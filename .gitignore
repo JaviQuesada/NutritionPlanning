@@ -1,0 +1,7 @@
+# .gitignore
+*.aux
+*.log
+*.pdf
+*.synctex.gz
+/.aux
+venv
