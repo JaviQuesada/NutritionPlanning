@@ -3,5 +3,7 @@
 *.log
 *.pdf
 *.synctex.gz
+.env
 /.aux
 venv
+__pycache__
