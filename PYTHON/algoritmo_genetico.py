@@ -1,6 +1,6 @@
 #algoritmo_genetico
 
-# Importamos las librerías necesarias
+# Importamos librerías
 from pymoo.algorithms.soo.nonconvex.ga import GA
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.operators.sampling.rnd import FloatRandomSampling
@@ -17,10 +17,11 @@ comida_basedatos = conexion_comida_basedatos()
 # Clase del problema de optimización
 class PlanningComida(ElementwiseProblem):
     
-        def __init__(self, comida_basedatos):
+        def __init__(self, comida_basedatos, objetivo_calorico):
 
             super().__init__(n_var=42, n_obj=1, n_constr=1, xl=0, xu=len(comida_basedatos)-1)  
             self.comida_basedatos = comida_basedatos
+            self.objetivo_calorico = objetivo_calorico
 
 
         def _evaluate(self, x, out, *args, **kwargs):
@@ -41,7 +42,7 @@ class PlanningComida(ElementwiseProblem):
                 total_calorias_semanales += calorias_diarias
 
                 # Añadir restricciones si las calorías diarias no están dentro del rango permitido
-                if calorias_diarias < 1800 or calorias_diarias > 2200:
+                if calorias_diarias < (self.objetivo_calorico * 0.9) or calorias_diarias > (self.objetivo_calorico * 1.1):
                     infracciones_semanales += 1
                     infracciones_diarias.append(max(1800 - calorias_diarias, calorias_diarias - 2200))
                 else:
@@ -52,32 +53,34 @@ class PlanningComida(ElementwiseProblem):
             out["G"] = np.array([sum(infracciones_diarias)])
 
 
-# Algoritmo genético
-problema = PlanningComida(comida_basedatos)
 
-algoritmo = GA(
-    pop_size=100,  # Tamaño de la población
-    sampling=FloatRandomSampling(), # Solucion inicial aleatoria
-    crossover=SBX(prob=0.9, eta=15),  # Cruzamiento
-    mutation=PolynomialMutation(prob=1/42, eta=20),  # Mutación
-    eliminate_duplicates=True,
-    seed=8947   # Semilla
-)
+def ejecutar_algoritmo_generico(comida_basedatos, objetivo_calorico):
 
-resultado = minimize(
-    problema,
-    algoritmo,
-    ('n_gen', 100),  # Número de generaciones
-    verbose=True
-)
+    problema = PlanningComida(comida_basedatos, objetivo_calorico)
 
-# Procesar y mostrar la solución si existe
-if resultado.X is not None:
-    translated_solution = traducir_solucion(resultado.X, comida_basedatos)
-    print_solucion(translated_solution)
-    print("Valor del objetivo (Suma de desviaciones diarias respecto a 2000 calorías):", resultado.F)
-else:
-    print("No se encontró una solución")
+    algoritmo = GA(
+        pop_size=100,  # Tamaño de la población
+        sampling=FloatRandomSampling(), # Solucion inicial aleatoria
+        crossover=SBX(prob=0.9, eta=15),  # Cruzamiento
+        mutation=PolynomialMutation(prob=1/42, eta=20),  # Mutación
+        eliminate_duplicates=True,
+        seed=42   # Semilla
+    )
+
+    resultado = minimize(
+        problema,
+        algoritmo,
+        ('n_gen', 200),  # Número de generaciones
+        verbose=True
+    )
+
+    # Mostrar la solución
+    if resultado.X is not None:
+        translated_solution = traducir_solucion(resultado.X, comida_basedatos)
+        print_solucion(translated_solution)
+        print("Días que no cumple objetivos:", int(resultado.F))
+    else:
+        print("No se encontró una solución")
 
 
 
