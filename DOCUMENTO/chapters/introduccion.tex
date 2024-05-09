@@ -1,12 +1,60 @@
 \chapter{Introducción}
 \label{ch:introduccion}
 
-La introducción a un \gls{pfg} o a un \gls{pfm} es el punto de entrada a todo el trabajo realizado y es considerada la más importante tras el resumen, donde se resume el trabajo entero. Aquí hay que dejar claro \textbf{qué} trabajo se ha realizado y el \textbf{porqué} de su importancia. Se deben generar expectativas. Un gancho típico en los trabajos suele ser el de aportar un dato relevante o controvertido para discutir sobre él o plantear una pregunta relevante para el contexto en el que se está trabajando.
+\section{Contexto}
+En los últimos años, la \gls{ia} se ha posicionado como una de las herramientas más útiles e interesantes de las que disponemos. El término inteligencia artificial fue acuñado por primera vez por John McCarthy en la Conferencia de Darmouth de 1956. Años después de que Alan Turing formulase la pregunta sobre si las máquinas podían pensar y plantease el famoso Test de Turing, varios científicos se reunieron con el objetivo de discutir acerca de la posiblidad de un artefacto de comportarse de manera inteligente. Se llegó a la conclusión de que todo aspecto del aprendizaje se puede describir con tanta precisión que resulte factible construir una máquina que los simule.
 
-Dentro del capítulo, tras introducir el trabajo realizado, se suelen incluir las siguientes secciones para establecer bien su alcance y limitaciones: \textbf{motivación}, \textbf{objetivos}, \textbf{suposiciones/limitaciones} y, a veces, \textbf{estructura de la memoria}. Ni que decir tiene que esta estructura planteada, tanto del capítulo como de la memoria en si es únicamente un ejemplo o propuesta. Cada proyecto es único y a veces es más cómodo escribirlo de otro modo.
+La IA se enfoca en crear sistemas que puedan realizar tareas que normalmente requerirían de inteligencia humana. Aunque ha tenido un reciente auge debido a los chatbots o los asistentes personales, presenta una gran cantidad de finalidades. Dentro de los usos que se le dan a la IA destacan la creación y el análisis de productos o la automatización de servicios, además de la optimización de procesos. Esta optimización se enfoca en encontrar la mejor solución posible a un problema dado dentro de un conjunto de opciones factibles. Los algoritmos de optimización y de personalización permiten, por ejemplo, crear aplicaciones que permiten organizar tareas de manera inteligente o termostatos que ajustan la calefacción automaticamente.
+
+Este \gls{pfg} se centrará en la resolución de un problema de optimización, la creación de un menú semanal de comidas personalizado que cumpla distintos objetivos, como el número de calorías diarias o la cantidad de macronutrientes ingeridos. Se hará uso de la computación evolutiva que, mediante algoritmos genéticos, diseñará una dieta equilibrada a partir de la selección, cruce y mutación de los distintos alimentos.
+
+
+\section{Motivación}
+
+La motivación para realizar este proyecto viene dada por el interés creciente en el área de la inteligencia artificial y cómo ha cambiado la manera de plantear los problemas respecto al pasado. En España, el sector TIC (Tecnologías de la Información y la Comunicación) cuenta con más del 40\% de empresas que usan estas herramientas para la automatización de flujos de trabajo, análisis de datos o para la gestión de la cadena de suministro. Buscan mejorar la precisión y la eficiencia a la hora de diseñar soluciones.
+
+No obstante, no solo en sectores tecnológicos se hace uso de la IA. El médico o el alimentario también están incorporándola de manera gradual. Los diagnósticos de imágenes médicas o la agricultura de precisión son cada vez más comunes. También en la nutrición, relacionada con esto ámbitos, estas tecnologías permiten nuevas posibilidades.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/prevalencia-obesidad.png}
+    \caption{Prevalencia (\%) de obesidad y exceso de peso por grupos de sexo y edad.}
+    \label{fig:prevalencia-obesidad}
+\end{figure}
+
+Según un estudio llevado a cabo por la Agencia Española de Seguridad Alimentaria y Nutrición (AESAN) y por el Instituto de Salud Carlos III (ISCIII), un 55,8\% de la población adulta española tiene exceso de peso y un 18,7\% padece obesidad. Esto trae consigo múltiples problemas de salud, como la aparición de enfermedades crónicas o cardiovasculares, complicaciones respiratorias o dificultades al moverse.
+
+Estos datos demuestran la importancia de una buena nutrición y hábitos alimenticios saludables. La planificación nutricional mediante algoritmos genéticos ayuda a comprender cómo se pueden mejorar estos hábitos a través de estas técnicas innovadoras, además de promover una vida sana y bienestar para todos, lo que se relaciona con los Objetivos de Desarrollo Sostenible (ODS), por lo que es un gran aliciente a la hora de realizar este PFG.
+
+
+\section{Justificación}
+
+En esta sección se deben explicar y argumentar las razones por las cuales se eligió el tema del proyecto, así como su importancia y relevancia. Algunos elementos clave que se pueden abordar en esta sección son:
+
+\begin{enumerate}
+    \item \textbf{Relevancia del tema}: ¿Existe alguna necesidad o problema específico que tu proyecto pueda abordar?
+    \item \textbf{Justificación teórica}: Mención sobre qué teorías, enfoques o modelos existentes en la literatura respalden la importancia de abordar este tema.
+    \item \textbf{Brecha en el conocimiento}: ¿Qué aspectos no se han explorado lo suficiente o no han sido abordados en estudios previos? ¿Cómo puede el proyecto contribuir a cerrar esa brecha en el conocimiento?
+    \item \textbf{Contribución práctica}: Aplicaciones del proyecto y cómo pueden beneficiar a la comunidad académica, profesional o a la sociedad en general.
+\end{enumerate}
+
+La sección no tiene por qué ser demasiado extensa, ni tiene por qué incluir (o limitarse) a los puntos anteriores, pero debe ser lo suficientemente clara y convincente para que los lectores comprendan por qué el proyecto es relevante y necesario.
+
 
 \section{Objetivos}
 
+El objetivo de este proyecto es la creación de un planning semanal de comidas mediante algoritmos genéticos. Experimentando con diferentes algoritmos se busca crear un menú que cumpla con distintos objetivos nutricionales, como la ingesta calórica diaria, a la vez que limitarse según las restricciones dadas. Los objetivos de este PFG son:
+
+\begin{itemize}
+    \item Desarrollar un algoritmo evolutivo capaz de generar menús que cumplan con las restricciones y los objetivos nutricionales establecidos.
+    \item Personalizar el algoritmo para la variación de las comidas según las necesidades específicas de los individuos.
+    \item Experimentar con distintas configuraciones y variantes del algoritmo genético en busca de encontrar la mejor solución posible.
+    \item Evaluar la sensibilidad y eficacia del algoritmo.
+    \item Ejecutar pruebas que validen el algoritmo.
+    \item Documentar los resultados obtenidos.
+\end{itemize}
+
+\begin{comment}
 Una de las partes más importante y complicada. Se considera \textbf{la finalidad} del proyecto en cuestión a realizar y suele encajar dentro de una de las siguientes categorías:
 
 \begin{itemize}
@@ -26,28 +74,14 @@ Sirve como primer indicador de la consecución del proyecto, ya que planteando o
 \end{itemize}
 
 Regla mnemotécnica: \textit{AMEAR}.
-
-\section{Motivación}
-
-Se refiere a los factores que han hecho que el estudiante se decante por trabajar en éste tema.
-
-Lo suyo sería apoyarse en buscar motivaciones más allá de las expresiones tipo \enquote{ampliar mis conocimientos}. Algunas fuentes donde encontrarla son las revistas especializadas, periódicos, organismos de estandarización, \glspl{ong}, etcétera.
-
-\section{Justificación}
-
-En esta sección se deben explicar y argumentar las razones por las cuales se eligió el tema del proyecto, así como su importancia y relevancia. Algunos elementos clave que se pueden abordar en esta sección son:
-
-\begin{enumerate}
-    \item \textbf{Relevancia del tema}: ¿Existe alguna necesidad o problema específico que tu proyecto pueda abordar?
-    \item \textbf{Justificación teórica}: Mención sobre qué teorías, enfoques o modelos existentes en la literatura respalden la importancia de abordar este tema.
-    \item \textbf{Brecha en el conocimiento}: ¿Qué aspectos no se han explorado lo suficiente o no han sido abordados en estudios previos? ¿Cómo puede el proyecto contribuir a cerrar esa brecha en el conocimiento?
-    \item \textbf{Contribución práctica}: Aplicaciones del proyecto y cómo pueden beneficiar a la comunidad académica, profesional o a la sociedad en general.
-\end{enumerate}
-
-La sección no tiene por qué ser demasiado extensa, ni tiene por qué incluir (o limitarse) a los puntos anteriores, pero debe ser lo suficientemente clara y convincente para que los lectores comprendan por qué el proyecto es relevante y necesario.
+\end{comment}
 
 \section{Estructura de la memoria}
 
-Cómo se organiza y estructura el proyecto en su totalidad. Esta sección presenta un resumen de los diferentes capítulos que conforman la memoria, así como una \textbf{muy breve} descripción de su contenido y propósito.
+En este subapartado se explicará la estructura del documento.
 
-Proporciona al lector una visión general de la estructura y el flujo del trabajo, permitiéndole comprender la secuencia lógica de cómo se desarrolla el trabajo o investigación.
+En el capítulo 2, \nameref{ch:estado-arte}, se centra en dar un enfoque general al proyecto. Se da contexto sobre las áreas en las que se basa el proyecto, la inteligencia artificial y los algoritmos evolutivos, además de sobre el tema central del PFG, la planificación nutricional mediante algoritmos evolutivos.
+
+En el capítulo 3, \nameref{ch:marco-teorico}, se aporta la base teórica que en la que se desarrolla el proyecto. Se da una explicación general sobre la inteligencia artificial y se indaga en el algoritmo evolutivo y su funcionamiento.
+
+En el capítulo 4, \nameref{ch:desarrollo}, 
