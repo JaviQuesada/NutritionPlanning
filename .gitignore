@@ -1,7 +1,6 @@
 # .gitignore
 *.aux
 *.log
-*.pdf
 *.synctex.gz
 .env
 /.aux

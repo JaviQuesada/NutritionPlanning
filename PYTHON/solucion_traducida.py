@@ -1,5 +1,5 @@
 #solucion_traducida.py
-
+import numpy as np
 # Traduce la solución del algoritmo genético a un formato de menú semanal
 def traducir_solucion(solucion_genetica, food_database):
 
@@ -13,8 +13,8 @@ def traducir_solucion(solucion_genetica, food_database):
             alimentos_comida = []
 
             for alimento_comida in range(2):  # Dos alimentos por comida
-                id_alimeto = int(solucion_genetica[dia * 6 + comida * 2 + alimento_comida])
-                alimento = food_database[id_alimeto]
+                id_alimento = int(solucion_genetica[dia * 6 + comida * 2 + alimento_comida])
+                alimento = food_database[id_alimento]
                 alimentos_comida.append((alimento["nombre"], alimento["calorias"]))
                 calorias_diarias += alimento["calorias"]
 

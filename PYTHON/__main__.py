@@ -9,7 +9,7 @@ def main():
 
     ejecutar_algoritmo_generico(comida_basedatos, calorias)
 
-    print(f"Tu consumo calórico diario es: {calorias:.2f} calorias")
+    print(f"Tu consumo calórico objetivo diario es: {calorias:.2f} calorias")
 
 
 
