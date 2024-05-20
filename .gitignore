@@ -1,8 +1,8 @@
 # .gitignore
-*.aux
+
 *.log
 *.synctex.gz
 .env
-/.aux
+/out
 venv
 __pycache__
