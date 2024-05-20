@@ -3,6 +3,6 @@
 *.log
 *.synctex.gz
 .env
-/out
+/DOCUMENTO/out/
 venv
 __pycache__
