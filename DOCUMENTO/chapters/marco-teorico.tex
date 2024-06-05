@@ -19,7 +19,7 @@ Antes de explicar la generación de una población inicial, es necesario conocer
 \begin{itemize}
     \item \textbf{Gen.} Es la unidad básica de información en un cromosoma. En una cadena de bits que representa una solución, cada bit puede considerarse un gen. En el caso que se trata en este PFG, el menú semanal, cada tipo de comida se podría considerar un gen. Por ejemplo, un gen sería bebida, plato principal o postre.
     \item \textbf{Alelo.} Es la forma específica o valor que puede tomar un gen. Siguiendo el ejemplo de bebida, posibles alelos serían agua, té o cerveza.
-    \item \textbf{Cromosoma.} Es una colección de genes y representa una solución completa al problema de optimización. El cromosoma es la cadena de bits completa. En nuestro caso, la lista completa de alimentos seleccionados para un día determinado es el cromosoma. 
+    \item \textbf{Cromosoma.} Es una colección de genes y representa una solución completa al problema de optimización. El cromosoma es la cadena de bits completa. En nuestro caso, la lista completa de alimentos seleccionados para una semana es el cromosoma. 
     \item \textbf{Fenotipo.} Es la manifestación real de la solución codificada. En el PFG sería cómo se preparan y sirven estos alimentos en la realidad.
 \end{itemize}
 
@@ -66,7 +66,7 @@ Existen tres tipos de restricciones que limitan el espacio de soluciones válida
 Estos tipos de restricciones se pueden tratar mediante distintos métodos.
 
 \begin{itemize}
-  \item \textbf{Funciones de penalización.} Se penalizan las soluciones infactibles. Estas penalizaciones representan cómop de lejos está la solución de la región factible.
+  \item \textbf{Funciones de penalización.} Se penalizan las soluciones infactibles. Estas penalizaciones representan cómo de lejos está la solución de la región factible.
   \item \textbf{Separatista.} Dividen el problema en subproblemas más manejables que se pueden resolver por separado y luego combinar.
   \item \textbf{Preservación de la factibilidad.} Se usan representaciones especiales (codificación binaria, entera, real, etc.) que simplifican la forma del espacio de búsqueda y operadores que mantienen la factibilidad de las soluciones, lo que elimina las soluciones inválidas en cada etapa del algoritmo.
   \item \textbf{Reparación.} Se modifican las soluciones candidatas infactibles de forma que no violen las restricciones.
