@@ -207,13 +207,11 @@ Para los objetivos se crean funciones de minimización, donde la solución candi
 \subsection{Objetivo y restricción de calorías}
 \label{ch:objetivo-restriccion-calorias}
 
-El primer objetivo que se introduce en el problema es de las kilocalorías. Se busca que la diferencia entre las kilocalorías que el usuario necesita diariamente y la suma de las kilocalorías de todos los alimentos consumidos en un día sea \textit{0} ó lo más cercano posible. La función de evaluación mide cuánto se ha desviado en total en toda la semana, es decir, se va sumando cada desviación de kilocalorías diaria hasta obtener un valor semanal.
+El primer objetivo que se introduce en el problema es de las kilocalorías. Se busca que la diferencia entre las kilocalorías que el usuario necesita diariamente y la suma de las kilocalorías de todos los alimentos consumidos en un día sea 0 ó lo más cercano posible. La función de evaluación mide cuánto se ha desviado en total en toda la semana, es decir, se va sumando cada desviación de kilocalorías diaria hasta obtener un valor semanal.
 
 Se le pregunta al usuario por distintos atributos físicos y por su nivel de actividad, con lo que se calcula la tasa metabólica basal y, en un última instancia, las kilocalorías, como se explica en el apartado \ref{ch:calculo-calorias}.
 
-El objetivo está atado a una restricción. Se penaliza aquellas desviaciones diarias que superen unos límites superior e inferior del 10\% respecto a las kilocalorías que el usuario necesita. Busca que las soluciones que se alejen bastante del objetivo sean menos seleccionadas.
-
-La función resultante es:
+El objetivo está atado a una restricción \textit{box-constraint}. Se penaliza aquellas desviaciones diarias que superen unos límites superior e inferior del 10\% respecto a las kilocalorías que el usuario necesita. Busca que las soluciones que se alejen bastante del objetivo sean menos seleccionadas.
 \[
 \begin{aligned}
 & \text{Minimizar } f_{\text{calorías}}(c_{i,d}) = \sum_{d=1}^{7} \left| k - \sum_{i=1}^{n_d} c_{i,d} \right| \\
@@ -236,9 +234,7 @@ La función resultante es:
 
 Este objetivo trata de distribuir correctamente los macronutrientes a lo largo del día. Se busca que cada tipo de macronutriente se encuentre dentro de los límites recomendado en el apartado \ref{ch:distribucion-macronutrientes}, poniendo como objetivo la media de estos límites. Parecido al anterior objetivo, se calcula la diferencia diaria entre estas medias y los valores reales de proteínas, carbohidratos y grasas obtenidos. Posteriormente, la función evalúa la desviación total en la semana.
 
-Existe también una restricción asociada a este objetivo, donde se requiere que la ingesta diaria de cada macronutriente se encuentre dentro de los límites antes citados.
-
-La función resultante es:
+Existe también una restricción de caja asociada a este objetivo, donde se requiere que la ingesta diaria de cada macronutriente se encuentre dentro de los límites antes citados.
 \[
 \begin{aligned}
 & \text{Minimizar } f_{\text{macronutrientes}} = \sum_{d=1}^{7} \Bigg( \left| \frac{\sum_{i=1}^{n_d} C_{i,d}}{\sum_{i=1}^{n_d} E_{i,d}} - 0.55 \right| \\
@@ -264,9 +260,7 @@ La función resultante es:
 
 \subsection{Objetivo de preferencia}
 
-Este objetivo busca la personalización del menú incluyendo los grupos de alimentos favoritos del usuario, o exluyendo aquellos que no le gustan. Se favorecerá los grupos preferidos y se penalizará los que no. A diferencia de los otros objetivos, esta función de minimización puede alcanzar valores negativos si existe una gran variedad de alimentos con grupo predilecto en la planificación.
-
-La función resultante es:
+Este objetivo busca la personalización del menú incluyendo los grupos de alimentos favoritos del usuario, o exluyendo aquellos que no le gustan. Se favorecerá los grupos preferidos y se penalizará los que no. Se puede considerar como restricción de igualdad débil ya que, aunque penalice las soluciones que la violan, no las invalida. A diferencia de los otros objetivos, esta función de minimización puede alcanzar valores negativos si existe una gran variedad de alimentos con grupo predilecto en la planificación.
 \[
 \text{Minimizar } f_{\text{preferencia}} = \sum_{i=1}^{N}
 \begin{cases} 
@@ -290,9 +284,7 @@ P & \text{si } g(a_i) = G_- \\
 
 \subsection{Restricción de alergia}
 
-Muy parecida al objetivo de preferencia, donde se penaliza de gran manera si el usuario es alérgico al grupo del alimento del menú. Al finalizar la semana, se suman todas las penalizaciones de alergias, haciendo que sea inviable para el algoritmo volver a seleccionar un alimento que produzca alergia.
-
-La función resultante es:
+Similar al objetivo de preferencia, es una restricción de igualdad donde se penaliza de gran manera si el usuario es alérgico al grupo del alimento del menú. Al finalizar la semana, se suman todas las penalizaciones de alergias, haciendo que sea inviable para el algoritmo volver a seleccionar un alimento que produzca alergia.
 \[
 \text{Minimizar } f_{\text{alergia}} = \sum_{i=1}^{N} 
 \begin{cases} 
