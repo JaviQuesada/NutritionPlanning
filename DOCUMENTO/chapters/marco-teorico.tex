@@ -1,7 +1,7 @@
 \chapter{Marco teórico}
 \label{ch:marco-teorico}
 
-En 1975 John Holland propone imitar los procesos biológicos naturales que rigen la selección natural usando ordenadores, lo que sería el principio de los \glspl{ag}~\cite{holland1975}. En un AG, las soluciones son modeladas como individuos o cromosomas, que generalmente se representan como cadenas de bits, aunque también se puede usar otro tipo de cadenas. Estas soluciones son evaluadas por una función de aptitud o fitness, y las más adecuadas son selecciondas para reproducirse mediante cruzamiento y mutación, procesos que mezclan y alteran aleatoriamente los cromosomas para generar diversidad. Los descendientes resultantes forman nuevas generaciones que vuelven a ser evaluadas, creando un ciclo que se repite hasta cumplir alguna condición de parada, como pudiera ser un número limitado de generaciones o que se alcance la solución deseada.
+En 1975 John Holland propone imitar los procesos biológicos naturales que rigen la selección natural usando ordenadores, lo que sería el principio de los algoritmos genéticos (AGs)~\cite{holland1975}. En un AG, las soluciones son modeladas como individuos o cromosomas, que generalmente se representan como cadenas de bits, aunque también se puede usar otro tipo de cadenas. Estas soluciones son evaluadas por una función de aptitud o fitness, y las más adecuadas son selecciondas para reproducirse mediante cruzamiento y mutación, procesos que mezclan y alteran aleatoriamente los cromosomas para generar diversidad. Los descendientes resultantes forman nuevas generaciones que vuelven a ser evaluadas, creando un ciclo que se repite hasta cumplir alguna condición de parada, como pudiera ser un número limitado de generaciones o que se alcance la solución deseada.
 
 \begin{figure}[H]
     \centering
@@ -35,6 +35,7 @@ En la figura \ref{fig:cromosoma} se expone la estructura de un cromosoma con el 
 La generación de una población inicial implica crear un conjunto de soluciones candidatas. Generalmente, los individuos son seleccionados aleatoriamente dentro de los límites definidos en cada problema, asegurando que todas las áreas del espacio de búsqueda puedan ser exploradas. También existen métodos alternativos de generación que aplican ciertas restricciones para formar soluciones iniciales más prometedoras. Tomando de ejemplo el menú semanal, el espacio de búsqueda comprendería la base de datos en la que aparecen todos los alimentos con sus respectivas calorias y macronutrientes. 
 
 \section{Evaluación}
+\label{ch:evaluacion}
 
 Se mide lo bueno que es un individuo para nuestros propósitos (la calidad del individuo). Lo más importante es definir una función de fitness correcta y representativa del problema a evaluar. Si se trata de un problema multiobjetivo, se tendrá que diseñar una función de fitness diferente por cada objetivo.
 
@@ -44,12 +45,12 @@ Para diseñar una función de fitness acorde al problema y al objetivo (u objeti
 
 \begin{enumerate}
   \item Determinar si el objetivo es maximizar o minimizar un valor específico. En el caso que se trata en este proyecto, se busca que la diferencia entre las calorias necesarias y la suma de las calorias de los alimentos sea la menor posible, por lo que se trataría de un problema de minimización.
-  \item Identificar las restricciones. En el ejemplo, una podría ser los límites superior e inferior de calorías permitidas.
+  \item Identificar las restricciones. En el ejemplo de los alimentos, una podría ser los límites superior e inferior de calorías permitidas.
   \item Definir la función matemática que represente el objetivo del problema. Si existen múltiples objetivos, se pueden ponderar.
   \item Incorporar las penalizaciones para soluciones que no cumplan con las restricciones.
 \end{enumerate}
 
-Por lo tanto, la mejor solución debería recibir la mejor evaluación. Esto ayudará al algoritmo a entender el camino a seguir, ya que penalizará las soluciones infactibles.
+Por lo tanto, la mejor solución debería recibir la mejor evaluación. Esto ayudará al algoritmo a entender el camino a seguir, ya que penalizará las soluciones no factibles.
 
 \subsection{Restricciones}
 
@@ -63,23 +64,40 @@ Existen tres tipos de restricciones que limitan el espacio de soluciones válida
   \item Restricciones de contorno o de caja (\textit{box-constraints}). $x^L \leq x \leq x^U$
 \end{itemize}
 
-Estos tipos de restricciones se pueden tratar mediante distintos métodos.
+Estos tipos de restricciones se pueden tratar mediante distintos métodos, que también son probados de manera práctica en el apartado \ref{ch:manejo-restricciones}. En el trabajo de Carlos A. Coello (2022)~\cite{Coello2022} se hace un recopilatorio de algunos de los métodos más usados y sus consiguientes ventajas y desventajas. Los más importantes son:
 
 \begin{itemize}
-  \item \textbf{Funciones de penalización.} Se penalizan las soluciones infactibles. Estas penalizaciones representan cómo de lejos está la solución de la región factible.
-  \item \textbf{Separatista.} Dividen el problema en subproblemas más manejables que se pueden resolver por separado y luego combinar.
+  \item \textbf{Funciones de penalización.} Se penalizan las soluciones no factibles. Estas penalizaciones representan cómo de lejos está la solución de la región factible. Se convierte un problema con restricciones en uno sin restricciones usando una función objetivo de penalización:
+  
+  \[
+  F(x) = f(x) + \sum_{j=1}^{m} R_j \cdot p_j(x)^\beta
+  \]
+  
+  \begin{itemize}
+    \item \( f(x) \) es la función objetivo original que se desea optimizar.
+    \item \( R_j \) es un parámetro de penalización definido por el usuario para la restricción \( c_j(x) \), cuya función de penalización es \( p_j(x) \)
+    \item \( \beta \) (comúnmente 1 o 2) es una constante definida por el usuario que determina cómo se pondera la violación de la restricción en la función de penalización.
+    \item En problemas de maximización la suma se convierte en negativa.     
+  \end{itemize}
+  Existen varios métodos de penalización:
+    \begin{itemize}
+      \item \textbf{Penalización estática.} Se usa un valor fijo \( R_j \). Se puede ver su implementación en el problema del PFG en el punto \ref{ch:penalizacion-estatica}.
+      \item \textbf{Penalización dinámica.} Se usa un factor \( R = (C \cdot t) ^ {\alpha} \), donde \( C \) y \( \alpha \) son constantes y \( t \) es el número de iteración. Al igual que la estática, su implementación será tratada en el apartado \ref{ch:penalizacion-dinamica}.
+      \item \textbf{Penalicación adaptativa.} La penalización se adapta en función de la factibilidad de las soluciones.
+    \end{itemize}
+  \item \textbf{Separatista.} Dividen el problema en subproblemas más manejables que se pueden resolver por separado y luego combinar. Las restricciones y los objetivos se tratan de forma separada. Un método separatista se trata en el punto \ref{ch:metodo-separatista}.
   \item \textbf{Preservación de la factibilidad.} Se usan representaciones especiales (codificación binaria, entera, real, etc.) que simplifican la forma del espacio de búsqueda y operadores que mantienen la factibilidad de las soluciones, lo que elimina las soluciones inválidas en cada etapa del algoritmo.
-  \item \textbf{Reparación.} Se modifican las soluciones candidatas infactibles de forma que no violen las restricciones.
+  \item \textbf{Reparación.} Se modifican las soluciones candidatas inviables de forma que no violen las restricciones.
 \end{itemize}
 
 \subsection{Condición de parada}
 
-Como se ha mencionado, tras la evaluación de calidad la condición de parada determina cuándo el algoritmo debe detenerse y presentar la solución. Si bien existen una gran variedad de condiciones de parada, las más comunes son:
+Tras la evaluación de calidad la condición de parada determina cuándo el algoritmo debe detenerse y presentar la solución. Si bien existen una gran variedad de condiciones de parada, las más comunes son:
 
 \begin{itemize}
   \item Aptitud del individuo. El algoritmo se detiene si se alcanza una solución, ya sea alcanzando el valor objetivo o estando dentro de unos umbrales predefinidos.
   \item Número máximo de generaciones. Se para si la población ya ha evolucionado un número de veces predefinido.
-  \item Tiempo máximo de ejecución. Parecida a la anterior, pero con un tiempo máximo.
+  \item Tiempo máximo de ejecución. Se detiene si el tiempo de ejecución es demasiado elevado.
   \item Convergencia. Se puede detener la ejecución si la población muestra poca o ninguna mejora en la aptitud durante un número determinado de generaciones consecutivas.
 \end{itemize}
 
@@ -93,7 +111,7 @@ Son los procesos que se aplican a poblaciones de individuos para desarrollar gen
   \caption{Operadores.}
   \label{fig:operadores}
 \end{figure}
-
+\newpage
 \subsection{Selección}
 \label{Seleccion}
 
@@ -107,7 +125,7 @@ Si bien se puede seleccionar de manera equiprobable, existen métodos basados en
   \item \textbf{Selección por torneo.} Se escoge aleatoriamente un subconjunto de individuos de la población, y el mejor de este es elegido.
 \end{itemize}
 
-\subsubsection{Selección ambiental (Remplazo)}
+\subsubsection{Selección ambiental (Reemplazo)}
 
 A parte de los métodos basados en la aptitud, se puede usar usa la técnica de la selección ambiental para seleccionar aquellos individuos que puedan influir significativamente en la eficacia del algoritmo genético. Existen varios métodos de selección ambiental:
 
@@ -115,8 +133,8 @@ A parte de los métodos basados en la aptitud, se puede usar usa la técnica de 
   \item \textbf{Reemplazo generacional completo.} Método tradicional en la selección y explicado en el apartado \ref{Seleccion}. Toda la población actual es reemplazada por una nueva. Promueve altas tasas de diversidad, pero conlleva una aptitud de los individuos irregular.
   \item \textbf{Reemplazo generacional parcial (\textit{Steady-State}).} Solo una parte de la población es reemplazada en cada generación. Se promueve una mejora constante en la calidad ya que las soluciones con un fitness elevado pueden mantenerse.
   \item \textbf{Reemplazo elitista.} Escoge los mejores individuos de una generación para que se mantengan en la siguiente. Esto ayuda a que la calidad del mejor individuo de una generación sea siempre igual o superior a su equivalente de la generación anterior, consiguiendo una progresión constante hacia la solución óptima, es decir, una mayor convergencia.
-  \item \textbf{Selección $(\mu,\lambda)$.} De $\mu$ padres se generan $\lambda$ hijos. Los $\mu$ mejores de los $\lambda$ hijos forman la siguiente generación de padres.
-  \item \textbf{Selección $(\mu+\lambda)$.} Igual que en la anterior, de $\mu$ padres se generan $\lambda$ hijos, pero en este caso los $\mu$ mejores de la combinación entre los $\mu$ padres y los $\lambda$ hijos forman la siguiente generación.
+  \item \textbf{Selección $(\mu,\lambda)$.} De $\mu$ padres se generan $\lambda$ hijos. Los $\mu$ mejores de los $\lambda$ hijos forman la siguiente generación de padres. Es decir, si se tiene 50 padres $(\mu)$ y se generan 100 descendientes $(\lambda)$, se selecciona los 50 mejores de los 100 descendientes para la siguiente generación.
+  \item \textbf{Selección $(\mu+\lambda)$.} Igual que en la anterior, de $\mu$ padres se generan $\lambda$ hijos, pero en este caso los $\mu$ mejores de la combinación entre los $\mu$ padres y los $\lambda$ hijos forman la siguiente generación. En este caso, con el mismo ejemplo de los 50 padres y los 100 descendientes, se selecciona los 50 de los 150 individuos combinados para la siguiente generación.
 \end{itemize}
 
 \subsection{Cruce}
@@ -154,3 +172,56 @@ Se combina el material genético de dos individuos, padres, para producir descen
   \item \textbf{Mutación por intercambio.} Dos genes aleatorios en el cromosoma son seleccionados y sus posiciones se intercambian. 
 \end{itemize}
 
+\section{Tipos de algoritmo}
+
+Si bien existen casos en los que solo es necesario la optimización de un objetivo, existe una gran diversidad de problemas en la que van a aparecer varios que se deben maximizar o minimizar. Debido a esto, existe una clasificación de los problemas según el número de objetivos a optimizar. Destacan dos grandes grupos: los problemas de optimización con un solo objetivo o \textit{Single-objective Optimization Problem (SOP)}, y los problemas de optimización multiobjetivo o \textit{Multi-objective Optimization Problem (MOP)}.
+
+\subsection{Single-objective Optimization Problem (SOP)}
+
+Los algoritmos que resuelven problemas \textit{SOP} se enfocan en optimizar una única función objetivo. La meta es encontrar la mejor solución posible según se busque maximizar o minimizar la función. Se usan algoritmos mono-objetivo cuando existe un único criterio de éxito.
+\newpage
+Los algoritmos mono-objetivo presentan una función objetivo que asigna un valor numérico a cada solución, indicando su calidad. Cada solución está representada por un vector de variables de decisión, que son los parámetros que se pueden ajustar dentro del espacio de decision. Estas soluciones deben pertenecer al conjunto factible, que incluye aquellas que cumplen con todas las restricciones del problema.
+
+El algoritmo más usado para los problemas mono-objetivo es el \textit{''Genetic Algorithm'' (GA)}, cuyo funcionamiento sigue los pasos explicados a lo largo del capítulo \ref{ch:marco-teorico}. Destaca por su simplicidad y su capacidad para explorar grandes expacios de búsqueda.
+
+\subsection{Multi-objective Optimization Problem (MOP)}
+
+Los algoritmos multi-objetivo buscan optimizar múltiples funciones simultáneamente. La meta es encontrar un conjunto de soluciones que represente un equilibrio entre los distintos criterios de éxito, conocido como conjunto de Pareto.
+
+Una solución se considera no dominada si no existe otra que mejore en, al menos, uno de los objetivos sin empeorar en los demás. El conjunto de todas las soluciones no dominadas se conoce, como se ha dicho antes, como el conjunto de Pareto.
+
+Al igual que en los mono-objetivo, cada solución está representada por un vector de variables de decisión. Estas soluciones deben pertenecer también al conjunto factible. La diferencia se encuentra en la existencia de múltiples funciones objetivo que asignan valores numérico a cada solución, indicando su calidad en diferentes dimensiones según el número de objetivos.
+
+Algunos de los algoritmos más usados para los \textit{MOP} son el \textit{''Non-dominated Sorting Genetic Algorithm II'' (NSGA-II)}, el \textit{''Strength Pareto Evolutionary Algorithm 2'' (SPEA2)} o el \textit{''Multi-Objective Evolutionary Algorithm based on Decomposition'' (MOEA/D)}. Usan criterios basados en Pareto para evaluar, clasificar y seleccionar las soluciones. Buscan dispersar las soluciones para aumentar la diversidad y explorar el espacio de soluciones. Aun así, presentan grandes diferencias a la hora de desarrollar el algoritmo evolutivo, como se explica en el apartado \ref{ch:distinto-algoritmo}.
+
+\subsection*{Tabla comparativa entre SOP y MOP}
+
+\begin{table}[h!]
+  \centering
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabularx}{\textwidth}{|l|X|X|}
+  \hline
+  \textbf{Campo} & \textbf{SOP (Single-Objective Optimization)} & \textbf{MOP (Multi-Objective Optimization)} \\
+  \hline
+  \textbf{Función objetivo} & Una única función objetivo & Varias funciones objetivo \\
+  \hline
+  \textbf{Meta} & Optimizar una solución & Balancear múltiples soluciones \\
+  \hline
+  \textbf{Solución} & Mejor solución única & Conjunto de Pareto \\
+  \hline
+  \textbf{Criterio} & Un criterio de éxito & Varios criterios de éxito \\
+  \hline
+  \textbf{Evaluación} & Valor numérico único & Valores numéricos múltiples \\
+  \hline
+  \textbf{Algoritmos comunes} & GA & NSGA-II,SPEA2,MOEA/D \\
+  \hline
+  \textbf{Búsqueda} & Explora grandes espacios de búsqueda & Usa criterios de Pareto para explorar el espacio de soluciones \\
+  \hline
+  \textbf{Clasificación} & - & Basada en dominancia \\
+  \hline
+  \textbf{Factibilidad} & Cumplir restricciones & Cumplir restricciones \\
+  \hline
+  \end{tabularx}
+  \caption{Comparación entre SOP y MOP.}
+  \label{table:sopvsmop}
+\end{table}

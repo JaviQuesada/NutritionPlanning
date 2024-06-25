@@ -2,11 +2,16 @@
 \label{ch:introduccion}
 
 \section{Contexto}
-En los últimos años, la \gls{ia} se ha posicionado como una de las herramientas más útiles e interesantes de las que disponemos. El término \textit{<<inteligencia artificial>>} fue acuñado por primera vez por John McCarthy en la Conferencia de Darmouth de 1956~\cite{dartmouth1956}. Años después de que Alan Turing formulase la pregunta sobre si las máquinas podían pensar y plantease el famoso Test de Turing~\cite{turing1950}, varios científicos se reunieron con el objetivo de discutir acerca de la posiblidad de un artefacto de comportarse de manera inteligente. Se llegó a la conclusión de que todo aspecto del aprendizaje se puede describir con tanta precisión que resulte factible construir una máquina que los simule.
+En los últimos años, la inteligencia artificial (IA) se ha posicionado como una de las herramientas más útiles e interesantes de las que disponemos. El término \textit{<<inteligencia artificial>>} fue acuñado por primera vez por John McCarthy en la Conferencia de Darmouth de 1956~\cite{dartmouth1956}. Años después de que Alan Turing formulase la pregunta sobre si las máquinas podían pensar y plantease el famoso ''Test de Turing''~\cite{turing1950}, varios científicos se reunieron con el objetivo de discutir acerca de la posiblidad de un artefacto de comportarse de manera inteligente. Se llegó a la conclusión de que todo aspecto del aprendizaje se puede describir con tanta precisión que resulte factible construir una máquina que los simule.
 
 La IA se enfoca en crear sistemas que puedan realizar tareas que normalmente requerirían de inteligencia humana. Aunque ha tenido un reciente auge debido a los chatbots o los asistentes personales, presenta una gran cantidad de finalidades. Dentro de los usos que se le dan a la IA destacan la creación y el análisis de productos o la automatización de servicios, además de la optimización de procesos. Esta optimización se enfoca en encontrar la mejor solución posible a un problema dado dentro de un conjunto de opciones factibles. Los algoritmos de optimización y de personalización permiten, por ejemplo, crear aplicaciones que permiten organizar tareas de manera inteligente~\cite{todoist2024} o termostatos que ajustan la calefacción automaticamente~\cite{googlenest2020}.
 
-Este \gls{pfg} se centrará en la resolución de un problema de optimización, la creación de un menú semanal de comidas personalizado que cumpla distintos objetivos, como el número de calorías diarias o la cantidad de macronutrientes ingeridos. Se hará uso de la computación evolutiva que, mediante algoritmos genéticos, diseñará una dieta equilibrada a partir de la selección, cruce y mutación de los distintos alimentos.
+En el ámbito de la nutrición, la IA tiene un gran potencial para la creación de dietas. La capacidad de analizar grandes volúmenes de datos y entender las necesidades nutricionales de cada paciente permite diseñar planes alimenticios personalizados. No solo cumple con los requisitos calóricos o de nutrientes, sino que también se adapta a los gustos del usuario para tomar en cuenta las preferencias personales o las restricciónes dietéticas.
+
+Este Proyecto Fin de Grado (PFG) se centrará en la resolución de un problema de optimización, la creación de un menú semanal de comidas personalizado que cumpla distintos objetivos, como el número de calorías diarias o la cantidad de macronutrientes ingeridos. Se hará uso de los algoritmos evolutivos, que diseñarán una dieta equilibrada a partir de la selección, cruce y mutación de los distintos alimentos.
+
+Los algoritmos evolutivos son muy útiles para estos problemas de optimización porque permiten explorar una gran cantidad de combinacione posibles para encontrar una solución óptima. El proceso incluye una población inicial de menús, la evaluación de estos según los requisitios nutricionales y la selección de los mejores para la generación de nuevas generaciones mediante cruce y mutación. Este ciclo se repetirá hasta que se obtenga un plan alimenticio optimizado que cumpla con todos los objetivos nutricionales y de preferencia.
+
 
 
 \section{Motivación}
@@ -22,9 +27,11 @@ No obstante, no solo en sectores tecnológicos se hace uso de la IA. El médico 
     \label{fig:prevalencia-obesidad}
 \end{figure}
 
-Según un estudio llevado a cabo por la Agencia Española de Seguridad Alimentaria y Nutrición (AESAN) y por el Instituto de Salud Carlos III (ISCIII), un 55,8\% de la población adulta española tiene exceso de peso y un 18,7\% padece obesidad, tal y como se muestra en la figura \ref{fig:prevalencia-obesidad}. Esto trae consigo múltiples problemas de salud, como la aparición de enfermedades crónicas o cardiovasculares, complicaciones respiratorias o dificultades al moverse.
+Según un estudio llevado a cabo por la \textit{Agencia Española de Seguridad Alimentaria y Nutrición (AESAN)} y por el \textit{Instituto de Salud Carlos III (ISCIII)}, un \textit{55,8\%} de la población adulta española tiene exceso de peso y un \textit{18,7\%} padece obesidad, tal y como se muestra en la figura \ref{fig:prevalencia-obesidad}. Esto trae consigo múltiples problemas de salud, como la aparición de enfermedades crónicas o cardiovasculares, complicaciones respiratorias o dificultades al moverse.
 
-Estos datos demuestran la importancia de una buena nutrición y hábitos alimenticios saludables. La planificación nutricional mediante algoritmos genéticos ayuda a comprender cómo se pueden mejorar estos hábitos a través de estas técnicas innovadoras, además de promover una vida sana y bienestar para todos, lo que se relaciona con los Objetivos de Desarrollo Sostenible (ODS)~\cite{ONU2024}, por lo que es un gran aliciente a la hora de realizar este PFG.
+Recientes estudios han demostrado que la IA puede aumentar la adherencia a planes de alimentación saludables un \textit{20\%}, al ofrecer recomendaciones personalizadas y un seguimiento continuo. Además, estas herramientas permiten ajustar dinámicamente las recomendaciones en función de la evolución de la salud del usuario, mejorando así los planes nutricionales~\cite{oh2021systematic}.
+
+La planificación nutricional mediante algoritmos evolutivos ayuda a comprender cómo se pueden mejorar los hábitos alimenticios y la nutrición a través de estas técnicas innovadoras, además de promover una vida sana y bienestar para todos, lo que se relaciona con el tercer objetivo de los Objetivos de Desarrollo Sostenible (ODS)~\cite{ONU2024}, por lo que es un gran aliciente a la hora de realizar este PFG.
 
 
 \section{Justificación}
@@ -42,13 +49,14 @@ La sección no tiene por qué ser demasiado extensa, ni tiene por qué incluir (
 
 
 \section{Objetivos}
+\label{ch:objetivos}
 
-El objetivo general de este proyecto es la creación de un planificación semanal de comidas mediante algoritmos genéticos. Experimentando con diferentes algoritmos se busca crear un menú que cumpla con distintos objetivos nutricionales, como la ingesta calórica diaria, a la vez que limitarse según las restricciones dadas. Los objetivos específicos de este PFG son:
+El objetivo general de este proyecto es la creación de una planificación semanal de comidas mediante algoritmos evolutivos. Experimentando con diferentes algoritmos se busca crear un menú que cumpla con distintos objetivos nutricionales, como la ingesta calórica diaria, a la vez que limitarse según las restricciones dadas. Los objetivos específicos de este PFG son:
 
 \begin{itemize}
     \item Desarrollar un algoritmo evolutivo capaz de generar menús que cumplan con las restricciones y los objetivos nutricionales establecidos.
     \item Personalizar el algoritmo para la variación de las comidas según las necesidades específicas de los individuos.
-    \item Experimentar con distintas configuraciones y variantes del algoritmo genético en busca de encontrar la mejor solución posible.
+    \item Experimentar con distintas configuraciones y variantes del algoritmo evolutivo en busca de encontrar la mejor solución posible.
     \item Evaluar la sensibilidad y eficacia del algoritmo.
     \item Ejecutar pruebas que validen el algoritmo.
     \item Documentar los resultados obtenidos.
@@ -80,8 +88,8 @@ Regla mnemotécnica: \textit{AMEAR}.
 
 En este subapartado se explicará la estructura del documento.
 
-En el capítulo 2, \nameref{ch:estado-arte}, se centra en dar un enfoque general al proyecto. Se da contexto sobre las áreas en las que se basa el proyecto, la inteligencia artificial y los algoritmos evolutivos, además de sobre el tema central del PFG, la planificación nutricional mediante algoritmos evolutivos.
+En el capítulo \ref{ch:estado-arte}, \nameref{ch:estado-arte}, se da un enfoque general al proyecto. Se da contexto sobre las áreas en las que se basa el proyecto: la inteligencia artificial y los algoritmos evolutivos, además de sobre el tema central del PFG, la planificación nutricional mediante algoritmos evolutivos.
 
-En el capítulo 3, \nameref{ch:marco-teorico}, se aporta la base teórica que en la que se desarrolla el proyecto. Se da una explicación general sobre la inteligencia artificial y se indaga en el algoritmo evolutivo y su funcionamiento.
+En el capítulo \ref{ch:marco-teorico}, \nameref{ch:marco-teorico}, se aporta la base teórica en la que se desarrolla el proyecto. Se indaga en el algoritmo evolutivo y en sus diversas partes, y se explica su funcionamiento.
 
-En el capítulo 4, \nameref{ch:desarrollo}, 
+En el capítulo \ref{ch:desarrollo}, \nameref{ch:desarrollo}, se describe los pasos a seguir para la construcción del algoritmo evolutivo y del planificador de menús, además de la explicación de la base de datos y los conceptos nutricionales necesarios para ello.

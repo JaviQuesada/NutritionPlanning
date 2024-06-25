@@ -24,6 +24,12 @@
 \RequirePackage{ifthen}     % Para poder usar condicionales en la clase
 \RequirePackage{pdflscape}  % Posibilidad de páginas en apaisado
 \RequirePackage{xcolor}     % Mejoras sobre el paquete color
+\usepackage[utf8]{inputenc}
+
+\definecolor{myblue}{RGB}{33, 150, 243}
+\definecolor{mygray}{RGB}{128, 128, 128}
+\definecolor{myorange}{RGB}{255, 165, 0}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Valores constantes
@@ -336,6 +342,7 @@
     unicode=true,
     colorlinks=true,
     linkcolor={linkcolor},
+    citecolor=blue,
 }
 \makeatother
 
