@@ -19,7 +19,7 @@ def conexion_comida_basedatos():
     cnx = mysql.connector.connect(**config)
     cursor = cnx.cursor(dictionary=True)
     
-    query = "SELECT nombre, grupo, calorias, grasas, proteinas, carbohidratos, supergrupo, supergrupo_nombre FROM comida"
+    query = "SELECT nombre, grupo, calorias, grasas, proteinas, carbohidratos FROM comida"
     cursor.execute(query)
     
     comida_basedatos = cursor.fetchall()

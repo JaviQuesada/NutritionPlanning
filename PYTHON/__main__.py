@@ -1,22 +1,55 @@
 #__main.py__
 
-from database import conexion_comida_basedatos
-from preguntas_usuario import calcular_calorias, preguntar_supergrupos
-from algoritmo_genetico import ejecutar_algoritmo_genetico
+from preguntas_usuario import VentanaCalorias
+from ventana_basedatos import BaseDatosApp
+from constantes import *
+import tkinter as tk
 
-def main():
 
-    comida_basedatos = conexion_comida_basedatos()
+class MainApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Planificacion nutricional mediante algoritmos evolutivos")
+        self.root.minsize(400, 300)
 
-    objetivo_calorico = calcular_calorias()
+        main_frame = tk.Frame(root)
+        main_frame.grid(row=0, column=0, pady=20, padx=20, sticky="ns")
 
-    supergrupo_alergia, supergrupo_gusta, supergrupo_no_gusta = preguntar_supergrupos()
+        # Etiqueta principal
+        tk.Label(main_frame, text="Planificación nutricional mediante algoritmos evolutivos", font=("Arial", 16)).grid(row=0, column=0, columnspan=2, padx=20, pady=20)
 
-    print(f"Tu consumo calórico objetivo diario es: {objetivo_calorico:.2f} calorias")
+    
+        # Botones de opciones
+        tk.Button(main_frame, text="Planificar el menú", command=self.abrir_calculadora).grid(row=1, column=0, padx=10, pady=10, sticky="n")
+        tk.Button(main_frame, text="Visualizar la base de datos", command=self.visualizar_base_datos).grid(row=1, column=1, padx=10, pady=10, sticky="n")
 
-    ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, supergrupo_alergia, supergrupo_gusta, supergrupo_no_gusta)
+        # Redimensionamiento de la ventana
+        self.root.grid_rowconfigure(0, weight=1)
+        self.root.grid_columnconfigure(0, weight=1)
+
+        main_frame.grid_rowconfigure(0, weight=1)
+        main_frame.grid_rowconfigure(1, weight=1)
+        main_frame.grid_columnconfigure(0, weight=1)
+        main_frame.grid_columnconfigure(1, weight=1)
+        
+
+    def abrir_calculadora(self):
+        # Oculta la ventana principal
+        self.root.withdraw()
+        # Abre la ventana de la calculadora
+        root2 = tk.Toplevel(self.root)
+        app = VentanaCalorias(root2, self.root)
+
+    def visualizar_base_datos(self):
+        # Oculta la ventana principal
+        self.root.withdraw()
+        # Abre la ventana de la base de datos
+        root2 = tk.Toplevel(self.root)
+        app = BaseDatosApp(root2, self.root)
 
 
 if __name__ == "__main__":
-    main()
+    root = tk.Tk()
+    app = MainApp(root)
+    root.mainloop()
     

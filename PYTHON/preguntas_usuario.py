@@ -1,53 +1,165 @@
-# preguntas_usuario.py
-
+import tkinter as tk
+from tkinter import ttk
 from database import conexion_comida_basedatos
-from constantes import NivelActividad, Supergrupo
+from constantes import NivelActividad, GruposComida
 
+from manejo_restricciones import ag_metodo_separatista, ag_penalizacion_estatica, ag_penalizacion_dinamica
+from variacion_algoritmos import ag_nsga2, ag_moead, ag_spea2
+
+# Conectar a la base de datos
 comida_basedatos = conexion_comida_basedatos()
 
-def calcular_calorias():
+class VentanaCalorias:
+    def __init__(self, root, ventana_principal):
+        # Inicializa la ventana principal
+        self.root = root
+        self.ventana_principal = ventana_principal
+        self.root.title("Preguntas al usuario")
+        self.root.minsize(800, 900)
+
+        # Crea el marco principal
+        frame = ttk.Frame(root, padding="10")
+        frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+        frame.columnconfigure(0, weight=1)
+        frame.columnconfigure(1, weight=2)
+        frame.rowconfigure(10, weight=1)
+
+        # Variables para los datos del usuario
+        self.peso = tk.DoubleVar()
+        self.altura = tk.DoubleVar()
+        self.edad = tk.IntVar()
+        self.sexo = tk.StringVar(value="hombre")
+        self.nivel_actividad = tk.StringVar(value="Sedentario (poco o ningún ejercicio)")
+
+        # Obtiene los grupos de comida
+        grupos_comida = self.obtener_grupos_comida(GruposComida)
+        self.diccionario_grupos = self.obtener_diccionario_grupos(GruposComida)
+
+        # Crea el formulario y los botones
+        self.crear_formulario(frame, grupos_comida)
+        self.crear_botones(frame)
+
+        self.resultado = ttk.Label(frame, text="")
+        self.resultado.grid(row=9, column=0, columnspan=2, pady=10, sticky="ew")
+
+        self.root.columnconfigure(0, weight=1)
+        self.root.rowconfigure(0, weight=1)
+
+    # Función para obtener los grupos de comida
+    def obtener_grupos_comida(self, clase, nivel=0):
+        grupos = []
+        for nombre, subclase in vars(clase).items():
+            if isinstance(subclase, tuple):
+                tab = " " * (2 * (len(subclase[0]) - 1))
+                grupos.append(f"{tab}{subclase[0]} {subclase[1]}")
+            elif isinstance(subclase, type):
+                grupos.extend(self.obtener_grupos_comida(subclase, nivel + 1))
+        return grupos
+
+    # Función para obtener el diccionario de grupos de comida
+    def obtener_diccionario_grupos(self, clase):
+        diccionario = {}
+        for nombre, subclase in vars(clase).items():
+            if isinstance(subclase, tuple):
+                diccionario[subclase[0]] = subclase[1]
+            elif isinstance(subclase, type):
+                diccionario.update(self.obtener_diccionario_grupos(subclase))
+        return diccionario
+
+    # Función para crear una lista de selección múltiple
+    def crear_listbox(self, frame, etiqueta, fila, grupos_comida):
+        ttk.Label(frame, text=etiqueta).grid(row=fila, column=0, sticky=tk.W, pady=5)
+        lista = tk.Listbox(frame, selectmode='multiple', width=50, height=10, exportselection=False)
+        for grupo in grupos_comida:
+            lista.insert(tk.END, grupo)
+        lista.grid(row=fila, column=1, pady=5, sticky="ew")
+        return lista
+
+    # Función para crear el formulario
+    def crear_formulario(self, frame, grupos_comida):
+        ttk.Label(frame, text="Introduce tu peso en kg:").grid(row=0, column=0, sticky=tk.W, pady=5)
+        ttk.Entry(frame, textvariable=self.peso).grid(row=0, column=1, pady=5, sticky="ew")
+
+        ttk.Label(frame, text="Introduce tu altura en cm:").grid(row=1, column=0, sticky=tk.W, pady=5)
+        ttk.Entry(frame, textvariable=self.altura).grid(row=1, column=1, pady=5, sticky="ew")
+
+        ttk.Label(frame, text="Introduce tu edad:").grid(row=2, column=0, sticky=tk.W, pady=5)
+        ttk.Entry(frame, textvariable=self.edad).grid(row=2, column=1, pady=5, sticky="ew")
+
+        ttk.Label(frame, text="Introduce tu sexo:").grid(row=3, column=0, sticky=tk.W, pady=5)
+        ttk.Combobox(frame, textvariable=self.sexo, values=["hombre", "mujer"]).grid(row=3, column=1, pady=5, sticky="ew")
+
+        ttk.Label(frame, text="Elige tu nivel de actividad:").grid(row=4, column=0, sticky=tk.W, pady=5)
+        actividad_descripciones = [actividad.value[0] for actividad in NivelActividad]
+        ttk.Combobox(frame, textvariable=self.nivel_actividad, values=actividad_descripciones).grid(row=4, column=1, pady=5, sticky="ew")
+
+        self.lista_alergia = self.crear_listbox(frame, "Grupos de comida a los que eres alérgico:", 5, grupos_comida)
+        self.lista_gusta = self.crear_listbox(frame, "Grupos de comida que te gustan:", 6, grupos_comida)
+        self.lista_no_gusta = self.crear_listbox(frame, "Grupos de comida que no te gustan:", 7, grupos_comida)
+
+    # Función para crear los botones
+    def crear_botones(self, frame):
+        ttk.Button(frame, text="Calcular Calorías", command=self.calcular_calorias).grid(row=8, column=0, pady=10)
+        ttk.Button(frame, text="Mostrar Menú", command=self.mostrar_menu).grid(row=8, column=1, pady=10)
+        ttk.Button(frame, text="Volver", command=self.volver).grid(row=10, column=0, columnspan=2, pady=10)
+
+    # Función para expandir las selecciones de los grupos de comida
+    def expandir_selecciones(self, lista):
+        seleccionados = [lista.get(i).split()[0] for i in lista.curselection()]
+        expandido = set()
+        for seleccionado in seleccionados:
+            for codigo, descripcion in self.diccionario_grupos.items():
+                if codigo.startswith(seleccionado):
+                    expandido.add(descripcion)
+        return list(expandido)
+
+    # Función para calcular las calorías
+    def calcular_calorias(self):
+        peso = self.peso.get()
+        altura = self.altura.get()
+        edad = self.edad.get()
+        sexo = self.sexo.get()
+        nivel_actividad_desc = self.nivel_actividad.get()
+
+        factor_actividad = next((actividad.value[1] for actividad in NivelActividad if actividad.value[0] == nivel_actividad_desc), 1.2)
+
+        if sexo == 'hombre':
+            tmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
+        else:
+            tmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
+
+        calorias_ajustadas = tmb * factor_actividad
+
+        self.resultado.config(text=f"Calorías diarias: {calorias_ajustadas:.2f}")
+        return calorias_ajustadas
+
+    # Función para mostrar el menú ejecutando el algoritmo genético
+    def mostrar_menu(self):
+        calorias_ajustadas = self.calcular_calorias()  # Asegúrate de calcular calorías antes de mostrar el menú
+        grupos_gusta = self.expandir_selecciones(self.lista_gusta)
+        grupos_no_gusta = self.expandir_selecciones(self.lista_no_gusta)
+        grupos_alergia = self.expandir_selecciones(self.lista_alergia)
+
+        self.ejecutar_algoritmo_genetico(calorias_ajustadas, grupos_gusta, grupos_no_gusta, grupos_alergia)
+
+    # Función para ejecutar el algoritmo genético
+    def ejecutar_algoritmo_genetico(self, calorias_ajustadas, grupos_gusta, grupos_no_gusta, grupos_alergia):
+        print(f"Objetivo calórico: {calorias_ajustadas}")
+        self.ventana_principal.withdraw()
+        self.root.withdraw()
+
+        ag_penalizacion_estatica.ejecutar_algoritmo_genetico(
+            comida_basedatos,
+            calorias_ajustadas,
+            grupos_gusta,
+            grupos_no_gusta,
+            grupos_alergia
+        )
     
-    # Datos del usuario
-    
-    peso = float(input("Introduce tu peso en kg: "))
-    altura = float(input("Introduce tu altura en cm: "))
-    edad = int(input("Introduce tu edad: "))
-    genero = input("Introduce tu género (hombre/mujer): ")
-    print("""
-        
-        
-          1. Sedentario (poco o ningún ejercicio)
-          2. Poco activo (ejercicio ligero/deportes 1-3 días a la semana)
-          3. Moderadamente activo (ejercicio moderado/deportes 3-5 días a la semana)
-          4. Activo (ejercicio duro/deportes 6-7 días a la semana)
-          5. Muy activo (ejercicio muy duro/deportes y un trabajo físico)
-          """)
-        
-    nivel_actividad = int(input("Elige tu nivel de actividad (1-5): "))
-    
-    factores_actividad = [nivel.value for nivel in NivelActividad]
+        self.ventana_principal.destroy()
 
-    if genero.lower() == 'hombre':
-        tmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
-    else:
-        tmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
-
-    calorias_ajustadas = tmb * factores_actividad[nivel_actividad-1]
-
-    return calorias_ajustadas
-
-
-def preguntar_supergrupos():
-
-    supergrupos = [(sg.letra, sg.nombre) for sg in Supergrupo]
-
-    print("Supergrupos disponibles:")
-
-    for i, (letra, nombre) in enumerate(supergrupos):
-        print(f"{i+1}. {letra} - {nombre}")
-
-    supergrupo_alergia = int(input("Hay alguna categoría de alimento que no puedas comer o presente algún tipo de alergia (1-{}): ".format(len(supergrupos))))
-    supergrupo_gusta = int(input("Elige tu supergrupo favorito (1-{}): ".format(len(supergrupos))))
-    supergrupo_no_gusta = int(input("Elige el supergrupo que menos te gusta (1-{}): ".format(len(supergrupos))))
-
-    return supergrupos [supergrupo_alergia-1], [supergrupo_gusta-1], supergrupos[supergrupo_no_gusta-1]
+    # Función para volver a la ventana principal
+    def volver(self):
+        self.root.destroy()
+        self.ventana_principal.deiconify()
