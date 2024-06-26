@@ -84,7 +84,7 @@ def objetivo_preferencia_grupo(alimento, grupo_gusta, grupo_no_gusta):
 def restriccion_alergia(alimento, grupo_alergia):
 
     if alimento["grupo"] in grupo_alergia:
-        return 1
+        return PENALIZACION_ALERGIA
     else:
         return 0
 
