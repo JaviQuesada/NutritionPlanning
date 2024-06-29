@@ -69,21 +69,21 @@ def restriccion_macronutrientes (calorias_diarias, proteinas_diarias, carbohidra
     return penalizacion_macronutrientes
 
 
-def objetivo_preferencia_grupo(alimento, grupo_gusta, grupo_no_gusta):
+def objetivo_preferencia_grupo(alimento, grupos_gusta, grupos_no_gusta):
 
     penalizacion = 0
 
-    if alimento["grupo"] in grupo_gusta:
+    if alimento["grupo"] in grupos_gusta:
         penalizacion = -PENALIZACION_PREFERENCIA
-    if alimento["grupo"] in grupo_no_gusta:
+    if alimento["grupo"] in grupos_no_gusta:
         penalizacion = PENALIZACION_PREFERENCIA
 
     return penalizacion
 
 
-def restriccion_alergia(alimento, grupo_alergia):
+def restriccion_alergia(alimento, grupos_alergia):
 
-    if alimento["grupo"] in grupo_alergia:
+    if alimento["grupo"] in grupos_alergia:
         return 1
     else:
         return 0
@@ -93,25 +93,20 @@ def restriccion_alergia(alimento, grupo_alergia):
 # Clase del problema de optimizacion
 class PlanningComida(ElementwiseProblem):
     
-        def __init__(self, comida_basedatos, objetivo_calorias, grupo_alergia, grupo_gusta, grupo_no_gusta):
+        def __init__(self, comida_basedatos, objetivo_calorias, grupos_alergia, grupos_gusta, grupos_no_gusta):
 
-            super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=3, xl=0, xu=len(comida_basedatos)-1)  
+            super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=0, xl=0, xu=len(comida_basedatos)-1)  
             self.comida_basedatos = comida_basedatos
             self.objetivo_calorias = objetivo_calorias
-            self.grupo_gusta = grupo_gusta
-            self.grupo_no_gusta = grupo_no_gusta
-            self.grupo_alergia = grupo_alergia
-
+            self.grupos_alergia = grupos_alergia
+            self.grupos_gusta = grupos_gusta
+            self.grupos_no_gusta = grupos_no_gusta
+            
             self.almuerzo_cena = filtrar_comida(comida_basedatos, "almuerzo_cena")
-                                                                                                            
             self.bebidas = filtrar_comida(comida_basedatos, "bebidas")
-            
             self.desayuno = filtrar_comida(comida_basedatos, "desayuno")
-            
-            self.bebida_desayuno = filtrar_comida(comida_basedatos, "bebida_desayuno")
-            
+            self.bebida_desayuno = filtrar_comida(comida_basedatos, "bebida_desayuno") 
             self.snacks = filtrar_comida(comida_basedatos, "snacks")
-
 
 
         def _evaluate(self, x, out, *args, **kwargs):
@@ -155,8 +150,8 @@ class PlanningComida(ElementwiseProblem):
                         carbohidratos_diarias += alimento["carbohidratos"]
                         grasas_diarias += alimento["grasas"]
 
-                        total_penalizaciones_preferencia += objetivo_preferencia_grupo(alimento, self.grupo_gusta, self.grupo_no_gusta)
-                        total_penalizaciones_alergia += restriccion_alergia(alimento, self.grupo_alergia)
+                        total_penalizaciones_preferencia += objetivo_preferencia_grupo(alimento, self.grupos_gusta, self.grupos_no_gusta)
+                        total_penalizaciones_alergia += restriccion_alergia(alimento, self.grupos_alergia)
 
 
                     suma_num_alimentos = suma_num_alimentos + num_alimentos
@@ -192,9 +187,9 @@ class PlanningComida(ElementwiseProblem):
             
 
 
-def ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, grupo_gusta, grupo_no_gusta, grupo_alergia):
+def ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, grupos_alergia, grupos_gusta, grupos_no_gusta):
 
-    problema = PlanningComida(comida_basedatos, objetivo_calorico, grupo_gusta, grupo_no_gusta, grupo_alergia)
+    problema = PlanningComida(comida_basedatos, objetivo_calorico, grupos_alergia, grupos_gusta, grupos_no_gusta)
 
     algoritmo = SPEA2(
         pop_size=100,  # Tamaño de la poblacion
