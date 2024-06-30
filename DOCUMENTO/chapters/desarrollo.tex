@@ -346,7 +346,7 @@ Tras la creación de la clase, hay que crear una función que recoja los resulta
 
 Se selecciona el número de individuos por generación y el número de generaciones que el algoritmo evaluará. Como no se ha puesto ninguna condición de parada específica el algoritmo terminará tras haber evaluado todas las generaciones predefinidas.
 
-Lo primero que el algoritmo hace es crear la matriz en la que se aloja toda la población, que tiene un tamaño del número de genes (o variables) por solución multiplicado por el número de individuos de una generación. Por ejemplo, si el menú se compone de \textit{77} genes y se selecciona un tamaño de población de \textit{100} indiviudos, se crea una matriz de \textit{77x100}, en la que cada solución candidata se evalúa individualmente.
+Lo primero que el algoritmo hace es crear la matriz en la que se aloja toda la población, que tiene un tamaño del número de genes (o variables) por solución multiplicado por el número de individuos de una generación. Por ejemplo, si el menú se compone de \textit{77} genes y se selecciona un tamaño de población de \textit{100} indiviudos, se crea una matriz de \(77 \, genes \times 100 \, individuos\), en la que cada solución candidata se evalúa individualmente.
 \newpage
 \textit{Pymoo} dispone de varios métodos de incialización, entre los que destaca \textit{''IntegerRandomSampling''}, usado para la generación de matrices de enteros. Este se puede usar en el planificador de comidas al seleccionar el índice del alimento que se añade al menú, que es un número entero. Pero se ha decidido crear una versión modificada del mismo para que genere soluciones que sean interesantes en el contexto del proyecto. En vez de seleccionar un índice aleatorio de un alimento de la base de datos, selecciona basándose las características propias de la solución, explicadas en el apartado \ref{ch:solucion-planteada}. Es decir, se ha configurado para que se seleccione una bebida cuando el gen sea el tercero de una comida principal, para que los alimentos del desayuno sean de la categoría \textit{''Cereales''} (A), etc. Así se consigue que la primera población de la generación cumpla las particularidades del problema, como se observa en la figura \ref{fig:matriz-inicializacion}.
 
@@ -397,7 +397,7 @@ En la tabla se aprecia, en orden: \textit{''n\_gen''} muestra el número de gene
         10 &  1000 &  5 & 0.000000E+00 & 4.510310E+02 & 0.0625000000 &     ideal \\ 
         \bottomrule
     \end{tabularx}
-    \caption{Resultados del algoritmo genético}
+    \caption{Resultados del algoritmo genético.}
     \label{tab:optimizacion}
 \end{table}
 \newpage
@@ -408,8 +408,8 @@ En el caso de que, como se ha explicado antes, no fuera necesario \textit{''out[
 Todas las métricas que obtiene el algoritmo son guardadas en una variable \textit{''resultado''}, a la que se puede acceder.
 
 \begin{itemize}
-    \item En \textit{''resultado.X''} se encuentra una matriz que contiene las soluciones de la población final. En este proyecto son cada uno de los posibles menús que el algoritmo ha encontrado en la última generación. Cada índice representa un alimento seleccionado. Como ejemplo, en 100 generaciones la matriz tiene un tamaño de \textit{77 genes x 100 generaciones}.
-    \item En \textit{''resultado.F''} se encuentra una matriz que contiene los valores de las funciones objetivo para cada solución de la población final. Como el algoritmo presenta 3 objetivos, la matriz puede tener un tamaño de \textit{3 objetivos x 100 generaciones}.
+    \item En \textit{''resultado.X''} se encuentra una matriz que contiene las soluciones no dominadas encontradas. En este proyecto son cada uno de los posibles menús factibles que el algoritmo ha encontrado. Siguiendo el ejemplo, en 10 generaciones el algoritmo ha encontrado 5 soluciones no dominadas, por lo que la matriz tiene un tamaño de \(77 \, genes \times 5 \, n\_nds\).
+    \item En \textit{''resultado.F''} se encuentra una matriz que contiene los valores de las funciones objetivo para cada solución no nominada encontrada. Como el algoritmo presenta 3 objetivos, la matriz puede tener un tamaño de \(3 \, objetivos \times 5 \, n\_nds\).
     \item En \textit{''resultado.G''} se encuentra una matriz muy parecida a \textit{''resultado.F''}, pero con las restricciones en vez de los objetivos. Esta matriz se encuentra vacía si los objetivos y las restricciones no se tratan de manera separada.
 \end{itemize}
 

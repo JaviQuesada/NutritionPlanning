@@ -1,17 +1,74 @@
 \chapter{Experimentación}
 \label{ch:experimentacion}
 
+Para poder evaluar un algoritmo se debe seguir una serie de pasos. Al tratarse de algoritmos estocásticos, es necesario ejecutar cada configuración del algoritmo 31 veces, reportando la media y la desvianza típica de los resultados obtenidos.
+
+Se han creado 5 sujetos de prueba con diferentes características para la experimentación. Se han escogido 31 \textit{seeds} para asegurar la reproducibilidad de las ejecuciones.
+
+En el anexo B se encuentran detallados todos los sujetos de prueba, los \textit{seeds} y el entorno usado para la ejecución de las pruebas.
+
+Lo primero es realizar un análisis de sensibilidad. Se debe variar entre distintos valores para cada hiperparámetro (tipos de operadores, probabilidad, tamaño de la población, ...) y reportar para cada configuración la media y la desvianza antes mencionadas, además del tiempo de ejecución.
+
+Para comparar conjuntos de resultados se hace uso de un test de significatividad estadística. Una prueba estadística propone una hipótesis nula (\(H_0\) ), es decir, que ambas provienen de la misma distribución, ya que no exite una diferencia significativa entre las muestras. El test devuelve un \textit{''p\_value''} qué tan probable es \(H_0\). Si el valor \textit{p} es inferior a un umbral ($\alpha$), que suele ser 0.05, se puede rechazar \(H_0\). Esto quiere decir que hay una probabilidad menor del 5\% de que dos muestras vengan de la misma distribución.
+
+Rechazar \(H_0\) propone evidencia en contra de la hipótesis y que, efectivamente, existe una diferencia significativa entre los conjuntos. Sin embargo, no rechazar \(H_0\) deja en un estado de incertidumbre y solo indica que no se tiene suficiente evidencia para desartarla.
+
+Según el número de conjuntos a comparar se pueden usar diversos tests no paramétricos. En este caso, el trabajo se va a centrar en dos.
+
+Para la comparación de dos conjuntos de resultados se usa el test de \textit{rangos con signos de Wilcoxon}. El proceso calcula las diferencias entre pares (en total 31), ordena las diferencias absolutas y les asigna un rango. Después suma los rangos de las diferencias potisitvas y negativas por separado. La prueba se queda con el valor menor. Si el valor es menor que un valor crítico obtenido de una tabla de Wilcoxon, se rechaza la hipótesis nula.~\cite{scipy2024wilcoxon}
+
+Si se rechaza \(H_0\) se hace una comparativa de las medias y las desvianzas típicas para saber que conjunto de resultados es mejor.
+
+Para la comparación de \textit{n} conjuntos se usa el test de \textit{rangos alineados de Friedman}. Dentro de cada conjunto se ordenan los valores de menor a mayor, dándoles a cada uno un rango de manera ascendente. Se calcula la media de todos los valores con el mismo rango y este valor se resta a cada uno de los números que presenten ese rango. Se suma los rangos que sean iguales entre todos los conjuntos. Es decir, el rango 1 del primer conjunto se suma con el rango 1 del segundo conjunto, y así sucesivamente con todos los rangos. Estas sumas son introducidas en la fórmula de Friedman. El resultado de esta fórmula se compara con con un valor crítico de la distribución chi-cuadrado. Al igual que en la de Wilcoxon, si el resultado es menor que el valor crítico, se rechaza \(H_0\).~\cite{stac2024friedman}
+
+El problema de este método es que no determina qué conjunto de resultados es mejor. Si se comparase cada par de conjuntos por separado la probabilidad de error por cada comparativa se iría acumulando, haciendo las siguientes comparativas inviables. Por ello se propone la variación del test de \textit{rangos alineados de Friedman} con la corrección \textit{post-hoc} de \textit{Shaffer}. Permite realizar comparaciones más precisas entre cada par de conjuntos.~\cite{stac2024shaffer}
+
+Después de que se obtenga la mejor combinación de hiperparámetros, a un problema multiobjetivo se le calcula el \textit{hypervolumen}, que es una medida que evalúa la calidad de un conjunto de soluciones. Mide el volumen de la región en el espacio que está dominada por las soluciones del conjunto y una referencia externa. Cuanto mayor sea, mejor será la calidad de las soluciones y la diversidad.~\cite{pymoo2024hypervolume}
+
+Tras haber analizado individualmente cada configuración del algoritmo (manejo de restricciones y uso de diferentes algorimos), ya se puede hacer la comparación entre ellos.
+
 \section{Manejo de restricciones}
 \label{ch:manejo-restricciones}
 
 \subsection{Penalización estática}
 \label{ch:penalizacion-estatica}
 
+En este método se penalizan las soluciones que violan las restricciones. En las funciones que en las que se definen las restricciones de calorías y macronutrientes, se calcula una penalización proporcional a la diferencia entre el objetivo y los nutrientes consumidos, multiplicada por una constante de penalización. Poniendo de ejemplo la restricción de calorías, si el objetivo calórico es 2500 kilocalorías y la diferencia con las kilocalorías ingeridas está fuera del 10\%, se multiplica esa diferencia por un factor de penalización. Por lo tanto, cuanto mayor es la diferencia, mayor es la penalización, lo que ayuda a guiar al algoritmo en busca de soluciones que se penalicen menos y, en última instancia, que se acerquen lo máximo posible al objetivo.
+
+En el caso de la restricción de alergia, se penaliza con un factor de penalización si el grupo alérgico aparece en el menú. Si no aparece, se devuelve 0.
+
+Los valores retornados de las funciones de restricción se suman entre sí. El valor resultante se suma a cada uno de los valores objetivo del problema. El algoritmo pasa de calcular 3 objetivos y 3 restricciones a calcular solo los 3 objetivos a los que se le ha sumado la penalización de las restricciones.
+
+En el objetivo de preferencias, que se puede considerar una restricción débil, se penaliza con un factor de penalización (de menor valor que el de la alergia) en el caso de que aparezca en el menú un grupo de alimentos que disguste al usuario. En cambio, si el alimento es del gusto del individuo, se devuelve ese mismo factor con un signo negativo delante, lo que ayuda a que baje el valor a minimizar.
+
+En el listado \ref{lst:factores} se muestran los valores de los factores de penalización usados y la importacia que se le da al cumplimiento de cada restricción.
+\newpage
+\begin{lstlisting}[basicstyle=\ttfamily, caption=Factores de penalización.,label={lst:factores}]
+    PENALIZACION_CALORIAS = 50
+    PENALIZACION_MACRONUTRIENTES = 30
+    PENALIZACION_PREFERENCIA = 10
+    PENALIZACION_ALERGIA = 100
+\end{lstlisting}
+
 \subsection{Penalización dinámica}
 \label{ch:penalizacion-dinamica}
 
+Este tipo de penalización, al igual que la estática, multiplica la diferencia entre el objetivo y ingesta real por un factor de penalización. Sin embargo, esta penalización se calcula de manera distinta.
+
+Siguiendo lo explicado en el apartado \ref{ch:restricciones}, en la penalización dinámica se hace uso de la fórmula \( R = (C \cdot t) ^ {\alpha} \). \(t\) representa la generación en la que se encuentra el algoritmo, que se va a incrementar según pasen las generaciones. \(C\) es el factor de penalización, que va a tener uno de los valores del listado \ref{lst:factores}, variando según la restricción que sea. \(\alpha\) es una constante con un valor a definir.
+
+Posteriormete, al igual que en el método de penalización estática, se suman entre sí y a los distintos valores objetivos.
+
+Se busca que, según vayan pasando las generaciones, se penalice en gran medida las soluciones que violen las restricciones.
+
 \subsection{Método separatista}
 \label{ch:metodo-separatista}
+
+En el método separatista los objetivos y las restricciones se tratan por separado. A diferencia de los métodos de penalización, en las funciones de restricción no se hace uso de los factores. Se devuelve únicamente, en el caso de las restricciones de las calorías y los macronutrientes, la diferencia entre el valor objetivo y el valor obtenido de la solución candidata.
+
+La función de la restricción de la alergia (y la de las preferencias) se trata igual que en los métodos con penalización, por lo que aquí sí que se usa el factor de penalización correspondiente.
+
+Como se explica en el apartado sobre la construcción de la solución (\ref{ch:explicacion-algoritmo}), en \textit{''out[F]''} se introducen los valores de las funciones de los objetivos (3 en total), y en \textit{''out[G]''} se introducen los valores de las funciones de las restricciones (3). El algoritmo busca primero soluciones que no violen las restricciones y, cuando las encuentra, busca soluciones que optimicen el problema. En la tabla \ref{tab:optimizacion} se puede ver este funcionamiento.
 
 
 \section{Variación de algoritmo}
@@ -20,8 +77,29 @@
 \subsection{Non-dominated Sorting Genetic Algorithm II (NSGA-II)}
 \label{ch:nsga2}
 
+Este algoritmo sigue el funcionamiento general de un algoritmo genético, pero presenta ciertas modificaciones para los algoritmos multi-objetivo. Tras realizar la evaluación, las soluciones se ordenan diversos frentes de Pareto. En el primer frente se encuentran las soluciones no dominadas, en el segundo las soluciones dominadas solo por soluciones del primer frente, y así sucesivamente. Tras esto, se hace uso del \textit{''crowd distance''}, una técnica usada para preservar la diversidad de las soluciones. Se evalúa cómo de cerca están las soluciones entre sí en el frente. Esta medida se usa en la selección por torneo para que las soluciones estén uniformemente distribuidas a lo largo del frente de Pareto.
+
+\textit{NSGA-II} usa elitismo, ya que combina la población de padres y los descendientes y escoge a los mejores individuos para la siguiente generación basados en la clasificación de Pareto y en el \textit{''crowd distance''}.~\cite{pymoo_nsga2}
+
 \subsection{Strength Pareto Evolutionary Algorithm 2 (SPEA2)}
 \label{ch:spea2}
 
-\subsection{Multi-Objective Evolutionary Algorithm based on Decomposition (MOEA/D)}
+El \textit{SPEA2} también está optimizado para problemas multi-objetivo y, al igual que el NSGA-II, tiene modificaciones respecto al funcionamiento básico del algoritmo genético.
+
+En la evaluación, a cada solución se le asigna una fuerza que refleja cuántas soluciones domina. Tras esto, se usa una medida de densidad para evaluar cómo de poblada está el área alrededor de una solución. El fitness se calcula sumando la fuerza con esta medida de densidad, lo que ayuda a la diversidad de la población. En la selección se escogen los que mayor fitness presentan.
+
+Al igual que el \textit{NSGA-II}, este algoritmo escoge los mejores individuos de la combinación de padres y descendientes para la siguiente generación.~\cite{pymoo_spea2}
+
+\subsection{Multi-Objective Evolutionary Algorithm based on Decomposition (MOEAD)}
 \label{ch:moead}
+
+\textit{MOEAD} hace uso de direcciones de referencia para dividir el problema multi-objetivo en problemas más pequeños de un solo objetivo. Cada dirección de referencia representa una combinación específica de los distintos objetivos. De manera ponderada, cada referencia se centra en la optimizción de un objetivo. En este problema se van a usar 12, mostradas en el listado \ref{lst:direcciones}, ya que asegura una buena cobertura del espacio de búsqueda, que presenta 3 dimensiones (3 objetivos)
+
+\begin{lstlisting}[basicstyle=\ttfamily, caption=Direcciones de referencia.,label={lst:direcciones}]
+    (1, 0, 0),          (0.67, 0.33, 0),    (0.33, 0.67, 0),
+    (0, 1, 0),          (0.67, 0, 0.33),    (0.33, 0, 0.67)
+    (0, 0.67, 0.33),    (0, 0.33, 0.67),    (0, 0, 1),
+    (0.33, 0.33, 0.33), (0.67, 0.16, 0.16), (0.16, 0.67, 0.16)
+\end{lstlisting}
+
+Para cada subproblema, se selecciona un número determinado de subproblemas más cercanos. Estos subproblemas forman el vecindario del primero. Existe una probabilidad \( P_{cv} \) de que una solución se cruce con otra de su mismo vecindario. Compartir información entre vecinos ayuda a generar soluciones que cumplan cada uno de los subproblemas, por lo que son útiles para mejorar la calidad y la diversidad de las soluciones en el frente.~\cite{moead_pymoo} 
