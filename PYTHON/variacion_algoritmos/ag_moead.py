@@ -208,15 +208,13 @@ def ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, grupos_aler
         save_history=True
     )
 
-    # Obtener las soluciones no dominadas
-    soluciones_no_dominadas = resultado.F
-
-    # Seleccionar la mejor solución basada en el primer objetivo (asumiendo que el menor es mejor)
-    mejor_indice = np.argmin(soluciones_no_dominadas[:, 0])
-    mejor_solucion = resultado.pop.get("X")[mejor_indice]
-
-    # Traducir y mostrar la mejor solución
+    # Obtener la mejor solucion encontrada
+    mejor_solucion = resultado.pop.get("X")[np.argmin(resultado.pop.get("F")[:, 0])]
+    
+    # Traducir la solucion
     menu = traducir_solucion(mejor_solucion, comida_basedatos)
+    
+    # Mostrar el menu
     mostrar_menu(menu)
 
     
