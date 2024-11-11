@@ -1,7 +1,6 @@
 #ag_reparacion.py
 
 import numpy as np
-
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.optimize import minimize
@@ -26,10 +25,10 @@ def objetivo_calorias(calorias_diarias, objetivo_calorico):
     return desviacion_objetivo_calorias
 
 
-def objetivo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias):
+def objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias):
     """Calcula la desviacion de los macronutrientes respecto a los porcentajes ideales."""
 
-    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
 
     desviacion_objetivo_proteinas = abs(porcentaje_proteinas - OBJETIVO_PROTEINAS)
     desviacion_objetivo_carbohidratos = abs(porcentaje_carbohidratos - OBJETIVO_CARBOHIDRATOS)
@@ -77,7 +76,7 @@ def reparar_solucion(solucion, problema, objetivo_calorico, grupos_alergia, num_
 
         # Calcula porcentajes de macronutrientes
         porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(
-            calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias
+            proteinas_diarias, carbohidratos_diarias, grasas_diarias
         )
 
         intentos = 0
@@ -111,7 +110,7 @@ def reparar_solucion(solucion, problema, objetivo_calorico, grupos_alergia, num_
 
             # Recalcula porcentajes de macronutrientes
             porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(
-                calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias
+                proteinas_diarias, carbohidratos_diarias, grasas_diarias
             )
 
     return solucion_reparada
@@ -214,7 +213,7 @@ class PlanningComida(ElementwiseProblem):
             desviacion_objetivo_calorias = objetivo_calorias(calorias_diarias, self.objetivo_calorias)
             total_desviaciones_calorias += desviacion_objetivo_calorias
 
-            desviacion_objetivo_macronutrientes = objetivo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+            desviacion_objetivo_macronutrientes = objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
             total_desviaciones_macronutrientes += desviacion_objetivo_macronutrientes
 
         # Calcula fitness

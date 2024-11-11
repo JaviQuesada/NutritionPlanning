@@ -5,7 +5,7 @@ from utilidades.constantes import GruposComida, DIAS_SEMANA, COMIDAS
 
 comida_basedatos = conexion_comida_basedatos()
 
-def calculo_macronutrientes(calorias_diarias, proteinas, carbohidratos, grasas):
+def calculo_macronutrientes(proteinas, carbohidratos, grasas):
     """Calcula el porcentaje de calorias provenientes de cada macronutriente."""
 
     calorias_proteinas = proteinas * 4
@@ -149,7 +149,7 @@ def traducir_solucion(solucion, comida_basedatos):
 
         if calorias > 0:
             datos_dia[dia]["porcentaje_proteinas"], datos_dia[dia]["porcentaje_carbohidratos"], datos_dia[dia]["porcentaje_grasas"] = \
-                calculo_macronutrientes(calorias, datos_dia[dia]["proteinas"], datos_dia[dia]["carbohidratos"], datos_dia[dia]["grasas"])
+                calculo_macronutrientes(datos_dia[dia]["proteinas"], datos_dia[dia]["carbohidratos"], datos_dia[dia]["grasas"])
         else:
             datos_dia[dia]["porcentaje_proteinas"] = datos_dia[dia]["porcentaje_carbohidratos"] = datos_dia[dia]["porcentaje_grasas"] = 0
 

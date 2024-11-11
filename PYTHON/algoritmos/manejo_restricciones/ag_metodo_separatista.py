@@ -1,7 +1,6 @@
 #ag_metodo_separatista.py
 
 import numpy as np
-
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.optimize import minimize
@@ -39,10 +38,10 @@ def restriccion_calorias(calorias_diarias, objetivo_calorico):
     return penalizacion_calorias
 
 
-def objetivo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias):
+def objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias):
     """Calcula la desviacion de los macronutrientes respecto a los porcentajes ideales."""
 
-    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
 
     desviacion_objetivo_proteinas = abs(porcentaje_proteinas - OBJETIVO_PROTEINAS)
     desviacion_objetivo_carbohidratos = abs(porcentaje_carbohidratos - OBJETIVO_CARBOHIDRATOS)
@@ -52,10 +51,10 @@ def objetivo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_
 
     return desviacion_macronutrientes
 
-def restriccion_macronutrientes (calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias):
+def restriccion_macronutrientes (proteinas_diarias, carbohidratos_diarias, grasas_diarias):
     """Aplica penalizacion si algun macronutriente esta fuera de los limites establecidos."""
 
-    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
 
     penalizacion_macronutrientes = 0
 
@@ -165,10 +164,10 @@ class PlanningComida(ElementwiseProblem):
             penalizacion_objetivo_calorias = restriccion_calorias(calorias_diarias, self.objetivo_calorias)
             total_penalizaciones_calorias += penalizacion_objetivo_calorias
 
-            desviacion_objetivo_macronutrientes = objetivo_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+            desviacion_objetivo_macronutrientes = objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
             total_desviaciones_macronutrientes += desviacion_objetivo_macronutrientes
 
-            penalizacion_objetivo_macronutriente = restriccion_macronutrientes(calorias_diarias, proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+            penalizacion_objetivo_macronutriente = restriccion_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
             total_penalizaciones_macronutrientes += penalizacion_objetivo_macronutriente
 
         # Calcula fitness
