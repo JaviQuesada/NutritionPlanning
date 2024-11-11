@@ -13,37 +13,77 @@
 \director{Cristian Ramírez Atencia}
 
 \abstract{spanish}{
+    \sloppy
+    \hyphenpenalty=10000
+    \exhyphenpenalty=10000
+        Este proyecto explora el uso e implementación de algoritmos genéticos en la planificación nutricional. La utilización de técnicas de inteligencia artificial, combinadas con datos nutricionales, permite diseñar dietas adaptadas específicamente a las necesidades y preferencias de cada usuario.
+
+        Por medio de técnicas de computación evolutiva, se diseña un menú alimenticio que cumple con distintos objetivos y restricciones nutricionales, como la ingesta calórica diaria o la distribución de macronutrientes. El algoritmo permite la personalización de la lista de alimentos para que se ajuste a las preferencias y a las alergias de los usuarios.
     
-    Para el final.
+        Se ha desarrollado un menú semanal que consta de 77 platos diferentes, distribuidos en 5 comidas diarias. Los alimentos son elegidos de una base de datos compuesta por más de 2500 registros, creada a partir de la información proporcionada por el gobierno del Reino Unido. Para ajustarse a las necesidades del problema, se han modificado diversos parámetros del algoritmo, como la inicialización o la mutación.
     
-    \textbf{Condensado no quiere decir incompleto}. Debe contener la información más destacable. Lo ideal es que ocupe entre media y una cara de un folio A4. Comenzará por el propósito y principales objetivos de la memoria. Luego hablaremos sobre los aspectos más destacables de la metodología empleada, seguido de los resultados obtenidos. Por último se presentarán las conclusiones de forma condensada.
+        Para optimizar el rendimiento y encontrar las mejores soluciones posibles, se evaluaron diferentes estrategias de cruce y mutación. También se realizaron pruebas comparativas entre distintas técnicas de manejo de restricciones y entre distintos algoritmos de optimización multiobjetivo, como NSGA-II, SPEA2 o MOEA/D.
     
-    Debe tener un estilo claro y conciso, sin ambigüedades de ningún tipo. Además, al ser un resumen de todo el contenido, ni que decir tiene que deberá ser lo último que elaboraremos, y deberá mantener una absoluta fidelidad con el contenido de la memoria.
-}
-\keywords{spanish}{Cuatro o cinco; Expresiones clave; Que resuman; Nuestro proyecto o; Investigación}
+        Los resultados demuestran que el enfoque propuesto cumple con las restricciones y los objetivos en la gran mayoría de los sujetos de prueba analizados, mejorando la eficacia y la personalización de la planificación nutricional.
+        }
+        \keywords{spanish}{Algoritmos evolutivos; Planificación nutricional; Inteligencia artificial; Optimización multiobjetivo}
 
 \abstract{english}{
-    This section must contain the summary that we have written before in Spanish, but in English, as well as the keywords.
-}
-\keywords{english}{Four or five; Key Expressions; Summarising; Our Project or; Research}
+    \sloppy
+    \hyphenpenalty=10000
+    \exhyphenpenalty=10000
+        This project explores the use and implementation of genetic algorithms in nutritional planning. The utilization of artificial intelligence techniques, combined with nutritional data, allows for designing diets specifically adapted to each user's needs and preferences.
+
+        Through evolutionary computing techniques, an alimentary menu is designed that meets various nutritional objectives and restrictions, such as daily caloric intake or macronutrient distribution. The algorithm enables the personalization of the food list to adjust to users' preferences and allergies.
+    
+        A weekly menu has been developed consisting of 77 different dishes, distributed across 5 daily meals. The foods are selected from a database comprising over 2,500 entries, created from information provided by the UK government. To suit the problem's needs, various algorithm parameters, such as initialization and mutation, have been modified.
+    
+        To optimize performance and find the best possible solutions, different crossover and mutation strategies were evaluated. Comparative tests were also conducted between various constraint-handling techniques and different multi-objective optimization algorithms, such as NSGA-II, SPEA2, and MOEA/D.
+    
+        The results demonstrate that the proposed approach meets the restrictions and objectives in the vast majority of the analyzed test subjects, improving the efficiency and personalization of nutritional planning.
+        }
+        \keywords{english}{Evolutionary algorithms; Nutritional planning; Artificial intelligence; Multi-objective optimization}
 
 \acknowledgements{
-    Aquí los agradecimientos que quieras dar. Y si no quieres, borras la entrada \texttt{\textbackslash acknowledgements} de \texttt{report.tex} y ya está.
+    A mi familia y amigos por apoyarme todo este tiempo.
+
+    A mis compañeros y tutores por esta etapa.
 }
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{adjustbox}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{colortbl}
+\usepackage{amssymb}
+\usepackage{xcolor}
 
 \begin{document}
 
-\include{frontmatter/glossary}
+\sloppy
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
 
+\include{frontmatter/glossary}
+\nocite{*}
 \input{chapters/introduccion}
 \input{chapters/estado-arte}
 \input{chapters/marco-teorico}
 \input{chapters/desarrollo}
 \input{chapters/experimentacion}
+\input{chapters/conclusiones}
+\input{chapters/impacto-social-medioambiental}
 
 \appendix
 
 \input{appendices/grupos-comida}
-\input{appendices/codigo-completo}
+\input{appendices/entorno-sujetos}
+\input{appendices/tablas-resultados}
+
 
 \end{document}

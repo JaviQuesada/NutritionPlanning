@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{upm-report}  %[2023-05-31 v1.0 UPM Report Template]
 
-\LoadClass[12pt,a4paper,oneside]{book}
+\LoadClass[11pt,a4paper,oneside]{book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Nos aseguramos de que usamos xetex como motor de compilación
@@ -24,6 +24,7 @@
 \RequirePackage{ifthen}     % Para poder usar condicionales en la clase
 \RequirePackage{pdflscape}  % Posibilidad de páginas en apaisado
 \RequirePackage{xcolor}     % Mejoras sobre el paquete color
+\RequirePackage[nottoc,notlof,notlot]{tocbibind}  % Incluir bibliografía en el índice
 \usepackage[utf8]{inputenc}
 
 \definecolor{myblue}{RGB}{33, 150, 243}
@@ -425,13 +426,13 @@
             \ifthenelse{\isempty{\doclicense@hyphenation}}{}{%
                 \@nameuse{\doclicense@hyphenation} 
             }%
-            \doclicenseLongText Obra derivada de \href{\templaterepository}{\templaterepository}.%
+            \doclicenseLongText% Obra derivada de \href{\templaterepository}{\templaterepository}.%
         \end{minipage}
         \hfill
         \begin{minipage}{\doclicense@imagewidth}\doclicenseImage\end{minipage}
     \end{center}
     \vspace{-1.5em}
-    Todo cambio respecto a la obra original es responsabilidad exclusiva del presente autor.\\
+    %Todo cambio respecto a la obra original es responsabilidad exclusiva del presente autor.\\
 }
 \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -465,7 +466,7 @@
         {\large \MakeUppercase{\reporttype}}\\*[1em]
         {\large \MakeUppercase{\textbf{\degreename}}}
         \vfill
-        {\fontsize{38}{38}\selectfont\@title}\\*[0.3cm]
+        {\fontsize{35}{38}\selectfont\@title}\\*[0.3cm]
         \vfill
         \parbox[b]{\linewidth}{%
             \normalsize
@@ -505,27 +506,6 @@
         \textbf{\schoolname}\\
         \schooladdress
     }
-    \newline
-    \hrule
-    \par{
-        Si deseas citar este trabajo, la entrada completa en \hologo{BibTeX} es la siguiente:
-
-     \hspace{1cm}
-     \begin{minipage}{14cm} 
-            \texttt{%
-            @mastersthesis\{citekey,\\
-                title   = \{\@title\},\\
-                author  = \{\@bibauthor~\textbackslash\& \@bibdirector \}\\
-                school  = \{\schoolname\},\\
-                year    = \{\the\year\},\\
-                month   = \{\the\month\},\\
-                type    = \{\reporttype\}\\
-            \}
-        }
-        \end{minipage}
-    }
-    \newline
-    \hrule
     \vspace*{-0.5cm}\par{\licencia}
  }}
 \makeatother
@@ -623,9 +603,12 @@
 
     \begingroup
         \tableofcontents
-        \conditionalLoF
-        \conditionalLoT
-        \conditionalLoL
+        \clearpage
+        \listoffigures
+        \clearpage
+        \listoftables
+        \clearpage
+        \lstlistoflistings
     \endgroup
 
     \mainmatter
@@ -639,9 +622,13 @@
 \AtEndDocument{
     \backmatter
 
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\bibname}
     \printbibliography
-    \chapter*{Índice de términos}
-    \printglossaries
+
+    %\chapter*{Índice de términos}
+    %\printglossaries
     %\printindex  TODO Hacer el índice (por supuesto opcional)
     \makebackcover
 }

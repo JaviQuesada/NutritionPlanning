@@ -1,105 +1,185 @@
 \chapter{Experimentación}
 \label{ch:experimentacion}
 
-Para poder evaluar un algoritmo se debe seguir una serie de pasos. Al tratarse de algoritmos estocásticos, es necesario ejecutar cada configuración del algoritmo 31 veces, reportando la media y la desvianza típica de los resultados obtenidos.
+Se han creado 5 sujetos de prueba con diferentes características para la experimentación. Dado que los algoritmos son estocásticos, se han seleccionado 31 semillas distintas para asegurar la reproducibilidad de las ejecuciones. Por lo tanto, se han realizado 155 tests por cada configuración. En el anexo \ref{ch:entorno-sujetos} se encuentran detallados todos los sujetos de prueba, los \textit{seeds} y el entorno usado para la ejecución de las pruebas.
 
-Se han creado 5 sujetos de prueba con diferentes características para la experimentación. Se han escogido 31 \textit{seeds} para asegurar la reproducibilidad de las ejecuciones.
+Lo primero que se ha realizado ha sido un análisis de sensibilidad. Se ha variado entre distintos valores para cada hiperparámetro (tipos de operadores, probabilidad, tamaño de la población, ...) y se han comparado para poder encontrar la mejor configuración posible.
 
-En el anexo B se encuentran detallados todos los sujetos de prueba, los \textit{seeds} y el entorno usado para la ejecución de las pruebas.
+Para comparar conjuntos de resultados se han usado dos métodos. El primero, \textit{success rate}, mide la viabilidad de cada configuración, evaluando el número de soluciones factibles que propone. La mejor configuración es la que mayor tasa de éxito tiene.
 
-Lo primero es realizar un análisis de sensibilidad. Se debe variar entre distintos valores para cada hiperparámetro (tipos de operadores, probabilidad, tamaño de la población, ...) y reportar para cada configuración la media y la desvianza antes mencionadas, además del tiempo de ejecución.
+El otro método para poder hacer comparaciones entre las configuraciones de un problema multiobjetivo es calculando el \textit{hipervolumen}, que es una medida que evalúa la calidad de un conjunto de soluciones. Mide el volumen de la región del espacio que está dominada por las soluciones del conjunto y una referencia externa. Cuanto mayor sea, mejor será la calidad de las soluciones y la diversidad.~\cite{pymoo2024hypervolume}. Solo se han calculado los hipervolumenes de las soluciones factibles, eliminando las que no cumplen las restricciones.
 
-Para comparar conjuntos de resultados se hace uso de un test de significatividad estadística. Una prueba estadística propone una hipótesis nula (\(H_0\) ), es decir, que ambas provienen de la misma distribución, ya que no exite una diferencia significativa entre las muestras. El test devuelve un \textit{''p\_value''} qué tan probable es \(H_0\). Si el valor \textit{p} es inferior a un umbral ($\alpha$), que suele ser 0.05, se puede rechazar \(H_0\). Esto quiere decir que hay una probabilidad menor del 5\% de que dos muestras vengan de la misma distribución.
+Para comparar hipervolumenes se hace uso de un test de significatividad estadística. Se trata de una prueba estadística propone una hipótesis nula (\(H_0\) ), es decir, que ambos conjuntos provienen de la misma distribución, ya que no exite una diferencia significativa entre las muestras. El test devuelve un \textit{''p\_value''} que señala qué tan probable es \(H_0\). Si el valor \textit{p} es inferior a un umbral ($\alpha$), que suele ser 0.05, se puede rechazar \(H_0\). Esto quiere decir que hay una probabilidad menor del 5\% de que dos muestras vengan de la misma distribución.
+\newpage
+Rechazar \(H_0\) propone evidencia en contra de la hipótesis y que, efectivamente, existe una diferencia significativa entre los conjuntos. Sin embargo, no rechazar \(H_0\) deja en un estado de incertidumbre y solo indica que no se tiene suficiente evidencia para descartarla.
 
-Rechazar \(H_0\) propone evidencia en contra de la hipótesis y que, efectivamente, existe una diferencia significativa entre los conjuntos. Sin embargo, no rechazar \(H_0\) deja en un estado de incertidumbre y solo indica que no se tiene suficiente evidencia para desartarla.
+Según el número de conjuntos a comparar se pueden usar diversos tests no paramétricos. En este caso, este trabajo se ha centrado en dos.
 
-Según el número de conjuntos a comparar se pueden usar diversos tests no paramétricos. En este caso, el trabajo se va a centrar en dos.
+Para la comparación de dos conjuntos de resultados se usa el \textit{test de rangos con signos de Wilcoxon}. El proceso calcula las diferencias entre pares (en total 31), ordena los resultados absolutos y les asigna un rango. Después suma los rangos de las diferencias positivas y negativas por separado. La prueba se queda con el valor menor. Si el valor es menor que un valor crítico, obtenido de una tabla de Wilcoxon, se rechaza la hipótesis nula.~\cite{scipy2024wilcoxon}
 
-Para la comparación de dos conjuntos de resultados se usa el test de \textit{rangos con signos de Wilcoxon}. El proceso calcula las diferencias entre pares (en total 31), ordena las diferencias absolutas y les asigna un rango. Después suma los rangos de las diferencias potisitvas y negativas por separado. La prueba se queda con el valor menor. Si el valor es menor que un valor crítico obtenido de una tabla de Wilcoxon, se rechaza la hipótesis nula.~\cite{scipy2024wilcoxon}
-
-Si se rechaza \(H_0\) se hace una comparativa de las medias y las desvianzas típicas para saber que conjunto de resultados es mejor.
-
-Para la comparación de \textit{n} conjuntos se usa el test de \textit{rangos alineados de Friedman}. Dentro de cada conjunto se ordenan los valores de menor a mayor, dándoles a cada uno un rango de manera ascendente. Se calcula la media de todos los valores con el mismo rango y este valor se resta a cada uno de los números que presenten ese rango. Se suma los rangos que sean iguales entre todos los conjuntos. Es decir, el rango 1 del primer conjunto se suma con el rango 1 del segundo conjunto, y así sucesivamente con todos los rangos. Estas sumas son introducidas en la fórmula de Friedman. El resultado de esta fórmula se compara con con un valor crítico de la distribución chi-cuadrado. Al igual que en la de Wilcoxon, si el resultado es menor que el valor crítico, se rechaza \(H_0\).~\cite{stac2024friedman}
+Para la comparación de \textit{n} conjuntos se usa el \textit{test de rangos alineados de Friedman}. Dentro de cada conjunto se ordenan los valores de menor a mayor, dándoles a cada uno un rango de manera ascendente. Se calcula la media de todos los valores con el mismo rango y este valor se resta a cada uno de los números que presenten ese rango. Se suman los rangos que sean iguales entre todos los conjuntos. Es decir, el rango 1 del primer conjunto se suma con el rango 1 del segundo conjunto, y así sucesivamente con todos los rangos. Estas sumas son introducidas en la fórmula de Friedman. El resultado de esta fórmula se compara con un valor crítico de la distribución chi-cuadrado. Al igual que en la de Wilcoxon, si el resultado es menor que el valor crítico, se rechaza \(H_0\).~\cite{stac2024friedman}
 
 El problema de este método es que no determina qué conjunto de resultados es mejor. Si se comparase cada par de conjuntos por separado la probabilidad de error por cada comparativa se iría acumulando, haciendo las siguientes comparativas inviables. Por ello se propone la variación del test de \textit{rangos alineados de Friedman} con la corrección \textit{post-hoc} de \textit{Shaffer}. Permite realizar comparaciones más precisas entre cada par de conjuntos.~\cite{stac2024shaffer}
 
-Después de que se obtenga la mejor combinación de hiperparámetros, a un problema multiobjetivo se le calcula el \textit{hypervolumen}, que es una medida que evalúa la calidad de un conjunto de soluciones. Mide el volumen de la región en el espacio que está dominada por las soluciones del conjunto y una referencia externa. Cuanto mayor sea, mejor será la calidad de las soluciones y la diversidad.~\cite{pymoo2024hypervolume}
+Si se rechaza \(H_0\) se hace una comparativa de las medias y las desvianzas típicas de los hipervolumenes para saber que conjunto de resultados es mejor.
 
-Tras haber analizado individualmente cada configuración del algoritmo (manejo de restricciones y uso de diferentes algorimos), ya se puede hacer la comparación entre ellos.
+Tras haber analizado individualmente cada configuración de hiperparámetros del algoritmo, ya se puede hacer la comparación entre las variaciones del algoritmo propuestas.
 
 \section{Manejo de restricciones}
-\label{ch:manejo-restricciones}
+\label{ch:manejo-restricciones-experimentacion}
 
-\subsection{Penalización estática}
-\label{ch:penalizacion-estatica}
+Todas las tablas de resultados y comparación de hiperparámetros, expuestas en el apéndice \ref{ch:tablas-resultados}, van a seguir la misma estructura, la cual es la mostrada en la tabla \ref{table:resultados-penalizacion-estatica-mutacion}. Cada fila muestra los resultados para un sujeto en una configuración de hiperparámetros. En este proyecto se ha comparado la probabilidad de mutación y el tipo y probabilidad de cruce. Por cada sujeto se muestra el tiempo en ejecutar un test, siendo este resultado una media de los 31 tests antes mencionados. Las dos siguientes columnas muestran el número de soluciones que se han obtenido en total en todas las ejecuciones y el número de esas soluciones que son factibles, respectivamente. La columna final muestra el \textit{success rate}, dividiendo el número de soluciones factibles entre el número total de soluciones.
 
-En este método se penalizan las soluciones que violan las restricciones. En las funciones que en las que se definen las restricciones de calorías y macronutrientes, se calcula una penalización proporcional a la diferencia entre el objetivo y los nutrientes consumidos, multiplicada por una constante de penalización. Poniendo de ejemplo la restricción de calorías, si el objetivo calórico es 2500 kilocalorías y la diferencia con las kilocalorías ingeridas está fuera del 10\%, se multiplica esa diferencia por un factor de penalización. Por lo tanto, cuanto mayor es la diferencia, mayor es la penalización, lo que ayuda a guiar al algoritmo en busca de soluciones que se penalicen menos y, en última instancia, que se acerquen lo máximo posible al objetivo.
+Las tablas del método separatista presentan modificaciones, ya que todas las soluciones que muestra este procedimiento son factibles. Por lo tanto, en vez de mostrar el número de soluciones factibles, se muestra el número de ejecuciones que han obtenido soluciones factibles. El \textit{success rate} se calcula dividiendo este nuevo número entre el total de ejecuciones realizadas para un sujeto en una configuración concreta, que es 31. En el anexo, la tabla \ref{table:resultados-metodo-separatista-mutacion-anexo} muestra la estructura a seguir en estos casos.
 
-En el caso de la restricción de alergia, se penaliza con un factor de penalización si el grupo alérgico aparece en el menú. Si no aparece, se devuelve 0.
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Mutación} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Baja (1/77)}}
+    & 1 & 6.11 & 811 & 804 & 99.14\% \\
+    \cline{2-6}
+    & 2 & 6.21 & 738 & 721 & 97.70\% \\
+    \cline{2-6}
+    & 3 & 6.08 & 872 & 868 & 99.54\% \\
+    \cline{2-6}
+    & 4 & 6.11 & 1092 & 1092 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.25 & 1979 & 1979 & 100.00\% \\   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Media (0.05)}}
+    & 1 & 7.24 & 44 & 1 & 2.27\% \\
+    \cline{2-6}
+    & 2 & 7.51 & 41 & 8 & 19.51\% \\
+    \cline{2-6}
+    & 3 & 7.40 & 73 & 43 & 58.90\% \\
+    \cline{2-6}
+    & 4 & 7.40 & 118 & 100 & 84.75\% \\
+    \cline{2-6}
+    & 5 & 7.25 & 900 & 900 & 100.00\% \\   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alta (0.1)}}
+    & 1 & 8.84 & 32 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 8.97 & 32 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 8.90 & 35 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 4 & 8.91 & 31 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 8.95 & 170 & 169 & 99.41\% \\  
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Penalización estática: probabilidad de mutación.}
+    \label{table:resultados-penalizacion-estatica-mutacion}
+\end{table}
 
-Los valores retornados de las funciones de restricción se suman entre sí. El valor resultante se suma a cada uno de los valores objetivo del problema. El algoritmo pasa de calcular 3 objetivos y 3 restricciones a calcular solo los 3 objetivos a los que se le ha sumado la penalización de las restricciones.
+El \textit{success rate} de las tablas de resultados de la probabilidad de mutación indica que en todos los casos el algoritmo propone mejores soluciones cuanto menor sea la probabilidad. La probabilidad baja favorece una convergencia más rápida y propone soluciones muchas veces similares entre sí, pero que cumplen con todas las restricciones.
 
-En el objetivo de preferencias, que se puede considerar una restricción débil, se penaliza con un factor de penalización (de menor valor que el de la alergia) en el caso de que aparezca en el menú un grupo de alimentos que disguste al usuario. En cambio, si el alimento es del gusto del individuo, se devuelve ese mismo factor con un signo negativo delante, lo que ayuda a que baje el valor a minimizar.
-
-En el listado \ref{lst:factores} se muestran los valores de los factores de penalización usados y la importacia que se le da al cumplimiento de cada restricción.
+Al contrario que la mutación, el cruce no altera en gran medida la viabilidad de las soluciones propuestas. A partir de los resultados no se puede determinar cuál es la mejor configuración posible, por lo que es necesario la comparación de los hipervolúmenes. Tras realizar el test de Friedman con la corrección post-hoc de Schaffer, el algoritmo con cruce de dos puntos y probabilidad alta es el más efectivo en todos los tipos de manejo de restricciones, lo que significa que la mejor opción es la que mayor recombinación de genes entre padres presenta, ayudando a mejorar la exploración del espacio de soluciones.
 \newpage
-\begin{lstlisting}[basicstyle=\ttfamily, caption=Factores de penalización.,label={lst:factores}]
-    PENALIZACION_CALORIAS = 50
-    PENALIZACION_MACRONUTRIENTES = 30
-    PENALIZACION_PREFERENCIA = 10
-    PENALIZACION_ALERGIA = 100
-\end{lstlisting}
+La comparación de algoritmos se realiza entre el método separatista y la penalización estática, ya que los resultados que se obtienen con el método \textit{''ConstraintsAsObjective''} muestra resultados muy malos y soluciones no factibles en más del 95\% de los casos (tablas \ref{table:resultados-restriccion-objetivo-mutacion-anexo} y \ref{table:resultados-restriccion-objetivo-cruce-anexo}). La prueba de Wilcoxon obtiene un \textit{$p\_value$} de 0.1037, por lo que no hay suficiente evidencia para demostrar que hay una diferencia significativa entre ambos conjuntos de resultados.
 
-\subsection{Penalización dinámica}
-\label{ch:penalizacion-dinamica}
+En la tabla \ref{table:comparacion-manejos-restricciones-grafico} se muestra de manera gráfica las conclusiones que se obtienen tras la comparación de los métodos. Como se ha explicado, la calidad de las soluciones de la penalización estática y del método separatista son prácticamente iguales. En cuanto a la estabilidad, la penalización estática presenta un \textit{success rate} más cercano al 100\% en los sujetos 1, 2 y 3 respecto al método separatista. En cambio, en los tiempos de ejecución destaca el método separatista, que es, de media, 1 segundo más rápido que el otro procedimiento.
 
-Este tipo de penalización, al igual que la estática, multiplica la diferencia entre el objetivo y ingesta real por un factor de penalización. Sin embargo, esta penalización se calcula de manera distinta.
+Por lo tanto, no es posible determinar cuál es el mejor método de manejo de restricciones con las pruebas realizadas con el algoritmo multiobjetivo NSGA-II. Ambos métodos van a ser usados en las pruebas de comparación de algoritmos para comprender la configuración de parámetros óptima para el proyecto.
 
-Siguiendo lo explicado en el apartado \ref{ch:restricciones}, en la penalización dinámica se hace uso de la fórmula \( R = (C \cdot t) ^ {\alpha} \). \(t\) representa la generación en la que se encuentra el algoritmo, que se va a incrementar según pasen las generaciones. \(C\) es el factor de penalización, que va a tener uno de los valores del listado \ref{lst:factores}, variando según la restricción que sea. \(\alpha\) es una constante con un valor a definir.
-
-Posteriormete, al igual que en el método de penalización estática, se suman entre sí y a los distintos valores objetivos.
-
-Se busca que, según vayan pasando las generaciones, se penalice en gran medida las soluciones que violen las restricciones.
-
-\subsection{Método separatista}
-\label{ch:metodo-separatista}
-
-En el método separatista los objetivos y las restricciones se tratan por separado. A diferencia de los métodos de penalización, en las funciones de restricción no se hace uso de los factores. Se devuelve únicamente, en el caso de las restricciones de las calorías y los macronutrientes, la diferencia entre el valor objetivo y el valor obtenido de la solución candidata.
-
-La función de la restricción de la alergia (y la de las preferencias) se trata igual que en los métodos con penalización, por lo que aquí sí que se usa el factor de penalización correspondiente.
-
-Como se explica en el apartado sobre la construcción de la solución (\ref{ch:explicacion-algoritmo}), en \textit{''out[F]''} se introducen los valores de las funciones de los objetivos (3 en total), y en \textit{''out[G]''} se introducen los valores de las funciones de las restricciones (3). El algoritmo busca primero soluciones que no violen las restricciones y, cuando las encuentra, busca soluciones que optimicen el problema. En la tabla \ref{tab:optimizacion} se puede ver este funcionamiento.
+\begin{center}
+    {\color{red} \Large /// Esta tabla es un borrador ///}
+\end{center}
 
 
-\section{Variación de algoritmo}
-\label{ch:distinto-algoritmo}
+\renewcommand{\arraystretch}{1.5}
 
-\subsection{Non-dominated Sorting Genetic Algorithm II (NSGA-II)}
-\label{ch:nsga2}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Método de manejo de restricciones} & \textbf{Estabilidad} & \textbf{Calidad} & \textbf{Velocidad} \\
+        \hline
+        Penalización Estática & 
+        \tikz{\node[draw=none, fill=green!30, rounded corners=2pt]{\scriptsize $\blacktriangle$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} \\
+        \hline
+        Método Separatista & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=green!30, rounded corners=2pt]{\scriptsize $\blacktriangle$};} \\
+        \hline
+        Restricción como Objetivo & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} \\
+        \hline
+    \end{tabular}
+    \caption{Comparación de métodos de manejo de restricciones.}
+    \label{table:comparacion-manejos-restricciones-grafico}
+\end{table}
+\renewcommand{\arraystretch}{1}
+\newpage
+\section{Algoritmos multi-objetivo}
+\label{ch:algoritmos-multiobjetivo}
 
-Este algoritmo sigue el funcionamiento general de un algoritmo genético, pero presenta ciertas modificaciones para los algoritmos multi-objetivo. Tras realizar la evaluación, las soluciones se ordenan diversos frentes de Pareto. En el primer frente se encuentran las soluciones no dominadas, en el segundo las soluciones dominadas solo por soluciones del primer frente, y así sucesivamente. Tras esto, se hace uso del \textit{''crowd distance''}, una técnica usada para preservar la diversidad de las soluciones. Se evalúa cómo de cerca están las soluciones entre sí en el frente. Esta medida se usa en la selección por torneo para que las soluciones estén uniformemente distribuidas a lo largo del frente de Pareto.
+Por los resultados mostrados en la tabla \ref{table:resultados-spea2-anexo} no es posble saber el mejor método de manejo de restricciones con el algoritmo SPEA2, por lo que se realiza el test de Wilcoxon entre pares. El resultado arroja un \textit{$p\_value$} de 0.87, por lo que no hay suficiente evidencia para demostrar que son diferentes.
 
-\textit{NSGA-II} usa elitismo, ya que combina la población de padres y los descendientes y escoge a los mejores individuos para la siguiente generación basados en la clasificación de Pareto y en el \textit{''crowd distance''}.~\cite{pymoo_nsga2}
+Para MOEA/D se va a comparar diferente cantidad de vecinos, la probabilidad de selección de vecinos y el número de direcciones de referencia con dos métodos muy usados para generarlas, \textit{das-dennis} e \textit{incremental}, explicadas en el punto \ref{ch:moead}. Este algoritmo solo se va a probar con el método de penalización estática, ya que no permite restricciones explícitas.
 
-\subsection{Strength Pareto Evolutionary Algorithm 2 (SPEA2)}
-\label{ch:spea2}
+Es interesante ver que todas las soluciones generadas por las distintas configuraciones de la tabla \ref{table:resultados-moead-nvecinos-anexo} son factibles, lo que puede demostrar que MOEA/D es un buen algoritmo para nuestro problema. Tras realizar el test estadístico, la mejor configuración es la que presenta un mayor número de vecinos, 30.
 
-El \textit{SPEA2} también está optimizado para problemas multi-objetivo y, al igual que el NSGA-II, tiene modificaciones respecto al funcionamiento básico del algoritmo genético.
+La probabilidad de selección entre vecinos tampoco supone un gran cambio en la factibilidad de las soluciones que propone el algoritmo. Tras realizar el test para casos \textit{NxN}, no hay suficiente evidencia para rechazar \(H_0\). La media entre calidad, estabilidad y rapidez es más alta en la probabilidad más alta (0.9), por lo que es la que se usa.
 
-En la evaluación, a cada solución se le asigna una fuerza que refleja cuántas soluciones domina. Tras esto, se usa una medida de densidad para evaluar cómo de poblada está el área alrededor de una solución. El fitness se calcula sumando la fuerza con esta medida de densidad, lo que ayuda a la diversidad de la población. En la selección se escogen los que mayor fitness presentan.
+Para establecer un número de direcciones con el método de generación \textit{das-dennis}, se compara el \textit{success rate} de la tabla \ref{table:resultados:moead-direcciones-dasdennis-anexo} y se realizan los tests no paramétricos. Aunque la que presenta un número más elevado de direcciones es la configuración con más calidad, se ha decidido seleccionar la configuración con 12 direcciones debido a los altos tiempos que necesita ''Alto (18)'' en cada ejecución, haciendo inviable su uso en un entorno real. Con los resultados obtenidos tras la generación de direcciones de referencia con \textit{incremental} ocurre lo mismo. el número más alto es el que arroja mejores resultados, pero los altos tiempos de ejecución descartan esa configuración. Tras hacer el test de Wilcoxon entre ambas configuraciones, se concluye que \textit{incremental} presenta mejores soluciones que \textit{das-dennis}.
 
-Al igual que el \textit{NSGA-II}, este algoritmo escoge los mejores individuos de la combinación de padres y descendientes para la siguiente generación.~\cite{pymoo_spea2}
+Con todas las configuraciones elegidas ya se puede realizar la comparación entre algoritmos. Los resultados muestran que, en cuanto a calidad de soluciones propuestas, el algoritmo de NSGA-II con el método separatista es el mejor, seguido por NSGA-II con penalización estática. En tercer y cuarto lugar se encuentra SPEA2 con penalización estática y con manejo separatista, respectivamente. Finalmente, el algoritmo MOEA/D tiene el peor rendimiento según los rankings obtenidos.
 
-\subsection{Multi-Objective Evolutionary Algorithm based on Decomposition (MOEAD)}
-\label{ch:moead}
+El MOEA/D presenta un success rate del 100\%. Los métodos de penalización estática, tanto de NSGA-II como de SPEA2, lo siguen de cerca, con más del 99\% de soluciones factibles propuestas. Los métodos separatistas empeoran un poco respecto al resto, aunque ambos siguen presentando más del 97\% de success rate.
 
-\textit{MOEAD} hace uso de direcciones de referencia para dividir el problema multi-objetivo en problemas más pequeños de un solo objetivo. Cada dirección de referencia representa una combinación específica de los distintos objetivos. De manera ponderada, cada referencia se centra en la optimizción de un objetivo. En este problema se van a usar 12, mostradas en el listado \ref{lst:direcciones}, ya que asegura una buena cobertura del espacio de búsqueda, que presenta 3 dimensiones (3 objetivos)
+En cuanto a los tiempos, todos los métodos de los algoritmos NSGA-II y SPEA2 no se llevan más de 1 segundo de diferencia, siendo el mejor el método separatista de NSGA-II con 5.64 segundos y el peor la penalización estática del mismo algoritmo con 6.61 segundos. El algortimo con los peores tiempos es MOEA/D, donde la media sube a 8.76 segundos por ejecución.
 
-\begin{lstlisting}[basicstyle=\ttfamily, caption=Direcciones de referencia.,label={lst:direcciones}]
-    (1, 0, 0),          (0.67, 0.33, 0),    (0.33, 0.67, 0),
-    (0, 1, 0),          (0.67, 0, 0.33),    (0.33, 0, 0.67)
-    (0, 0.67, 0.33),    (0, 0.33, 0.67),    (0, 0, 1),
-    (0.33, 0.33, 0.33), (0.67, 0.16, 0.16), (0.16, 0.67, 0.16)
-\end{lstlisting}
+\begin{center}
+    {\color{red} \Large /// Esta tabla es un borrador ///}
+\end{center}
 
-Para cada subproblema, se selecciona un número determinado de subproblemas más cercanos. Estos subproblemas forman el vecindario del primero. Existe una probabilidad \( P_{cv} \) de que una solución se cruce con otra de su mismo vecindario. Compartir información entre vecinos ayuda a generar soluciones que cumplan cada uno de los subproblemas, por lo que son útiles para mejorar la calidad y la diversidad de las soluciones en el frente.~\cite{moead_pymoo} 
+\renewcommand{\arraystretch}{1.5}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Algoritmo} & \textbf{Estabilidad} & \textbf{Calidad} & \textbf{Velocidad} \\
+        \hline
+        NSGA-II (Penalización estática) & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=green!30, rounded corners=2pt]{\scriptsize $\blacktriangle$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} \\
+        \hline
+        NSGA-II (Método separatista) & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} & 
+        \tikz{\node[draw=none, fill=green!30, rounded corners=2pt]{\scriptsize $\blacktriangle$};} & 
+        \tikz{\node[draw=none, fill=green!30, rounded corners=2pt]{\scriptsize $\blacktriangle$};} \\
+        \hline
+        SPEA2 (Penalización estática) & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} \\
+        \hline
+        SPEA2 (Método separatista) & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} & 
+        \tikz{\node[draw=none, fill=yellow!30, rounded corners=2pt]{\scriptsize $\approx$};} \\
+        \hline
+        MOEA/D & 
+        \tikz{\node[draw=none, fill=green!30, rounded corners=2pt]{\scriptsize $\blacktriangle$};} & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} & 
+        \tikz{\node[draw=none, fill=red!60, rounded corners=2pt]{\scriptsize $\blacktriangledown$};} \\
+        \hline
+    \end{tabular}
+    \caption{Comparación de algoritmos.}
+\end{table}
+
+\renewcommand{\arraystretch}{1}

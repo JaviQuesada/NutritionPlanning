@@ -1,0 +1,520 @@
+\chapter{Apéndice: Tablas de resultados}
+\label{ch:tablas-resultados}
+
+\section{Manejo de restricciones}
+\label{ch:manejo-restricciones-experimentacion-anexo}
+
+\subsection{Penalización estática}
+\label{ch:ag-penalizacion-estatica-anexo}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Mutación} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Baja (1/77)}}
+    & 1 & 6.11 & 811 & 804 & 99.14\% \\
+    \cline{2-6}
+    & 2 & 6.21 & 738 & 721 & 97.70\% \\
+    \cline{2-6}
+    & 3 & 6.08 & 872 & 868 & 99.54\% \\
+    \cline{2-6}
+    & 4 & 6.11 & 1092 & 1092 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.25 & 1979 & 1979 & 100.00\% \\   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Media (0.05)}}
+    & 1 & 7.24 & 44 & 1 & 2.27\% \\
+    \cline{2-6}
+    & 2 & 7.51 & 41 & 8 & 19.51\% \\
+    \cline{2-6}
+    & 3 & 7.40 & 73 & 43 & 58.90\% \\
+    \cline{2-6}
+    & 4 & 7.40 & 118 & 100 & 84.75\% \\
+    \cline{2-6}
+    & 5 & 7.25 & 900 & 900 & 100.00\% \\   
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alta (0.1)}}
+    & 1 & 8.84 & 32 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 8.97 & 32 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 8.90 & 35 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 4 & 8.91 & 31 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 8.95 & 170 & 169 & 99.41\% \\  
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Penalización estática: probabilidad de mutación.}
+    \label{table:resultados-penalizacion-estatica-mutacion-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Cruce} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Un Punto Bajo (0.6)}}
+    & 1 & 6.57 & 473 & 450 & 95.14\% \\
+    \cline{2-6}
+    & 2 & 6.44 & 476 & 456 & 95.80\% \\
+    \cline{2-6}
+    & 3 & 6.43 & 703 & 690 & 98.15\% \\
+    \cline{2-6}
+    & 4 & 6.47 & 976 & 976 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.52 & 1847 & 1847 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Un Punto Alto (0.9)}}
+    & 1 & 6.11 & 811 & 804 & 99.14\% \\
+    \cline{2-6}
+    & 2 & 6.21 & 738 & 721 & 97.70\% \\
+    \cline{2-6}
+    & 3 & 6.08 & 872 & 868 & 99.54\% \\
+    \cline{2-6}
+    & 4 & 6.11 & 1092 & 1092 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.25 & 1979 & 1979 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Dos Puntos Bajo (0.6)}}
+    & 1 & 6.47 & 852 & 847 & 99.41\% \\
+    \cline{2-6}
+    & 2 & 6.55 & 720 & 715 & 99.31\% \\
+    \cline{2-6}
+    & 3 & 6.76 & 856 & 856 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 7.09 & 1096 & 1096 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.96 & 1795 & 1795 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Dos Puntos Alto (0.9)}}
+    & 1 & 6.71 & 881 & 880 & 99.89\% \\
+    \cline{2-6}
+    & 2 & 6.79 & 955 & 928 & 97.17\% \\
+    \cline{2-6}
+    & 3 & 6.69 & 1068 & 1068 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 6.67 & 1149 & 1149 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.18 & 1751 & 1751 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Penalización estática: tipo y probabilidad de cruce.}
+    \label{table:resultados-penalizacion-estatica-cruce-anexo}
+\end{table}
+
+\subsection{Método separatista}
+\label{ch:ag-metodo-separatista-anexo}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Mutación} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Ejecuciones con Soluciones} & \textbf{\% de Ejecuciones con Soluciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Baja (1/77)}} & 1 & 5.54 & 640 & 28 & 90.32\% \\
+    \cline{2-6}
+    & 2 & 5.43 & 598 & 25 & 80.65\% \\
+    \cline{2-6}
+    & 3 & 5.50 & 937 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 4 & 5.57 & 1102 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 5.89 & 1856 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Media (0.05)}} & 1 & 6.27 & 7 & 4 & 12.90\% \\
+    \cline{2-6}
+    & 2 & 6.39 & 1 & 1 & 3.23\% \\
+    \cline{2-6}
+    & 3 & 6.35 & 41 & 6 & 19.35\% \\
+    \cline{2-6}
+    & 4 & 6.40 & 69 & 11 & 35.48\% \\
+    \cline{2-6}
+    & 5 & 6.77 & 960 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alta (0.1)}} & 1 & 8.20 & 0 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 8.59 & 0 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 8.14 & 0 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 4 & 8.13 & 0 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 8.15 & 194 & 30 & 96.77\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Método separatista: probabilidad de mutación.}
+    \label{table:resultados-metodo-separatista-mutacion-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Cruce} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Ejecuciones con Soluciones} & \textbf{\% de Ejecuciones con Soluciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Un Punto Bajo (0.6)}} & 1 & 5.70 & 539 & 26 & 83.87\% \\
+    \cline{2-6}
+    & 2 & 5.83 & 448 & 22 & 70.97\% \\
+    \cline{2-6}
+    & 3 & 5.80 & 716 & 30 & 96.77\% \\
+    \cline{2-6}
+    & 4 & 5.79 & 903 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.07 & 1884 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Un Punto Alto (0.9)}} & 1 & 5.54 & 640 & 28 & 90.32\% \\
+    \cline{2-6}
+    & 2 & 5.43 & 598 & 25 & 80.65\% \\
+    \cline{2-6}
+    & 3 & 5.50 & 937 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 4 & 5.57 & 1102 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 5.89 & 1856 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Dos Puntos Bajo (0.6)}} & 1 & 5.61 & 794 & 28 & 90.32\% \\
+    \cline{2-6}
+    & 2 & 5.72 & 642 & 26 & 83.87\% \\
+    \cline{2-6}
+    & 3 & 5.73 & 848 & 30 & 96.77\% \\
+    \cline{2-6}
+    & 4 & 5.82 & 1113 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.08 & 1802 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Dos Puntos Alto (0.9)}} & 1 & 5.48 & 1018 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 5.58 & 827 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 5.61 & 962 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 5.64 & 1226 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 5.91 & 1693 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Método separatista: tipo y probabilidad de cruce.}
+    \label{table:resultados-metodo-separatista-cruce-anexo}
+\end{table}
+
+\subsection{Restricción como objetivo}
+\label{ch:ag-restriccion-como-objetivo-anexo}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Mutación} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Baja (1/77)}}
+    & 1 & 7.12 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 7.01 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 7.01 & 3090 & 11 & 0.36\% \\
+    \cline{2-6}
+    & 4 & 7.03 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 7.08 & 3092 & 98 & 3.17\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Media (0.05)}}
+    & 1 & 7.88 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 8.02 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 8.03 & 3094 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 4 & 8.01 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 8.06 & 3100 & 59 & 1.90\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alta (0.1)}}
+    & 1 & 9.26 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 9.40 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 9.44 & 3080 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 4 & 9.43 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 9.24 & 3079 & 12 & 0.39\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Restricción como objetivo: probabilidad de mutación.}
+    \label{table:resultados-restriccion-objetivo-mutacion-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Tipo de Cruce} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Un Punto Bajo (0.6)}}
+    & 1 & 7.12 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 7.01 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 7.01 & 3090 & 11 & 0.36\% \\
+    \cline{2-6}
+    & 4 & 7.03 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 7.08 & 3092 & 98 & 3.17\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Un Punto Alto (0.9)}}
+    & 1 & 6.69 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 6.87 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 6.87 & 3051 & 3 & 0.10\% \\
+    \cline{2-6}
+    & 4 & 6.92 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 6.98 & 3090 & 123 & 3.98\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Dos Puntos Bajo (0.6)}}
+    & 1 & 7.05 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 7.19 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 7.28 & 3058 & 8 & 0.26\% \\
+    \cline{2-6}
+    & 4 & 7.40 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 7.42 & 3100 & 71 & 2.29\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Dos Puntos Alto (0.9)}}
+    & 1 & 6.98 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 2 & 7.15 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 3 & 7.09 & 2997 & 12 & 0.40\% \\
+    \cline{2-6}
+    & 4 & 7.00 & 3100 & 0 & 0.00\% \\
+    \cline{2-6}
+    & 5 & 7.27 & 3094 & 118 & 3.81\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en Restricción como objetivo: tipo y probabilidad de cruce.}
+    \label{table:resultados-restriccion-objetivo-cruce-anexo}
+\end{table}
+
+\section{Algoritmos multi-objetivo}
+\label{ch:algoritmos-multiobjetivo-anexo}
+
+\subsection{SPEA2}
+\label{ch:ag-spea2-anexo}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Manejo de Restricciones} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Ejecuciones con Soluciones} & \textbf{\% de Ejecuciones con Soluciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Método separatista}} & 1 & 5.81 & 1099 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 5.51 & 813 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 5.57 & 1063 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 5.77 & 1282 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.18 & 1744 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Manejo de Restricciones} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que cumplen Restricciones} & \textbf{\% Soluciones que cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{=}{\textbf{Penalización estática}} & 1 & 5.91 & 1138 & 1129 & 99.21\% \\
+    \cline{2-6}
+    & 2 & 5.82 & 752 & 735 & 97.74\% \\
+    \cline{2-6}
+    & 3 & 5.79 & 1076 & 1076 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 5.80 & 1267 & 1267 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.02 & 2094 & 2094 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en SPEA2: manejo de restricciones.}
+    \label{table:resultados-spea2-anexo}
+\end{table}
+
+\subsection{MOEAD}
+\label{ch:ag-moead-anexo}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Nº de Vecinos} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (10)}}
+    & 1 & 8.22 & 1343 & 1343 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 8.23 & 1376 & 1376 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 8.22 & 1258 & 1258 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 8.21 & 1181 & 1181 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 8.20 & 1157 & 1157 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (20)}}
+    & 1 & 7.97 & 1311 & 1311 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 8.06 & 1592 & 1592 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 8.10 & 1494 & 1494 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 8.20 & 1434 & 1434 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 8.11 & 1441 & 1441 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (30)}}
+    & 1 & 8.18 & 1643 & 1643 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 8.26 & 1529 & 1529 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 8.21 & 1536 & 1536 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 8.18 & 1333 & 1333 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 8.20 & 1426 & 1426 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en MOEA/D: número de vecinos.}
+    \label{table:resultados-moead-nvecinos-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Probabilidad de Selección de Vecinos} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Baja (0.5)}}
+    & 1 & 7.97 & 1556 & 1556 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 7.97 & 1707 & 1707 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 7.91 & 1427 & 1427 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 7.94 & 1372 & 1372 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 7.98 & 1520 & 1485 & 97.70\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Media (0.7)}}
+    & 1 & 8.18 & 1643 & 1643 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 8.26 & 1529 & 1529 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 8.21 & 1536 & 1536 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 8.18 & 1333 & 1333 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 8.20 & 1426 & 1426 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alta (0.9)}}
+    & 1 & 8.15 & 1630 & 1630 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 8.06 & 1337 & 1337 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 7.98 & 1565 & 1565 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 8.01 & 1524 & 1524 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 8.99 & 1543 & 1543 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en MOEA/D: probabilidad de selección de vecinos.}
+    \label{table:resultados-moead-prob-vecinos-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Nº de Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}}
+    & 1 & 3.37 & 520 & 426 & 81.92\% \\ \cline{2-6}
+    & 2 & 3.40 & 585 & 345 & 58.97\% \\ \cline{2-6}
+    & 3 & 3.42 & 543 & 403 & 74.22\% \\ \cline{2-6}
+    & 4 & 3.45 & 581 & 386 & 66.44\% \\ \cline{2-6}
+    & 5 & 3.49 & 499 & 452 & 90.58\% \\ \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}}
+    & 1 & 8.15 & 1630 & 1630 & 100.00\% \\ \cline{2-6}
+    & 2 & 8.06 & 1337 & 1337 & 100.00\% \\ \cline{2-6}
+    & 3 & 7.98 & 1565 & 1565 & 100.00\% \\ \cline{2-6}
+    & 4 & 8.01 & 1524 & 1524 & 100.00\% \\ \cline{2-6}
+    & 5 & 8.99 & 1543 & 1543 & 100.00\% \\ \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}}
+    & 1 & 15.23 & 3009 & 3009 & 100.00\% \\ \cline{2-6}
+    & 2 & 14.72 & 2629 & 2629 & 100.00\% \\ \cline{2-6}
+    & 3 & 14.73 & 2782 & 2782 & 100.00\% \\ \cline{2-6}
+    & 4 & 14.86 & 2612 & 2612 & 100.00\% \\ \cline{2-6}
+    & 5 & 14.86 & 2926 & 2926 & 100.00\% \\ \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en MOEA/D: direcciones de referencia en Das-Dennis.}
+    \label{table:resultados:moead-direcciones-dasdennis-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Nº de Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Nº Total de Soluciones} & \textbf{Nº de Soluciones que Cumplen Restricciones} & \textbf{\% de Soluciones que Cumplen Restricciones} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}}
+    & 1 & 4.89 & 925 & 904 & 97.73\% \\ \cline{2-6}
+    & 2 & 5.02 & 910 & 810 & 89.01\% \\ \cline{2-6}
+    & 3 & 4.89 & 840 & 840 & 100.00\% \\ \cline{2-6}
+    & 4 & 4.93 & 825 & 806 & 97.70\% \\ \cline{2-6}
+    & 5 & 4.96 & 935 & 912 & 97.54\% \\ \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}}
+    & 1 & 8.86 & 1634 & 1634 & 100.00\% \\ \cline{2-6}
+    & 2 & 8.93 & 1708 & 1708 & 100.00\% \\ \cline{2-6}
+    & 3 & 7.89 & 1752 & 1752 & 100.00\% \\ \cline{2-6}
+    & 4 & 8.98 & 1571 & 1571 & 100.00\% \\ \cline{2-6}
+    & 5 & 9.15 & 1837 & 1837 & 100.00\% \\ \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}}
+    & 1 & 34.70 & 5538 & 5538 & 100.00\% \\ \cline{2-6}
+    & 2 & 34.61 & 4981 & 4981 & 100.00\% \\ \cline{2-6}
+    & 3 & 34.35 & 5596 & 5596 & 100.00\% \\ \cline{2-6}
+    & 4 & 34.38 & 4803 & 4803 & 100.00\% \\ \cline{2-6}
+    & 5 & 34.24 & 5548 & 5548 & 100.00\% \\ \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en MOEA/D: direcciones de referencia en Incremental.}
+    \label{table:resultados:moead-direcciones-incremental-anexo}
+\end{table}

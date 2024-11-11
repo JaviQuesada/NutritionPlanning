@@ -31,7 +31,7 @@ En la figura \ref{fig:cromosoma} se expone la estructura de un cromosoma con el 
   \caption{Estructura de un cromosoma.}
   \label{fig:cromosoma}
 \end{figure}
-
+\newpage
 La generación de una población inicial implica crear un conjunto de soluciones candidatas. Generalmente, los individuos son seleccionados aleatoriamente dentro de los límites definidos en cada problema, asegurando que todas las áreas del espacio de búsqueda puedan ser exploradas. También existen métodos alternativos de generación que aplican ciertas restricciones para formar soluciones iniciales más prometedoras. Tomando de ejemplo el menú semanal, el espacio de búsqueda comprendería la base de datos en la que aparecen todos los alimentos con sus respectivas calorias y macronutrientes. 
 
 \section{Evaluación}
@@ -65,7 +65,7 @@ Existen tres tipos de restricciones que limitan el espacio de soluciones válida
   \item Restricciones de contorno o de caja (\textit{box-constraints}). $x^L \leq x \leq x^U$
 \end{itemize}
 
-Estos tipos de restricciones se pueden tratar mediante distintos métodos, que también son probados de manera práctica en el apartado \ref{ch:manejo-restricciones}. En el trabajo de Carlos A. Coello (2022)~\cite{Coello2022} se hace un recopilatorio de algunos de los métodos más usados y sus consiguientes ventajas y desventajas. Los más importantes son:
+Estos tipos de restricciones se pueden tratar mediante distintos métodos, que también son probados de manera práctica en el apartado \ref{ch:manejo-restricciones}. En el trabajo de Carlos A. Coello (2022)~\cite{coello2022} se hace un recopilatorio de algunos de los métodos más usados y sus consiguientes ventajas y desventajas. Los más importantes son:
 
 \begin{itemize}
   \item \textbf{Funciones de penalización.} Se penalizan las soluciones no factibles. Estas penalizaciones representan cómo de lejos está la solución de la región factible. Se convierte un problema con restricciones en uno sin restricciones usando una función objetivo de penalización:
@@ -80,14 +80,19 @@ Estos tipos de restricciones se pueden tratar mediante distintos métodos, que t
     \item \( \beta \) (comúnmente 1 o 2) es una constante definida por el usuario que determina cómo se pondera la violación de la restricción en la función de penalización.
     \item En problemas de maximización la suma se convierte en negativa.     
   \end{itemize}
+
+  \newpage
   Existen varios métodos de penalización:
+  
     \begin{itemize}
       \item \textbf{Penalización estática.} Se usa un valor fijo \( R_j \). Se puede ver su implementación en el problema del PFG en el punto \ref{ch:penalizacion-estatica}.
-      \item \textbf{Penalización dinámica.} Se usa un factor \( R = (C \cdot t) ^ {\alpha} \), donde \( C \) y \( \alpha \) son constantes y \( t \) es el número de iteración. Al igual que la estática, su implementación será tratada en el apartado \ref{ch:penalizacion-dinamica}.
+      \item \textbf{Penalización dinámica.} Se usa un factor \( R = (C \cdot t) ^ {\alpha} \), donde \( C \) y \( \alpha \) son constantes y \( t \) es el número de iteración.
       \item \textbf{Penalicación adaptativa.} La penalización se adapta en función de la factibilidad de las soluciones.
     \end{itemize}
   \item \textbf{Separatista.} Dividen el problema en subproblemas más manejables que se pueden resolver por separado y luego combinar. Las restricciones y los objetivos se tratan de forma separada. Un método separatista se trata en el punto \ref{ch:metodo-separatista}.
+  \begin{comment}
   \item \textbf{Preservación de la factibilidad.} Se usan representaciones especiales (codificación binaria, entera, real, etc.) que simplifican la forma del espacio de búsqueda y operadores que mantienen la factibilidad de las soluciones, lo que elimina las soluciones inválidas en cada etapa del algoritmo.
+  \end{comment}
   \item \textbf{Reparación.} Se modifican las soluciones candidatas inviables de forma que no violen las restricciones.
 \end{itemize}
 
@@ -101,7 +106,7 @@ Tras la evaluación de calidad la condición de parada determina cuándo el algo
   \item Tiempo máximo de ejecución. Se detiene si el tiempo de ejecución es demasiado elevado.
   \item Convergencia. Se puede detener la ejecución si la población muestra poca o ninguna mejora en la aptitud durante un número determinado de generaciones consecutivas.
 \end{itemize}
-
+\newpage
 \section{Operadores}
 
 Son los procesos que se aplican a poblaciones de individuos para desarrollar generaciones futuras. Sirven para la exploración del espacio de soluciones y para la mejora de las poblaciones a través de las generaciones. Se busca que el conjunto de individuos presente una alta diversidad, ya que si es baja se corre el riego de caer en mínimos locales, lo que no permitiría explorar el espacio de soluciones ampliamente. En la figura \ref{fig:operadores} aparecen los operadores básicos en los algoritmos evolutivos, que son los que se van a explicar en más detalle.
@@ -112,7 +117,7 @@ Son los procesos que se aplican a poblaciones de individuos para desarrollar gen
   \caption{Operadores.}
   \label{fig:operadores}
 \end{figure}
-\newpage
+
 \subsection{Selección}
 \label{Seleccion}
 
@@ -121,9 +126,9 @@ El primero de los operadores básicos. Elige un individuo para reproducirlo. Com
 Si bien se puede seleccionar de manera equiprobable, existen métodos basados en la aptitud del individuo que buscan respetar este equilibrio. Estos son algunos:
 
 \begin{itemize}
-  \item \textbf{Método estándar (rueda de la fortuna).} Asigna a cada individuo una probabilidad proporcional a su fitness, por lo que los más aptos tienen mayor probabilidad de reproducirse. Existe un derivado de este método en el que se normalizan las probabilidades, lo que favorece aún más a los adaptados.
+  \item \textbf{Método estándar (rueda de la fortuna).} Asigna a cada individuo una probabilidad proporcional a su fitness, por lo que los más aptos tienen mayor probabilidad de reproducirse. Existe un derivado de este método en el que se normalizan las probabilidades, lo que favorece aún más a los de mayor calidad.\newpage
   \item \textbf{Método del rango.} Se ordenan los individuos según su aptitud, y la probabilidad de selección se asigna según este ránking.
-  \item \textbf{Selección por torneo.} Se escoge aleatoriamente un subconjunto de individuos de la población, y el mejor de este es elegido.
+  \item \textbf{Selección por torneo.} Se escoge aleatoriamente un subconjunto de individuos de la población, y el mejor de este es elegido. Este es el método de selección usado en el desarrollo del algoritmo nutricional (sección \ref{ch:explicacion-algoritmo}).
 \end{itemize}
 
 \subsubsection{Selección ambiental (Reemplazo)}
@@ -155,13 +160,13 @@ Se combina el material genético de dos individuos, padres, para producir descen
   \item \textbf{Cruce de dos puntos.} Similar al cruce de un punto, pero se seleccionan dos puntos de corte. Las cadenas de genes entre estos dos puntos se intercambian entre los dos padres.
   \item \textbf{Cruce uniforme.} Cada gen tiene una probabilidad igual de ser elegido de uno de los dos padres.
 \end{itemize}
-
+\newpage
 \subsection{Mutación}
 
 Último de los operadores básicos. Se recorre toda la cadena, mutando cada gen con probabilidad \(P_m\) , es decir, eligiendo un nuevo valor mediante una elección equiprobable sobre el alfabeto. La mutación aumenta la diversidad y ayuda a no caer en mínimos locales. Algunos de los métodos usados son:
 
 \begin{itemize}
-  \item \textbf{Mutación uniforme.} Cada gen puede cambiar a otro valor con probabilidad \(P_m\) , como se expone en la figura \ref{fig:mutación}.
+  \item \textbf{Mutación uniforme.} Cada gen puede cambiar a otro valor con probabilidad \(P_m\), como se expone en la figura \ref{fig:mutación}.
 
   \begin{figure}[H]
     \centering
@@ -180,7 +185,7 @@ Si bien existen casos en los que solo es necesario la optimización de un objeti
 \subsection{Single-objective Optimization Problem (SOP)}
 
 Los algoritmos que resuelven problemas \textit{SOP} se enfocan en optimizar una única función objetivo. La meta es encontrar la mejor solución posible según se busque maximizar o minimizar la función. Se usan algoritmos mono-objetivo cuando existe un único criterio de éxito.
-\newpage
+
 Los algoritmos mono-objetivo presentan una función objetivo que asigna un valor numérico a cada solución, indicando su calidad. Cada solución está representada por un vector de variables de decisión, que son los parámetros que se pueden ajustar dentro del espacio de decision. Estas soluciones deben pertenecer al conjunto factible, que incluye aquellas que cumplen con todas las restricciones del problema.
 
 El algoritmo más usado para los problemas mono-objetivo es el \textit{''Genetic Algorithm'' (GA)}, cuyo funcionamiento sigue los pasos explicados a lo largo del capítulo \ref{ch:marco-teorico}. Destaca por su simplicidad y su capacidad para explorar grandes expacios de búsqueda.
@@ -193,36 +198,95 @@ Una solución se considera no dominada si no existe otra que mejore en, al menos
 
 Al igual que en los mono-objetivo, cada solución está representada por un vector de variables de decisión. Estas soluciones deben pertenecer también al conjunto factible. La diferencia se encuentra en la existencia de múltiples funciones objetivo que asignan valores numérico a cada solución, indicando su calidad en diferentes dimensiones según el número de objetivos.
 
-Algunos de los algoritmos más usados para los \textit{MOP} son el \textit{''Non-dominated Sorting Genetic Algorithm II'' (NSGA-II)}, el \textit{''Strength Pareto Evolutionary Algorithm 2'' (SPEA2)} o el \textit{''Multi-Objective Evolutionary Algorithm based on Decomposition'' (MOEA/D)}. Usan criterios basados en Pareto para evaluar, clasificar y seleccionar las soluciones. Buscan dispersar las soluciones para aumentar la diversidad y explorar el espacio de soluciones. Aun así, presentan grandes diferencias a la hora de desarrollar el algoritmo evolutivo, como se explica en el apartado \ref{ch:distinto-algoritmo}.
+Algunos de los algoritmos más usados para los \textit{MOP} son el \textit{''Non-dominated Sorting Genetic Algorithm II'' (NSGA-II)}, el \textit{''Strength Pareto Evolutionary Algorithm 2'' (SPEA2)} o el \textit{''Multi-Objective Evolutionary Algorithm based on Decomposition'' (MOEA/D)}. Usan criterios basados en Pareto para evaluar, clasificar y seleccionar las soluciones. Buscan dispersar las soluciones para aumentar la diversidad y explorar el espacio de soluciones. Aun así, presentan grandes diferencias a la hora de desarrollar el algoritmo evolutivo.
 
-\subsection*{Tabla comparativa entre SOP y MOP}
+\subsubsection{Non-dominated Sorting Genetic Algorithm II (NSGA-II)}
+\label{ch:nsga2}
 
-\begin{table}[h!]
+Este algoritmo sigue el funcionamiento general de un algoritmo genético, pero presenta ciertas modificaciones para los algoritmos multi-objetivo, como se muestra en la figura \ref{fig:nsga2}. Tras realizar la evaluación, las soluciones se ordenan en diferentes frentes de Pareto. En el primer frente se encuentran las soluciones no dominadas, en el segundo las soluciones dominadas solo por soluciones del primer frente, y así sucesivamente. Tras esto, se calcula el \textit{''crowd distance''}, una medida usada para preservar la diversidad de las soluciones. Se evalúa cómo de cerca están las soluciones entre sí en el mismo frente. Cuanto mayor sea la distancia, más aislada y diversa es la solución, lo que ayuda a explorar en profundidad el espacio de soluciones.
+
+\textit{NSGA-II} usa elitismo, ya que combina la población de los padres y los descendientes y escoge a los mejores individuos para la siguiente generación basados en la clasificación de Pareto y en el \textit{''crowd distance''}. Además, se hace uso de la selección por torneo para elegir a los padres que se usarán en la reproducción, también usando de referencia las medidas antes citadas.
+
+\begin{figure}[H]
   \centering
-  \renewcommand{\arraystretch}{1.5}
-  \begin{tabularx}{\textwidth}{|l|X|X|}
-  \hline
-  \textbf{Campo} & \textbf{SOP (Single-Objective Optimization)} & \textbf{MOP (Multi-Objective Optimization)} \\
-  \hline
-  \textbf{Función objetivo} & Una única función objetivo & Varias funciones objetivo \\
-  \hline
-  \textbf{Meta} & Optimizar una solución & Balancear múltiples soluciones \\
-  \hline
-  \textbf{Solución} & Mejor solución única & Conjunto de Pareto \\
-  \hline
-  \textbf{Criterio} & Un criterio de éxito & Varios criterios de éxito \\
-  \hline
-  \textbf{Evaluación} & Valor numérico único & Valores numéricos múltiples \\
-  \hline
-  \textbf{Algoritmos comunes} & GA & NSGA-II,SPEA2,MOEA/D \\
-  \hline
-  \textbf{Búsqueda} & Explora grandes espacios de búsqueda & Usa criterios de Pareto para explorar el espacio de soluciones \\
-  \hline
-  \textbf{Clasificación} & - & Basada en dominancia \\
-  \hline
-  \textbf{Factibilidad} & Cumplir restricciones & Cumplir restricciones \\
-  \hline
-  \end{tabularx}
-  \caption{Comparación entre SOP y MOP.}
-  \label{table:sopvsmop}
-\end{table}
+  \includegraphics[width=0.8\textwidth]{figures/nsga2.png}
+  \caption{Estructura general del algoritmo NSGA-II. Fuente \cite{nsga2_imagen}}
+  \label{fig:nsga2}
+\end{figure}
+
+\subsubsection{Strength Pareto Evolutionary Algorithm 2 (SPEA2)}
+\label{ch:spea2}
+
+El \textit{SPEA2} también está optimizado para problemas multi-objetivo y, al igual que el NSGA-II, tiene modificaciones respecto al funcionamiento básico del algoritmo genético.
+
+En la evaluación, a cada solución se le asigna una fuerza que refleja el número de soluciones que domina, como se expone en la figura \ref{fig:spea2}. Tras esto, se usa una medida de densidad para evaluar cuán poblada está el área alrededor de cada solución. El fitness se calcula sumando la fuerza y esta medida de densidad, lo que ayuda a la diversidad de la población. En la selección se escogen aquellas soluciones que mayor fitness presentan.
+
+\textit{SPEA2} hace uso de un archivo externo para almacenar soluciones no dominadas. Este archivo se actualiza en cada generación y mantiene un conjunto de soluciones que representan la mejor aproximación al frente de Pareto en ese momento.
+
+Similar al \textit{NSGA-II}, este algoritmo escoge los mejores individuos de la combinación de padres y descendientes para la siguiente generación.~\cite{pymoo_spea2}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figures/spea2.png}
+  \caption{Cálculo del fitness en SPEA2. Fuente \cite{spea2_imagen}}
+  \label{fig:spea2}
+\end{figure}
+\newpage
+\subsubsection{Multi-Objective Evolutionary Algorithm based on Decomposition (MOEA/D)}
+\label{ch:moead}
+
+\textit{MOEA/D} hace uso de direcciones de referencia para dividir el problema multi-objetivo en problemas más pequeños de un solo objetivo. Cada dirección de referencia representa una combinación específica de los distintos objetivos. De manera ponderada, cada referencia se centra en la optimización de un objetivo particular. En el listado \ref{lst:direcciones} se muestra un ejemplo con 12 direcciones de referencia que puede ser utilizado en este proyecto, donde se busca una buena cobertura del espacio de búsqueda, que presenta 3 dimensiones (3 objetivos).
+
+\begin{small}
+\begin{lstlisting}[basicstyle=\ttfamily, caption=Direcciones de referencia.,label={lst:direcciones}]
+    (1, 0, 0),          (0.67, 0.33, 0),    (0.33, 0.67, 0),
+    (0, 1, 0),          (0.67, 0, 0.33),    (0.33, 0, 0.67)
+    (0, 0.67, 0.33),    (0, 0.33, 0.67),    (0, 0, 1),
+    (0.33, 0.33, 0.33), (0.67, 0.16, 0.16), (0.16, 0.67, 0.16)
+\end{lstlisting}
+\end{small}
+
+Para generar estas direcciones existen distintos métodos, incluyendo \textit{''das-dennis''} e \textit{''incremental''}. El método \textit{''das-dennis''} es usado para distribuir uniformemente las direcciones, dividiendo el espacio es particiones equitativas. Mientras tanto, el método \textit{''incremental''} ajusta las direcciones de referencia gradualmente, permitiendo una adaptación más precisa a las áreas del espacio de búsqueda que son más prometedoras.
+
+Para cada subproblema, se selecciona un número determinado de subproblemas más cercanos. Estos subproblemas forman el vecindario del primero, como se ilustra en la figura \ref{fig:moead}. Existe una probabilidad \( P_{cv} \) de que una solución se cruce con otra de su mismo vecindario. Compartir información entre vecinos ayuda a generar soluciones que cumplan cada uno de los subproblemas, por lo que son útiles para mejorar la calidad y la diversidad.~\cite{moead_pymoo}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.73\textwidth]{figures/moead.png}
+  \caption{Vecindarios en MOEA/D. Fuente \cite{moead_imagen}}
+  \label{fig:moead}
+\end{figure}
+\begin{comment}
+  \subsection{Tabla comparativa entre SOP y MOP}
+
+  \begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabularx}{\textwidth}{|l|X|X|}
+    \hline
+    \textbf{Campo} & \textbf{SOP (Single-Objective Optimization)} & \textbf{MOP (Multi-Objective Optimization)} \\
+    \hline
+    \textbf{Función objetivo} & Una única función objetivo & Varias funciones objetivo \\
+    \hline
+    \textbf{Meta} & Optimizar una solución & Balancear múltiples soluciones \\
+    \hline
+    \textbf{Solución} & Mejor solución única & Conjunto de Pareto \\
+    \hline
+    \textbf{Criterio} & Un criterio de éxito & Varios criterios de éxito \\
+    \hline
+    \textbf{Evaluación} & Valor numérico único & Valores numéricos múltiples \\
+    \hline
+    \textbf{Algoritmos comunes} & GA & NSGA-II,SPEA2,MOEA/D \\
+    \hline
+    \textbf{Búsqueda} & Explora grandes espacios de búsqueda & Usa criterios de Pareto para explorar el espacio de soluciones \\
+    \hline
+    \textbf{Clasificación} & - & Basada en dominancia \\
+    \hline
+    \textbf{Factibilidad} & Cumplir restricciones & Cumplir restricciones \\
+    \hline
+    \end{tabularx}
+    \caption{Comparación entre SOP y MOP.}
+    \label{table:sopvsmop}
+  \end{table}
+
+\end{comment}
