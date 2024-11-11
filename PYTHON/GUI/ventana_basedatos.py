@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-from utilidades import database
+from PYTHON.utilidades import database
 
 
 class BaseDatosApp:

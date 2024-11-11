@@ -1,7 +1,7 @@
 # funciones_auxiliares.py
 
-from utilidades.database import conexion_comida_basedatos
-from utilidades.constantes import GruposComida, DIAS_SEMANA, COMIDAS
+from PYTHON.utilidades.database import conexion_comida_basedatos
+from PYTHON.utilidades.constantes import GruposComida, DIAS_SEMANA, COMIDAS
 
 comida_basedatos = conexion_comida_basedatos()
 

@@ -1,9 +1,12 @@
 #__main__.py
 
+import sys
+import os
 import tkinter as tk
 
-from GUI.ventana_preguntasusuario import VentanaCalorias
-from GUI.ventana_basedatos import BaseDatosApp
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from PYTHON.GUI.ventana_preguntasusuario import VentanaCalorias
+from PYTHON.GUI.ventana_basedatos import BaseDatosApp
 
 
 class MainApp:

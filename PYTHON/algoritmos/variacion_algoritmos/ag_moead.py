@@ -8,10 +8,10 @@ from pymoo.core.problem import ElementwiseProblem
 from pymoo.operators.crossover.pntx import TwoPointCrossover
 from pymoo.config import Config
 
-from utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
-from utilidades.database import conexion_comida_basedatos
-from utilidades.constantes import *
-from algoritmos.operadores_custom import CustomIntegerRandomSampling, CustomMutation
+from PYTHON.utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
+from PYTHON.utilidades.database import conexion_comida_basedatos
+from PYTHON.utilidades.constantes import *
+from PYTHON.algoritmos.operadores_custom import CustomIntegerRandomSampling, CustomMutation
 
 Config.warnings['not_compiled'] = False
 

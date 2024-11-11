@@ -3,10 +3,10 @@
 import tkinter as tk
 from tkinter import ttk
 
-from GUI.ventana_menu import VentanaMenu
-from utilidades import database, funciones_auxiliares, constantes
-from algoritmos.manejo_restricciones import ag_metodo_separatista, ag_penalizacion_estatica, ag_restriccion_como_objetivo
-from algoritmos.variacion_algoritmos import ag_nsga2, ag_moead, ag_spea2
+from PYTHON.GUI.ventana_menu import VentanaMenu
+from PYTHON.utilidades import database, funciones_auxiliares, constantes
+from PYTHON.algoritmos.manejo_restricciones import ag_metodo_separatista, ag_penalizacion_estatica, ag_restriccion_como_objetivo
+from PYTHON.algoritmos.variacion_algoritmos import ag_nsga2, ag_moead, ag_spea2
 
 # Conectar a la base de datos
 comida_basedatos = database.conexion_comida_basedatos()
