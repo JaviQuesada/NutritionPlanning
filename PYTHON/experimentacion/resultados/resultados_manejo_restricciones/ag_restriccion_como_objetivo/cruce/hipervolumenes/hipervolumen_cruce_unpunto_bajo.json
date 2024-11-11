@@ -1,0 +1,632 @@
+{
+    "sujeto 1": [
+        {
+            "seed": 6,
+            "hipervolumen": null
+        },
+        {
+            "seed": 26,
+            "hipervolumen": null
+        },
+        {
+            "seed": 59,
+            "hipervolumen": null
+        },
+        {
+            "seed": 60,
+            "hipervolumen": null
+        },
+        {
+            "seed": 79,
+            "hipervolumen": null
+        },
+        {
+            "seed": 93,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489,
+            "hipervolumen": null
+        },
+        {
+            "seed": 608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 634,
+            "hipervolumen": null
+        },
+        {
+            "seed": 684,
+            "hipervolumen": null
+        },
+        {
+            "seed": 784,
+            "hipervolumen": null
+        },
+        {
+            "seed": 930,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3364,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 4845,
+            "hipervolumen": null
+        },
+        {
+            "seed": 5375,
+            "hipervolumen": null
+        },
+        {
+            "seed": 8542,
+            "hipervolumen": null
+        },
+        {
+            "seed": 9397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 11320,
+            "hipervolumen": null
+        },
+        {
+            "seed": 14648,
+            "hipervolumen": null
+        },
+        {
+            "seed": 39843,
+            "hipervolumen": null
+        },
+        {
+            "seed": 73886,
+            "hipervolumen": null
+        },
+        {
+            "seed": 83186,
+            "hipervolumen": null
+        },
+        {
+            "seed": 97870,
+            "hipervolumen": null
+        },
+        {
+            "seed": 152822,
+            "hipervolumen": null
+        },
+        {
+            "seed": 211193,
+            "hipervolumen": null
+        },
+        {
+            "seed": 226880,
+            "hipervolumen": null
+        },
+        {
+            "seed": 315529,
+            "hipervolumen": null
+        },
+        {
+            "seed": 428397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489166,
+            "hipervolumen": null
+        },
+        {
+            "seed": 526568,
+            "hipervolumen": null
+        }
+    ],
+    "sujeto 2": [
+        {
+            "seed": 6,
+            "hipervolumen": null
+        },
+        {
+            "seed": 26,
+            "hipervolumen": null
+        },
+        {
+            "seed": 59,
+            "hipervolumen": null
+        },
+        {
+            "seed": 60,
+            "hipervolumen": null
+        },
+        {
+            "seed": 79,
+            "hipervolumen": null
+        },
+        {
+            "seed": 93,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489,
+            "hipervolumen": null
+        },
+        {
+            "seed": 608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 634,
+            "hipervolumen": null
+        },
+        {
+            "seed": 684,
+            "hipervolumen": null
+        },
+        {
+            "seed": 784,
+            "hipervolumen": null
+        },
+        {
+            "seed": 930,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3364,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 4845,
+            "hipervolumen": null
+        },
+        {
+            "seed": 5375,
+            "hipervolumen": null
+        },
+        {
+            "seed": 8542,
+            "hipervolumen": null
+        },
+        {
+            "seed": 9397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 11320,
+            "hipervolumen": null
+        },
+        {
+            "seed": 14648,
+            "hipervolumen": null
+        },
+        {
+            "seed": 39843,
+            "hipervolumen": null
+        },
+        {
+            "seed": 73886,
+            "hipervolumen": null
+        },
+        {
+            "seed": 83186,
+            "hipervolumen": null
+        },
+        {
+            "seed": 97870,
+            "hipervolumen": null
+        },
+        {
+            "seed": 152822,
+            "hipervolumen": null
+        },
+        {
+            "seed": 211193,
+            "hipervolumen": null
+        },
+        {
+            "seed": 226880,
+            "hipervolumen": null
+        },
+        {
+            "seed": 315529,
+            "hipervolumen": null
+        },
+        {
+            "seed": 428397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489166,
+            "hipervolumen": null
+        },
+        {
+            "seed": 526568,
+            "hipervolumen": null
+        }
+    ],
+    "sujeto 3": [
+        {
+            "seed": 6,
+            "hipervolumen": null
+        },
+        {
+            "seed": 26,
+            "hipervolumen": null
+        },
+        {
+            "seed": 59,
+            "hipervolumen": null
+        },
+        {
+            "seed": 60,
+            "hipervolumen": null
+        },
+        {
+            "seed": 79,
+            "hipervolumen": null
+        },
+        {
+            "seed": 93,
+            "hipervolumen": 145714219.79738533
+        },
+        {
+            "seed": 489,
+            "hipervolumen": null
+        },
+        {
+            "seed": 608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 634,
+            "hipervolumen": null
+        },
+        {
+            "seed": 684,
+            "hipervolumen": null
+        },
+        {
+            "seed": 784,
+            "hipervolumen": null
+        },
+        {
+            "seed": 930,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3364,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 4845,
+            "hipervolumen": null
+        },
+        {
+            "seed": 5375,
+            "hipervolumen": null
+        },
+        {
+            "seed": 8542,
+            "hipervolumen": null
+        },
+        {
+            "seed": 9397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 11320,
+            "hipervolumen": null
+        },
+        {
+            "seed": 14648,
+            "hipervolumen": null
+        },
+        {
+            "seed": 39843,
+            "hipervolumen": null
+        },
+        {
+            "seed": 73886,
+            "hipervolumen": null
+        },
+        {
+            "seed": 83186,
+            "hipervolumen": null
+        },
+        {
+            "seed": 97870,
+            "hipervolumen": 150189629.50667867
+        },
+        {
+            "seed": 152822,
+            "hipervolumen": null
+        },
+        {
+            "seed": 211193,
+            "hipervolumen": null
+        },
+        {
+            "seed": 226880,
+            "hipervolumen": null
+        },
+        {
+            "seed": 315529,
+            "hipervolumen": 104783786.2125867
+        },
+        {
+            "seed": 428397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489166,
+            "hipervolumen": null
+        },
+        {
+            "seed": 526568,
+            "hipervolumen": null
+        }
+    ],
+    "sujeto 4": [
+        {
+            "seed": 6,
+            "hipervolumen": null
+        },
+        {
+            "seed": 26,
+            "hipervolumen": null
+        },
+        {
+            "seed": 59,
+            "hipervolumen": null
+        },
+        {
+            "seed": 60,
+            "hipervolumen": null
+        },
+        {
+            "seed": 79,
+            "hipervolumen": null
+        },
+        {
+            "seed": 93,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489,
+            "hipervolumen": null
+        },
+        {
+            "seed": 608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 634,
+            "hipervolumen": null
+        },
+        {
+            "seed": 684,
+            "hipervolumen": null
+        },
+        {
+            "seed": 784,
+            "hipervolumen": null
+        },
+        {
+            "seed": 930,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3364,
+            "hipervolumen": null
+        },
+        {
+            "seed": 3608,
+            "hipervolumen": null
+        },
+        {
+            "seed": 4845,
+            "hipervolumen": null
+        },
+        {
+            "seed": 5375,
+            "hipervolumen": null
+        },
+        {
+            "seed": 8542,
+            "hipervolumen": null
+        },
+        {
+            "seed": 9397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 11320,
+            "hipervolumen": null
+        },
+        {
+            "seed": 14648,
+            "hipervolumen": null
+        },
+        {
+            "seed": 39843,
+            "hipervolumen": null
+        },
+        {
+            "seed": 73886,
+            "hipervolumen": null
+        },
+        {
+            "seed": 83186,
+            "hipervolumen": null
+        },
+        {
+            "seed": 97870,
+            "hipervolumen": null
+        },
+        {
+            "seed": 152822,
+            "hipervolumen": null
+        },
+        {
+            "seed": 211193,
+            "hipervolumen": null
+        },
+        {
+            "seed": 226880,
+            "hipervolumen": null
+        },
+        {
+            "seed": 315529,
+            "hipervolumen": null
+        },
+        {
+            "seed": 428397,
+            "hipervolumen": null
+        },
+        {
+            "seed": 489166,
+            "hipervolumen": null
+        },
+        {
+            "seed": 526568,
+            "hipervolumen": null
+        }
+    ],
+    "sujeto 5": [
+        {
+            "seed": 6,
+            "hipervolumen": 118558323.38653018
+        },
+        {
+            "seed": 26,
+            "hipervolumen": null
+        },
+        {
+            "seed": 59,
+            "hipervolumen": 282596770.4598303
+        },
+        {
+            "seed": 60,
+            "hipervolumen": 86202367.29326509
+        },
+        {
+            "seed": 79,
+            "hipervolumen": 192949912.966329
+        },
+        {
+            "seed": 93,
+            "hipervolumen": 86155293.84043576
+        },
+        {
+            "seed": 489,
+            "hipervolumen": 70369580.68755916
+        },
+        {
+            "seed": 608,
+            "hipervolumen": 111889875.50585
+        },
+        {
+            "seed": 634,
+            "hipervolumen": 263771180.05817905
+        },
+        {
+            "seed": 684,
+            "hipervolumen": 297935616.3017342
+        },
+        {
+            "seed": 784,
+            "hipervolumen": 187939306.6937365
+        },
+        {
+            "seed": 930,
+            "hipervolumen": 277513608.0190586
+        },
+        {
+            "seed": 3364,
+            "hipervolumen": 211579923.82662043
+        },
+        {
+            "seed": 3608,
+            "hipervolumen": 111240103.62953264
+        },
+        {
+            "seed": 4845,
+            "hipervolumen": 94334444.69715384
+        },
+        {
+            "seed": 5375,
+            "hipervolumen": 82746469.50714138
+        },
+        {
+            "seed": 8542,
+            "hipervolumen": 162906162.03836682
+        },
+        {
+            "seed": 9397,
+            "hipervolumen": 139995069.91231686
+        },
+        {
+            "seed": 11320,
+            "hipervolumen": 133718194.91339529
+        },
+        {
+            "seed": 14648,
+            "hipervolumen": 76080413.79203202
+        },
+        {
+            "seed": 39843,
+            "hipervolumen": 241137687.7762921
+        },
+        {
+            "seed": 73886,
+            "hipervolumen": 172572293.9782945
+        },
+        {
+            "seed": 83186,
+            "hipervolumen": 221939379.88832226
+        },
+        {
+            "seed": 97870,
+            "hipervolumen": 128632379.2781468
+        },
+        {
+            "seed": 152822,
+            "hipervolumen": 133525245.66524082
+        },
+        {
+            "seed": 211193,
+            "hipervolumen": 116085602.64648187
+        },
+        {
+            "seed": 226880,
+            "hipervolumen": 184516544.71416867
+        },
+        {
+            "seed": 315529,
+            "hipervolumen": 156039129.16862094
+        },
+        {
+            "seed": 428397,
+            "hipervolumen": 166732872.92038733
+        },
+        {
+            "seed": 489166,
+            "hipervolumen": 262871651.3180568
+        },
+        {
+            "seed": 526568,
+            "hipervolumen": 71679341.72454506
+        }
+    ]
+}
