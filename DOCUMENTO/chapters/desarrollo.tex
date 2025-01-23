@@ -412,7 +412,7 @@ Todas las métricas que obtiene el algoritmo son guardadas en una variable \text
 
 \begin{itemize}
     \item En \textit{''resultado.X''} se encuentra una matriz que contiene las soluciones no dominadas encontradas. En este proyecto son cada uno de los posibles menús factibles que el algoritmo ha encontrado. Siguiendo el ejemplo \ref{tab:optimizacion}, en 10 generaciones el algoritmo ha encontrado 5 soluciones no dominadas, por lo que la matriz tiene un tamaño de \(5 \, n\_nds\ \times 77 \, genes\).
-    \item En \textit{''resultado.F''} se encuentra una matriz que contiene los valores de las funciones objetivo para cada solución no nominada encontrada. Como el algoritmo presenta 3 objetivos, la matriz puede tener un tamaño de \(5 \, n\_nds \times 3 \, objetivos\).
+    \item En \textit{''resultado.F''} se encuentra una matriz que contiene los valores de las funciones objetivo para cada solución no dominada encontrada. Como el algoritmo presenta 3 objetivos, la matriz puede tener un tamaño de \(5 \, n\_nds \times 3 \, objetivos\).
     \item En \textit{''resultado.G''} se encuentra una matriz muy parecida a \textit{''resultado.F''}, pero con las restricciones en vez de los objetivos. Esta matriz se encuentra vacía si los objetivos y las restricciones no se tratan de manera separada.
 \end{itemize}
 
