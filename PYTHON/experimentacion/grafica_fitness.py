@@ -10,8 +10,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from PYTHON.utilidades import database, constantes
 from PYTHON.experimentacion.ejecutar_guardar_resultados import cargar_sujetos
 
-from PYTHON.algoritmos.variacion_algoritmos import ag_spea2_estatica
-from PYTHON.algoritmos.variacion_algoritmos import ag_spea2_separatista
+from PYTHON.algoritmos.spea2 import ag_spea2_estatica, ag_spea2_separatista
 
 
 def ejecutar_algoritmo(metodo, conexion_bd, sujeto, seed):

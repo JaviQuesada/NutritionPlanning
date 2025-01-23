@@ -1,4 +1,4 @@
-#ag_reparacion.py
+#ag_nsga2_reparacion.py
 
 import numpy as np
 from pymoo.algorithms.moo.nsga2 import NSGA2

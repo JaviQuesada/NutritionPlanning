@@ -35,7 +35,7 @@ NUM_COMIDAS = len(COMIDAS)
 NUM_ALIMENTOS_DIARIO = sum(comida["num_alimentos"] for comida in COMIDAS)   # En total un dia tiene 11 alimentos
 NUM_GENES = NUM_DIAS * NUM_ALIMENTOS_DIARIO     # En total el menu consta de 77 alimentos
 
-
+# Niveles de actividad
 class NivelActividad(Enum):
     SEDENTARIO = ("Sedentario (poco o ningun ejercicio)", 1.2)
     POCO_ACTIVO = ("Poco activo (ejercicio ligero/deportes 1-3 dias a la semana)", 1.375)
@@ -54,7 +54,7 @@ class NivelActividad(Enum):
                 return activity.value[1]
         raise ValueError("Nivel de actividad no valido")
     
-
+# 31 semillas
 SEEDS = [
     6, 26, 59, 60,
     79, 93, 489, 608,
@@ -66,6 +66,7 @@ SEEDS = [
     428397, 489166, 526568
 ]
 
+# Grupos de comida
 class GruposComida:
     class Cereales:
         CEREALES = ("A", "Cereals and cereal products")

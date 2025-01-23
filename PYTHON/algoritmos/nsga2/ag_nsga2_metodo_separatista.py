@@ -1,4 +1,4 @@
-#ag_metodo_separatista.py
+#ag_nsga2_metodo_separatista.py
 
 import numpy as np
 from pymoo.algorithms.moo.nsga2 import NSGA2

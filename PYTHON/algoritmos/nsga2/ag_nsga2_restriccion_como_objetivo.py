@@ -1,4 +1,4 @@
-#ag_restriccion_como_objetivo.py
+#ag_nsga2_restriccion_como_objetivo.py
 
 import numpy as np
 from pymoo.algorithms.moo.nsga2 import NSGA2
