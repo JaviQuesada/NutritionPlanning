@@ -1,7 +1,7 @@
-#ag_metodo_separatista.py
+#ag_spea2_estatica.py
 
 import numpy as np
-from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.algorithms.moo.spea2 import SPEA2
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.optimize import minimize
 from pymoo.operators.crossover.pntx import SinglePointCrossover, TwoPointCrossover
@@ -31,17 +31,17 @@ def restriccion_calorias(calorias_diarias, objetivo_calorico):
     limite_superior = objetivo_calorico * 1.1
 
     if calorias_diarias < limite_inferior or calorias_diarias > limite_superior:
-        penalizacion_calorias = abs(objetivo_calorico - calorias_diarias)
+        penalizacion_calorias = abs(objetivo_calorico - calorias_diarias) * PENALIZACION_CALORIAS
     else:
         penalizacion_calorias = 0
 
     return penalizacion_calorias
 
 
-def objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias):
+def objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarios, grasas_diarias):
     """Calcula la desviacion de los macronutrientes respecto a los porcentajes ideales."""
 
-    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarios, grasas_diarias)
 
     desviacion_objetivo_proteinas = abs(porcentaje_proteinas - OBJETIVO_PROTEINAS)
     desviacion_objetivo_carbohidratos = abs(porcentaje_carbohidratos - OBJETIVO_CARBOHIDRATOS)
@@ -51,10 +51,10 @@ def objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_di
 
     return desviacion_macronutrientes
 
-def restriccion_macronutrientes (proteinas_diarias, carbohidratos_diarias, grasas_diarias):
+def restriccion_macronutrientes(proteinas_diarias, carbohidratos_diarios, grasas_diarias):
     """Aplica penalizacion si algun macronutriente esta fuera de los limites establecidos."""
 
-    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+    porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas = calculo_macronutrientes(proteinas_diarias, carbohidratos_diarios, grasas_diarias)
 
     penalizacion_macronutrientes = 0
 
@@ -67,7 +67,7 @@ def restriccion_macronutrientes (proteinas_diarias, carbohidratos_diarias, grasa
     if porcentaje_grasas < LIMITE_GRASAS[0] or porcentaje_grasas > LIMITE_GRASAS[1]:
         penalizacion_macronutrientes += abs(porcentaje_grasas - OBJETIVO_GRASAS)
 
-    return penalizacion_macronutrientes
+    return penalizacion_macronutrientes  * PENALIZACION_MACRONUTRIENTES
 
 
 def objetivo_preferencia_grupo(alimento, grupos_gusta, grupos_no_gusta):
@@ -90,14 +90,14 @@ def restriccion_alergia(alimento, grupos_alergia):
         return (PENALIZACION_ALERGIA)**2
     else:
         return 0
-    
+
 
 class PlanningComida(ElementwiseProblem):
     """Clase que define el problema de planificacion de comida en base a objetivos y restricciones."""
     
     def __init__(self, comida_basedatos, objetivo_calorias, edad, grupos_alergia, grupos_gusta, grupos_no_gusta):
 
-        super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=3, xl=0, xu=len(comida_basedatos)-1)  
+        super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=0, xl=0, xu=len(comida_basedatos)-1)  
         self.comida_basedatos = comida_basedatos
         self.objetivo_calorias = objetivo_calorias
         self.edad = edad
@@ -110,6 +110,7 @@ class PlanningComida(ElementwiseProblem):
         self.desayuno = self.filtrar_comida("desayuno")
         self.bebida_desayuno = self.filtrar_comida("bebida_desayuno") 
         self.snacks = self.filtrar_comida("snacks")
+
 
     def _evaluate(self, x, out, *args, **kwargs):
         """Evalua el plan de comidas generando los valores de los objetivos y las restricciones."""
@@ -129,7 +130,7 @@ class PlanningComida(ElementwiseProblem):
             calorias_diarias = 0
 
             proteinas_diarias = 0
-            carbohidratos_diarias = 0
+            carbohidratos_diarios = 0
             grasas_diarias = 0
 
             suma_num_alimentos = 0
@@ -146,17 +147,18 @@ class PlanningComida(ElementwiseProblem):
 
                     # Suma las calorias y macronutrientes del alimento actual
                     calorias_diarias += alimento["calorias"]
+
                     proteinas_diarias += alimento["proteinas"]
-                    carbohidratos_diarias += alimento["carbohidratos"]
+                    carbohidratos_diarios += alimento["carbohidratos"]
                     grasas_diarias += alimento["grasas"]
 
                     # Calcula penalizaciones por preferencia y alergia
                     total_penalizaciones_preferencia += objetivo_preferencia_grupo(alimento, self.grupos_gusta, self.grupos_no_gusta)
                     total_penalizaciones_alergia += restriccion_alergia(alimento, self.grupos_alergia)
-                
+
                 # Agrega el numero de alimentos de esta comida al total del dia
                 suma_num_alimentos = suma_num_alimentos + num_alimentos
-    
+
             # Calcula desviaciones y penalizaciones
             desviacion_objetivo_calorias = objetivo_calorias(calorias_diarias, self.objetivo_calorias)
             total_desviaciones_calorias += desviacion_objetivo_calorias
@@ -164,36 +166,36 @@ class PlanningComida(ElementwiseProblem):
             penalizacion_objetivo_calorias = restriccion_calorias(calorias_diarias, self.objetivo_calorias)
             total_penalizaciones_calorias += penalizacion_objetivo_calorias
 
-            desviacion_objetivo_macronutrientes = objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+            desviacion_objetivo_macronutrientes = objetivo_macronutrientes(proteinas_diarias, carbohidratos_diarios, grasas_diarias)
             total_desviaciones_macronutrientes += desviacion_objetivo_macronutrientes
 
-            penalizacion_objetivo_macronutriente = restriccion_macronutrientes(proteinas_diarias, carbohidratos_diarias, grasas_diarias)
+            penalizacion_objetivo_macronutriente = restriccion_macronutrientes(proteinas_diarias, carbohidratos_diarios, grasas_diarias)
             total_penalizaciones_macronutrientes += penalizacion_objetivo_macronutriente
 
+        total_penalizacion = total_penalizaciones_alergia + total_penalizaciones_calorias + total_penalizaciones_macronutrientes
+
         # Calcula fitness
-        fitness_objetivo_calorias = total_desviaciones_calorias
-        fitness_objetivo_macronutrientes = total_desviaciones_macronutrientes
-        fitness_objetivo_preferencia = total_penalizaciones_preferencia
+        fitness_objetivo_calorias = total_desviaciones_calorias + total_penalizacion
+        fitness_objetivo_macronutrientes = total_desviaciones_macronutrientes + total_penalizacion
+        fitness_objetivo_preferencia = total_penalizaciones_preferencia + total_penalizacion
 
-        fitness_restriccion_alergia = total_penalizaciones_alergia
-        fitness_restriccion_calorias = total_penalizaciones_calorias
-        fitness_restriccion_macronutrientes = total_penalizaciones_macronutrientes
+        # Para la visualizacion del fitness
+        out["raw"] = np.array([total_desviaciones_calorias, total_desviaciones_macronutrientes, total_penalizaciones_preferencia])
 
-        # Establece objetivos y restricciones a minimizar
+        # Establece objetivos a minimizar
         out["F"] = np.column_stack([fitness_objetivo_calorias, fitness_objetivo_macronutrientes, fitness_objetivo_preferencia])
-        out["G"] = np.column_stack([fitness_restriccion_alergia, fitness_restriccion_calorias, fitness_restriccion_macronutrientes])
 
 
     def filtrar_comida(self, tipo):
         """Filtra la base de datos de comida segun el tipo de comida."""
-        return filtrar_comida(self.comida_basedatos, tipo, self.edad)
+        return filtrar_comida(self.comida_basedatos, tipo, self.edad)    
             
 
 def ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta, seed):
 
     problema = PlanningComida(comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta)
 
-    algoritmo = NSGA2(
+    algoritmo = SPEA2(  # Algoritmo SPEA2
         pop_size=100,  # Tamaño de la poblacion
         sampling=CustomIntegerRandomSampling(problema),  # Inicializacion personalizada
         crossover=TwoPointCrossover(prob=0.9),  # Cruzamiento

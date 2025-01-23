@@ -180,6 +180,7 @@ class PlanningComida(ElementwiseProblem):
         fitness_objetivo_macronutrientes = total_desviaciones_macronutrientes + total_penalizacion
         fitness_objetivo_preferencia = total_penalizaciones_preferencia + total_penalizacion
 
+        out["raw"] = np.array([total_desviaciones_calorias, total_desviaciones_macronutrientes, total_penalizaciones_preferencia])
         # Establece objetivos a minimizar
         out["F"] = np.column_stack([fitness_objetivo_calorias, fitness_objetivo_macronutrientes, fitness_objetivo_preferencia])
 

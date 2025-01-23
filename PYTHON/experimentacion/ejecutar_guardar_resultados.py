@@ -1,11 +1,15 @@
+#ejecutar_guardar_resultados.py
+
 import json
 import os
 import sys
 import numpy as np
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
 from PYTHON.utilidades import database, constantes
-from PYTHON.algoritmos.variacion_algoritmos import ag_moead
+from PYTHON.algoritmos.variacion_algoritmos import ag_spea2_separatista
+
 
 def cargar_sujetos():
     """Devuelve los datos de los sujetos de prueba."""
@@ -46,11 +50,11 @@ def verificar_restricciones(solucion, conexion_bd, calorias_objetivo, alergias):
 
         calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, conexion_bd, dia)
 
-        if ag_moead.restriccion_calorias(calorias, calorias_objetivo) > 0:
+        if ag_spea2_separatista.restriccion_calorias(calorias, calorias_objetivo) > 0:
             cumple_calorias = False
-        if ag_moead.restriccion_macronutrientes(proteinas, carbohidratos, grasas) > 0:
+        if ag_spea2_separatista.restriccion_macronutrientes(proteinas, carbohidratos, grasas) > 0:
             cumple_macronutrientes = False
-        if any(ag_moead.restriccion_alergia(conexion_bd[int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + i])], alergias) > 0 
+        if any(ag_spea2_separatista.restriccion_alergia(conexion_bd[int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + i])], alergias) > 0 
                for i in range(constantes.NUM_ALIMENTOS_DIARIO)):
             cumple_alergias = False
 
@@ -60,8 +64,8 @@ def verificar_restricciones(solucion, conexion_bd, calorias_objetivo, alergias):
 def procesar_solucion(solucion, conexion_bd, calorias_objetivo, gustos, disgustos, alergias):
     """Calcula el fitness y verifica restricciones para una solucion. Devuelve diccionario para JSON"""
 
-    fitness_calorias = calcular_fitness_acumulado(solucion, conexion_bd, calorias_objetivo, ag_moead.objetivo_calorias)
-    fitness_macronutrientes = calcular_fitness_acumulado(solucion, conexion_bd, None, ag_moead.objetivo_macronutrientes)
+    fitness_calorias = calcular_fitness_acumulado(solucion, conexion_bd, calorias_objetivo, ag_spea2_separatista.objetivo_calorias)
+    fitness_macronutrientes = calcular_fitness_acumulado(solucion, conexion_bd, None, ag_spea2_separatista.objetivo_macronutrientes)
     fitness_preferencia = calcular_fitness_preferencia(solucion, conexion_bd, gustos, disgustos)
     
     restricciones_cumplidas = verificar_restricciones(solucion, conexion_bd, calorias_objetivo, alergias)
@@ -115,7 +119,7 @@ def ejecutar_y_guardar_resultados():
         for seed in constantes.SEEDS:
 
             # Ejecuta algoritmo
-            resultado = ag_moead.ejecutar_algoritmo_genetico(
+            resultado = ag_spea2_separatista.ejecutar_algoritmo_genetico(
                 conexion_bd, calorias_objetivo, sujeto['edad'], alergias, gustos, disgustos, seed
             )
             tiempo = resultado.exec_time
@@ -175,7 +179,7 @@ def ejecutar_y_guardar_resultados():
     }
 
     # Guardar los resultados en un archivo JSON
-    ruta_resultados = 'PYTHON/resultados/resultados_variacion_algoritmo/ag_moead/direcciones_referencia/incremental/direcciones_referencia_alta.json'
+    ruta_resultados = 'PYTHON/resultados/resultados_variacion_algoritmo/ag_spea2/direcciones_referencia/incremental/direcciones_referencia_alta.json'
     os.makedirs(os.path.dirname(ruta_resultados), exist_ok=True)
     with open(ruta_resultados, 'w') as archivo_json:
         json.dump(resultados_a_guardar, archivo_json, indent=4)
@@ -190,9 +194,9 @@ def calcular_fitness_acumulado(solucion, conexion_bd, calorias_objetivo, funcion
     for dia in range(constantes.NUM_DIAS):
         calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, conexion_bd, dia)
 
-        if funcion_objetivo == ag_moead.objetivo_calorias:
+        if funcion_objetivo == ag_spea2_separatista.objetivo_calorias:
             total_desviacion += funcion_objetivo(calorias, calorias_objetivo)
-        elif funcion_objetivo == ag_moead.objetivo_macronutrientes:
+        elif funcion_objetivo == ag_spea2_separatista.objetivo_macronutrientes:
             total_desviacion += funcion_objetivo(proteinas, carbohidratos, grasas)
 
     return total_desviacion
@@ -202,7 +206,7 @@ def calcular_fitness_preferencia(solucion, conexion_bd, gustos, disgustos):
     """Calcula y devuelve la penalizacion total por preferencia"""
 
     return sum(
-        ag_moead.objetivo_preferencia_grupo(conexion_bd[int(alimento)], gustos, disgustos) 
+        ag_spea2_separatista.objetivo_preferencia_grupo(conexion_bd[int(alimento)], gustos, disgustos) 
         for alimento in solucion
     )
 

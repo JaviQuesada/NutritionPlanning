@@ -1,4 +1,6 @@
 # ventana_preguntasusuario.py
+import time
+import random
 
 import tkinter as tk
 from tkinter import ttk
@@ -6,10 +8,14 @@ from tkinter import ttk
 from PYTHON.GUI.ventana_menu import VentanaMenu
 from PYTHON.utilidades import database, funciones_auxiliares, constantes
 from PYTHON.algoritmos.manejo_restricciones import ag_metodo_separatista, ag_penalizacion_estatica, ag_restriccion_como_objetivo
-from PYTHON.algoritmos.variacion_algoritmos import ag_nsga2, ag_moead, ag_spea2
+from PYTHON.algoritmos.variacion_algoritmos import ag_nsga2, ag_moead, ag_spea2_estatica
 
 # Conectar a la base de datos
 comida_basedatos = database.conexion_comida_basedatos()
+
+# Establecer como semilla la hora del sistema
+seed = int(time.time())
+random.seed(seed)
 
 class VentanaCalorias:
     """Ventana de calculo de calorias"""
@@ -165,7 +171,7 @@ class VentanaCalorias:
         grupos_gusta = self.expandir_selecciones(self.lista_gusta)
         grupos_no_gusta = self.expandir_selecciones(self.lista_no_gusta)
         
-        resultado = ag_metodo_separatista.ejecutar_algoritmo_genetico(comida_basedatos, calorias_ajustadas, self.edad.get(), grupos_alergia, grupos_gusta, grupos_no_gusta, 26)
+        resultado = ag_penalizacion_estatica.ejecutar_algoritmo_genetico(comida_basedatos, calorias_ajustadas, self.edad.get(), grupos_alergia, grupos_gusta, grupos_no_gusta, seed)
 
         cv = resultado.F[:, 0]
         least_infeas = cv.argmin()

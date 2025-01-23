@@ -7,10 +7,10 @@ from pymoo.optimize import minimize
 from pymoo.operators.crossover.pntx import SinglePointCrossover, TwoPointCrossover
 from pymoo.config import Config
 
-from utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
-from utilidades.database import conexion_comida_basedatos
-from utilidades.constantes import *
-from algoritmos.operadores_custom import CustomIntegerRandomSampling, CustomMutation
+from PYTHON.utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
+from PYTHON.utilidades.database import conexion_comida_basedatos
+from PYTHON.utilidades.constantes import *
+from PYTHON.algoritmos.operadores_custom import CustomIntegerRandomSampling, CustomMutation
 
 Config.warnings['not_compiled'] = False
 
@@ -178,6 +178,8 @@ class PlanningComida(ElementwiseProblem):
         fitness_objetivo_calorias = total_desviaciones_calorias + total_penalizacion
         fitness_objetivo_macronutrientes = total_desviaciones_macronutrientes + total_penalizacion
         fitness_objetivo_preferencia = total_penalizaciones_preferencia + total_penalizacion
+
+        out["raw"] = np.array([total_desviaciones_calorias, total_desviaciones_macronutrientes, total_penalizaciones_preferencia])
 
         # Establece objetivos a minimizar
         out["F"] = np.column_stack([fitness_objetivo_calorias, fitness_objetivo_macronutrientes, fitness_objetivo_preferencia])
