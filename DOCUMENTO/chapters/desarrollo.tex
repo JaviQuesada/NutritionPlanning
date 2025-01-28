@@ -23,30 +23,30 @@
 \section{Base de datos}
 
 \subsection{Selección de la base de datos}
-La base de datos de alimentos y platos utilizada para el desarrollo del algoritmo es la perteneciente al gobierno de Reino Unido. El proyecto proporciona información detallada sobre la composición nutricional de los alimentos consumidos comúnmente en Reino Unido.~\cite{cofid2021}
+La base de datos de alimentos y platos utilizada para el desarrollo del algoritmo es la perteneciente al gobierno del Reino Unido. El proyecto proporciona información detallada sobre la composición nutricional de los alimentos consumidos comúnmente en Reino Unido.~\cite{cofid2021}
 
 La base de datos ``\textit{Composition of foods integrated dataset (CoFID)}`` se originó a partir del trabajo de Widdowson y McCance en la década de 1940 y ha sido periódicamente actualizada desde entonces para reflejar los últimos cambios en la dieta y las nuevas investigaciones científicas. La última actualización se publicó en marzo de 2021.
 
-La elección de esta base de datos se basa en la gran cantidad de datos nutricionales que se aportan sobre los alimentos, junto con una amplia documentación que explica en profundidad cada uno de los detalles necesarios para entender el trabajo. A todo esto hay que sumar la facilidad para la exportación, que permite modificarla y analizarla con suma sencillez.
+La elección de esta base de datos se basa en la gran cantidad de datos nutricionales que se aportan sobre los alimentos, junto con una documentación detallada para entender el trabajo. A todo esto hay que sumar la facilidad para la exportación, que permite modificarla y analizarla con suma sencillez.
 
 CoFID incluye más de 2500 alimentos, cada uno de ellos categorizado según su grupo alimenticio. Cada alimento incorpora información sobre una amplia gama de nutrientes, como vitaminas, minerales, azúcares y otros componentes, además de los macronutrientes (carbohidratos, proteínas y grasas), que van a ser los principalmente usados en este PFG.
 
-En la página web se pueden encontrar principalmente dos archivos. El primero es una guía de usuario en formato PDF que explica en detalle en qué consiste la base de datos y la información que se va a encontrar en ella.\newpage El segundo archivo trata de una hoja de cálculo de Microsoft Excel donde se encuentra toda la información nutricional relativa a 2.887 alimentos. Existen múltiples casos en los que se presenta un mismo alimento con diversos tipos de cocción o de aliño, lo que provoca un cambio en los valores nutricionales, razón por la que se considera como dos alimentos o platos distintos.
+En la página web se pueden encontrar principalmente dos archivos. El primero es una guía de usuario en formato PDF que explica en detalle en qué consiste la base de datos y la información que se va a encontrar en ella.\newpage El segundo archivo trata de una hoja de cálculo de Microsoft Excel donde se encuentra toda la información nutricional relativa a 2.887 alimentos. Existen múltiples casos donde un mismo alimento se presenta con diferentes tipos de cocción o de aliño, lo que cambia los valores nutricionales y se considera como dos alimentos o platos distintos.
 
-La información requerida se encuentra en la tabla ``\textit{1.3. Proximates}``, que es donde se localizan los campos que se van a usar: \textit{''Food Code''}, identificador del alimento; \textit{''Food Name''}, nombre del alimento; \textit{''Group''}, categoría alimenticia a la que pertenece; \textit{''Protein(g)''}, que muestra los gramos de proteína por cada \textit{100g} del alimento; \textit{''Fat(g)''}, lo mismo que la proteína, pero con la grasa; \textit{''Carbohydrate(g)''}, al igual que los dos últimos campos, muestra datos de los hidratos de carbono o carbohidratos; y \textit{''Energy(kcal)''}, que representa las kilocalorías del alimento por cada \textit{100g}.
+La información necesaria se encuentra en la tabla ``\textit{1.3. Proximates}``, que es donde se localizan los campos que se van a usar: \textit{''Food Code''}, identificador del alimento; \textit{''Food Name''}, nombre del alimento; \textit{''Group''}, categoría alimenticia a la que pertenece; \textit{''Protein(g)''}, que muestra los gramos de proteína por cada \textit{100g} del alimento; \textit{''Fat(g)''}, lo mismo que la proteína, pero con la grasa; \textit{''Carbohydrate(g)''}, al igual que los dos últimos campos, muestra datos de los hidratos de carbono o carbohidratos; y \textit{''Energy(kcal)''}, que representa las kilocalorías del alimento por cada \textit{100g}.
 
 Como se puede comprobar por las descripciones previas, todos los datos están representados en base a \textit{100} gramos del alimento correspondiente. Esto también ocurre con las bebidas, cuyos valores nutricionales se han calculado en base \textit{100} mililitros. La planificación nutricional se realizará usando estas proporciones.
 
 Por último, destacar que, debido a que la información es extraída de una web oficial del Reino Unido, todos los datos, incluyendo entre ellos el nombre de los alimentos o platos, están en inglés. En el menú de comidas resultante de la ejecución del algoritmo genético se mantendrá este idioma.
 
 \subsection{Creación de la base de datos}
-Tras haber seleccionado la fuente, se necesita un gestor de bases de datos para poder manipular los datos eficientemente. Para este trabajo se ha seleccionado MySQL Workbench, que dispone de una interfaz gráfica intuitiva para diseñar, modelar y administrar bases de datos MySQL.~\cite{mysqlworkbench}
+Tras haber seleccionado la fuente, se necesita un gestor de bases de datos para manipular los datos de forma eficiente. Para este trabajo se ha seleccionado MySQL Workbench, que dispone de una interfaz gráfica intuitiva para diseñar, modelar y administrar bases de datos MySQL.~\cite{mysqlworkbench}
 
-Dentro del gestor, lo primero que se debe crear es la propia base de datos. Se va a hacer uso de sentencias SQL para ello. A la base de datos se le ha llamado \textit{''food\_database''}.
+Dentro del gestor, lo primero que se debe hacer es crear la base de datos. Se hace uso de sentencias SQL para ello. A la base de datos se le ha llamado \textit{''food\_database''}.
 
 \newpage
 
-Tras la configuración de la base de datos, hay que crear la tabla con los campos en los que se almacenarán los valores. Mostrando en el listado \ref{lst:tabla} el código ejecutado, esta será la única tabla necesaria a lo largo del proyecto.
+Después de configurar la base de datos, se debe crear una tabla con los campos donde se almacenarán los valores. Mostrando en el listado \ref{lst:tabla} el código ejecutado, esta será la única tabla necesaria a lo largo del proyecto.
 
 \begin{lstlisting}[style=sqlstyle, caption=Creación de la tabla y sus campos., label={lst:tabla}]
     CREATE DATABASE food_database;
@@ -62,7 +62,7 @@ Tras la configuración de la base de datos, hay que crear la tabla con los campo
     );
 \end{lstlisting}
 
-Ahora que la estructura ya está creada, falta introducir los datos. MySQL Workbench dispone de una herramienta para la importación desde archivos Comma Separated Values (valores separados por comas) o CSV, que permite con facilidad identificar los numerosos datos de la hoja de cálculo. Consigue emparejar fácilmente los campos de la tabla recién creada con los del archivo CSV, como muestra la figura \ref{fig:importacion}, lo que da como resultado una correcta importación masiva de datos.
+Ahora que la estructura ya está creada, falta introducir los datos. MySQL Workbench dispone de una herramienta para la importación desde archivos Comma Separated Values (valores separados por comas) o CSV, que permite con facilidad identificar los numerosos datos de la hoja de cálculo. Esto permite emparejar fácilmente los campos de la tabla recién creada con los del archivo CSV, como muestra la figura \ref{fig:importacion}, logrando una importación masiva de datos de manera correcta.
 
 \begin{figure}[H]
     \centering
@@ -75,11 +75,11 @@ Ahora que la estructura ya está creada, falta introducir los datos. MySQL Workb
 
 Para optimizar la base de datos y mejorar el funcionamiento del algoritmo con el fin de alcanzar mejores soluciones, existen ciertos cambios a realizar a los datos aportados por el gobierno de Reino Unido.
 
-El primer cambio es la eliminación de los datos incompletos. En la base de datos original existen diversos alimentos que no presentan toda la información que se va requerir en el trabajo. El principal promotor de este cambio es la existencia de registros que no tienen calorias asignadas (representadas en el archivo Excel con una \textit{''N''}), que han pasado con el valor \textit{0}.
+El primer cambio es la eliminación de los datos incompletos. En la base de datos original existen diversos alimentos que no presentan toda la información que se va requerir en el trabajo. El principal promotor de este cambio es la existencia de registros que no tienen calorías asignadas (representadas en el archivo Excel con una \textit{''N''}), que han pasado con el valor \textit{0}.
 
-Sin dejar de lado la eliminación de registros, se filtra las categorías de comidas que pueden ser ingeridas por el consumidor. Existen categorías como, por ejemplo, \textit{''Harinas, granos y almidones''} (AA) o \textit{''Grasas y aceites''} (O), que no son consumidas por el usuario como plato único, sino que participan en la cocción o en el acompañamiento del alimento principal. Por lo que se eliminan. También se elimina la categoría \textit{''Bebidas Alcohólicas''} (Q), ya que sería necesario un análisis más exhaustivo y conocer las recomendaciones de los nutricionistas respecto a su consumo. De esta categoría se mantienen la cerveza, el vino, la sidra y el cava, presentes en la dieta mediterránea y de las que la Sociedad Española de Nutrición Comunitaria (SENC) recomienda el consumo opcional, moderado y responsable~\cite{senpiramide}.
+Sin dejar de lado la eliminación de registros, se filtra las categorías de comidas que pueden ser ingeridas por el consumidor. Existen categorías como, por ejemplo, \textit{''Harinas, granos y almidones''} (AA) o \textit{''Grasas y aceites''} (O), que no son consumidas por el usuario como plato único, sino que participan en la cocción o en el acompañamiento del alimento principal. Por lo tanto, se eliminan. También se elimina la categoría \textit{''Bebidas Alcohólicas''} (Q), ya que sería necesario un análisis más exhaustivo y conocer las recomendaciones de los nutricionistas respecto a su consumo. De esta categoría se mantienen la cerveza, el vino, la sidra y el cava, presentes en la dieta mediterránea y de las que la Sociedad Española de Nutrición Comunitaria (SENC) recomienda el consumo opcional, moderado y responsable~\cite{senpiramide}.
 
-También se ha modificado el grupo \textit{''Zumos''} (PE), donde se ha cambiado \textit{PE} por \textit{FE}. Se ha movido al grupo \textit{''Frutas''} (F) porque los zumos son mucho más parecidos a los alimentos de este grupo que al de las bebidas (P).
+También se ha modificado el grupo \textit{''Zumos''} (PE), donde \textit{PE} se ha cambiado por \textit{FE}. Se ha movido al grupo \textit{''Frutas''} (F) porque los zumos son mucho más parecidos a los alimentos de este grupo que al de las bebidas (P).
 
 En el apéndice \ref{ch:grupos-comida} se encuentran todos los grupos con los que se va a trabajar.
 
@@ -99,9 +99,9 @@ Se ha hecho uso de distintas fuentes para los valores nutricionales utilizados p
 En el algoritmo se busca crear un menú equilibrado y personalizado para el usuario, con el propósito de mantener el peso y la masa corporal del individuo.
 
 \subsection{Cálculo de calorías}
-\label{ch:calculo-calorias}
+\label{ch:calculo-calorías}
 
-El primer objetivo es el calórico, explicado en el apartado \ref{ch:objetivo-restriccion-calorias}. Para ello es necesario saber cuántas kilocalorías diarias necesita el usuario. La Tasa Metabólica Basal (TMB) es la cantidad de energía que el cuerpo necesita para mantener las funciones vitales en reposo. Existen diversas fórmulas de calcularla, pero en este proyecto se hace uso de una las más extendidas actualmente, la fórmula de Harris-Benedict revisada por Mifflin et al.~\cite{mifflin1990}. Esta fórmula toma en cuenta el peso, la altura, la edad y el sexo para estimar las kilocalorías.
+El primer objetivo es el calórico, explicado en el apartado \ref{ch:objetivo-restriccion-calorías}. Para ello es necesario saber cuántas kilocalorías diarias necesita el usuario. La Tasa Metabólica Basal (TMB) es la cantidad de energía que el cuerpo necesita para mantener las funciones vitales en reposo. Existen diversas fórmulas de calcularla, pero en este proyecto se hace uso de una las más extendidas actualmente, la fórmula de Harris-Benedict revisada por Mifflin et al.~\cite{mifflin1990}. Esta fórmula toma en cuenta el peso, la altura, la edad y el sexo para estimar las kilocalorías.
 
 \begin{itemize}
     \item Para hombres:
@@ -124,7 +124,7 @@ Como se explica en la definición de la TMB, esta energía es calculada en repos
     \item Actividad muy alta (ejercicio muy intenso, trabajos físicos o entrenamiento dos veces al día): \textit{TMB $\times$ 1.9}
 \end{itemize}
 
-Por ejemplo, para un hombre de \textit{23 años} que pesara \textit{75 kg} y midiera \textit{175 cm} su TMB sería de \textit{1734 kilocalorías por dia}. Pero como también realiza una actividad moderada, habría que multiplicar por \textit{1.55}, dando un total de \textit{2687.31 kcal/dia}.
+Por ejemplo, para un hombre de \textit{23 años} que pesa \textit{75 kg} y mide \textit{175 cm} su TMB sería de \textit{1734 kilocalorías por día}. Pero como también realiza una actividad moderada, habría que multiplicar por \textit{1.55}, dando un total de \textit{2687.31 kcal/día}.
 
 \begin{comment}
 \subsection{Distribución de calorías}
@@ -148,7 +148,7 @@ Para calcular el porcentaje de nuestras calorías bastaría con sumar los alimen
 \subsection{Distribución de macronutrientes}
 \label{ch:distribucion-macronutrientes}
 
-Otro objetivo, tratado en el punto \ref{ch:objetivo-restriccion-macronutrientes}, es la correcta distribución diaria de macronutrientes, es decir, de los hidratos de carbono, de las proteínas y de las grasas. El \textit{Institute of Medicine (IOM)}, en su trabajo de 2005~\cite{iom2005}, define los AMDR (Acceptable Macronutrient Distribution Ranges) como los rangos de ingesta para macronutrientes que se asocian con un riesgo reducido de enfermedades crónicas y aseguran una ingesta adecuada de nutrientes esenciales. Estos límites para adultos son:
+Otro objetivo, tratado en el punto \ref{ch:objetivo-restriccion-macronutrientes}, es la correcta distribución diaria de macronutrientes: hidratos de carbono, proteínas y grasas. El \textit{Institute of Medicine (IOM)}, en su trabajo de 2005~\cite{iom2005}, define los AMDR (Acceptable Macronutrient Distribution Ranges) como los rangos de ingesta para macronutrientes que se asocian con un riesgo reducido de enfermedades crónicas y aseguran una ingesta adecuada de nutrientes esenciales. Estos límites para adultos son:
 
 \begin{itemize}
     \item $45\% \leq \% \text{ de carbohidratos} \leq 65\%$
@@ -156,7 +156,7 @@ Otro objetivo, tratado en el punto \ref{ch:objetivo-restriccion-macronutrientes}
     \item $20\% \leq \% \text{ de grasas} \leq 35\%$
 \end{itemize}
 
-Para saber si la solución respeta estos límites, primero es necesario saber cuántas kilocalorías aporta cada macronutriente. Siguiendo el estudio del \textit{IOM}, las kilocalorías por gramo de cada macronutriente son:
+Para verificar si la solución respeta estos límites, primero es necesario calcular cuántas kilocalorías aporta cada macronutriente. Siguiendo el estudio del \textit{IOM}, las kilocalorías por gramo de cada macronutriente son:
 
 \begin{itemize}
     \item Carbohidratos: \textit{4 kcal} por gramo
@@ -166,7 +166,7 @@ Para saber si la solución respeta estos límites, primero es necesario saber cu
 
 La suma de las kilocalorías individuales de cada macronutriente equivale al total de calorías del alimento, dato del que ya se dispone.
 
-Con las kilocalorías de cada macronutriente ya calculadas, solo falta dividir estas entre las calorías totales y multiplicarlo por \textit{100} para saber los porcentajes de cada macronutriente. Por ejemplo, para calcular el procentaje de carbohidratos sería:
+Con las kilocalorías de cada macronutriente ya calculadas, solo falta dividir estas entre las calorías totales y multiplicarlo por \textit{100} para saber los porcentajes de cada macronutriente. Por ejemplo, para calcular el porcentaje de carbohidratos sería:
 \[
 \left( \frac{\text{kcal de carbohidratos}}{\text{kcal totales}} \right) \times 100
 \]
@@ -179,7 +179,7 @@ Siguiendo el caso de los hidratos de carbono, \textit{11 g} de carbohidratos de 
 
 Se ha buscado plantear un menú siguiendo los hábitos alimenticios y nutricionales de los consumidores españoles.
 
-La primera parte es la elección de la estructura del cromosoma solución. En este problema se ha planteado que cada gen represente un alimento diferente consumido. Tal y como se muestra en la figura \ref{fig:cromosoma_desarrollo}, cada día del menú semanal consta de un total de 5 comidas repartidas a lo largo del mismo: desayuno, tentempié, almuerzo, merienda y cena. De estas comidas, las tres principales, el desayuno, el almuerzo y la cena, consta cada una de 2 alimentos y 1 bebida, haciendo un total de 3 genes. Las otras dos, el tentempié y la merienda, consideradas como comidas entre horas, tienen 1 alimento cada una, es decir, añadiendo 2 genes más al cromosoma.
+La primera parte es la elección de la estructura del cromosoma solución. En este problema se ha planteado que cada gen represente un alimento diferente consumido. Como se muestra en la figura \ref{fig:cromosoma_desarrollo}, cada día del menú semanal incluye 5 comidas: desayuno, tentempié, almuerzo, merienda y cena. De estas comidas, las tres principales, el desayuno, el almuerzo y la cena, consta cada una de 2 alimentos y 1 bebida, haciendo un total de 3 genes. Las otras dos comidas, tentempié y merienda, consideradas como comidas entre horas, contienen 1 alimento cada una, sumando 2 genes adicionales al cromosoma.
 
 Cada día presenta al final 11 genes (o alimentos). Como el proyecto trata de una planificación semanal, se repite esta cadena por cada día de la semana, dando un cromosoma que presenta un total de 77 genes.
 
@@ -193,10 +193,10 @@ Cada día presenta al final 11 genes (o alimentos). Como el proyecto trata de un
 Como se ha explicado, el tercer gen de cada comida principal está reservado para una bebida, por lo que es necesario filtrar los grupos de comida para que seleccione solo un alimento de esta categoría. Estos cambios que se realizan en la inicialización y mutación son explicados en el apartado \ref{ch:explicacion-algoritmo}, pero primero se define qué categorías de alimentos (detalladas en el apéndice \ref{ch:grupos-comida}) están reservadas para ciertos genes o comidas.
 
 \begin{itemize}
-    \item El tercer gen de cada comida principal está destinado a una bebida. De las categorías disponibles, solo se puede seleccionar de los grupo \textit{''Bebidas''} (P), \textit{''Jugos de frutas''} (FC), \textit{''Zumos''} (FE) o \textit{''Bebidas Alcohólicas''} (Q) (solo si el sujeto es mayor de edad).
-    \item Debido a que la bebida del desayuno suele ser una bebida con leche (no presente en el grupo \textit{P}), café o un zumo, se ha decidido que el valor que tenga este gen sea de las categorías \textit{''Leche de vaca''} (BA), \textit{''Bebidas a base de leche''} (BH), \textit{''Bebidas en polvo, esencias e infusiones''} (PA), \textit{''Jugos de frutas''} (FC) o \textit{''Zumos''} (FE).
-    \item También los alimentos del desayuno suelen diferenciarse con respecto a los del almuerzo y la cena, que son comúnmente intercambiables entre sí. Por ello los alimentos de esta comida son del grupo \textit{''Huevos''} (C), \textit{''Frutas''} (FA), \textit{''Bacon''} (MAA) o \textit{''Cereales''} (A), excepto \textit{''Arroz''} (AC), \textit{''Pasta''} (AD) y \textit{''Pizza''} (AE), que se suelen consumir en el almuerzo o la cena.
-    \item Para las comidas entre horas, tentempié y merienda, se han seleccionado alimentos de las categorías \textit{''Frutas''} (F) y \textit{''Azúcares''} (S).
+    \item El tercer gen de cada comida principal está destinado a una bebida. De las categorías disponibles, solo se pueden seleccionar de los grupo \textit{''Bebidas''} (P), \textit{''Jugos de frutas''} (FC), \textit{''Zumos''} (FE) o \textit{''Bebidas Alcohólicas''} (Q) (solo si el sujeto es mayor de edad).
+    \item Debido a que la bebida del desayuno suele ser una bebida con leche (no presente en el grupo \textit{P}), café o un zumo, se ha decidido que este gen sea de las categorías \textit{''Leche de vaca''} (BA), \textit{''Bebidas a base de leche''} (BH), \textit{''Bebidas en polvo, esencias e infusiones''} (PA), \textit{''Jugos de frutas''} (FC) o \textit{''Zumos''} (FE).
+    \item También los alimentos del desayuno suelen diferenciarse con respecto a los del almuerzo y la cena, que son comúnmente intercambiables entre sí. Por ello, los alimentos de esta comida son del grupo \textit{''Huevos''} (C), \textit{''Frutas''} (FA), \textit{''Bacon''} (MAA) o \textit{''Cereales''} (A), excepto \textit{''Arroz''} (AC), \textit{''Pasta''} (AD) y \textit{''Pizza''} (AE), que se suelen consumir en el almuerzo o la cena.
+    \item Para las comidas entre horas (tentempié y merienda), se seleccionan alimentos de las categorías \textit{''Frutas''} (F) y \textit{''Azúcares''} (S).
     \item Para las otras dos comidas principales, el almuerzo y la cena, los alimentos pueden ser de cualquier grupo, excepto los cereales, salvo \textit{''Panes''} (AF) y las excepciones antes mencionadas: el arroz, la pasta y las pizzas.
 \end{itemize}
 
@@ -207,13 +207,13 @@ Como se ha explicado, el tercer gen de cada comida principal está reservado par
 Para los objetivos se crean funciones de minimización, donde la solución candidata (o soluciones) con el valor más bajo es la que mayor aptitud presenta.
 \end{comment}
 \subsection{Objetivo y restricción de calorías}
-\label{ch:objetivo-restriccion-calorias}
+\label{ch:objetivo-restriccion-calorías}
 
-El primer objetivo que se introduce en el problema es de las kilocalorías. Se busca que la diferencia entre las kilocalorías que el usuario necesita diariamente y la suma de las kilocalorías de todos los alimentos consumidos en un día sea 0 ó lo más cercano posible. La función de evaluación mide cuánto se ha desviado en total en toda la semana, es decir, se va sumando cada desviación de kilocalorías diaria hasta obtener un valor semanal.
+El primer objetivo introducido en el problema es de las kilocalorías. Se busca que la diferencia entre las kilocalorías que el usuario necesita diariamente y la suma de las kilocalorías de todos los alimentos consumidos en un día sea 0 ó lo más cercano posible. La función de evaluación mide cuánto se ha desviado en total en toda la semana, es decir, se va sumando cada desviación de kilocalorías diaria hasta obtener un valor semanal.
 
-Se le pregunta al usuario por distintos atributos físicos y por su nivel de actividad, con lo que se calcula la tasa metabólica basal y, en un última instancia, las kilocalorías, como se explica en el apartado \ref{ch:calculo-calorias}.
+Se consulta al usuario por distintos atributos físicos y su nivel de actividad, con los cuales se calcula la tasa metabólica basal y, en última instancia, las kilocalorías, como se explica en el apartado \ref{ch:calculo-calorías}.
 \newpage
-El objetivo está atado a una restricción \textit{box-constraint}. Se penaliza aquellas desviaciones diarias que superen unos límites superior e inferior del 10\% respecto a las kilocalorías que el usuario necesita. Busca que las soluciones que se alejen bastante del objetivo sean menos seleccionadas.
+El objetivo está atado a una restricción \textit{box-constraint}. Se penalizan aquellas desviaciones diarias que superen los límites superior e inferior del 10\% respecto a las kilocalorías que el usuario necesita. Busca que las soluciones que se alejen bastante del objetivo sean menos seleccionadas.
 \begin{small}
 \[
     \begin{aligned}
@@ -234,9 +234,9 @@ El objetivo está atado a una restricción \textit{box-constraint}. Se penaliza 
 \subsection{Objetivo y restricción de macronutrientes}
 \label{ch:objetivo-restriccion-macronutrientes}
 
-Este objetivo trata de distribuir correctamente los macronutrientes a lo largo del día. Se busca que cada tipo de macronutriente se encuentre dentro de los límites recomendado en el apartado \ref{ch:distribucion-macronutrientes}, poniendo como objetivo la media de estos límites. Parecido al anterior objetivo, se calcula la diferencia diaria entre estas medias y los valores reales de proteínas, carbohidratos y grasas obtenidos. Posteriormente, la función evalúa la desviación total en la semana.
+Este objetivo trata de distribuir correctamente los macronutrientes a lo largo del día. Se busca que cada tipo de macronutriente se encuentre dentro de los límites recomendados en el apartado \ref{ch:distribucion-macronutrientes}, poniendo como objetivo la media de estos límites. Similar al anterior objetivo, se calcula la diferencia diaria entre estas medias y los valores reales de proteínas, carbohidratos y grasas obtenidos. Posteriormente, la función evalúa la desviación semanal total.
 
-Existe también una restricción de caja asociada a este objetivo, donde se requiere que la ingesta diaria de cada macronutriente se encuentre dentro de los límites antes citados.
+Existe también una restricción de caja asociada a este objetivo, que exige que la ingesta diaria de cada macronutriente se mantenga dentro de los límites especificados.
 \begin{small}
     \[
     \begin{aligned}
@@ -262,7 +262,7 @@ Existe también una restricción de caja asociada a este objetivo, donde se requ
 
 \subsection{Objetivo de preferencia}
 
-Este objetivo busca la personalización del menú incluyendo los grupos de alimentos favoritos del usuario, o exluyendo aquellos que no le gustan. Se favorecerá los grupos preferidos y se penalizará los que no. Se puede considerar como restricción de igualdad débil ya que, aunque penalice las soluciones que la violan, no las invalida. A diferencia de los otros objetivos, esta función de minimización puede alcanzar valores negativos si existe una gran variedad de alimentos con grupo predilecto en la planificación.
+Este objetivo busca la personalización del menú incluyendo los grupos de alimentos favoritos del usuario, o excluyendo aquellos que no le gustan. Se favorecerán los grupos preferidos y se penalizarán los que no. Se puede considerar una restricción de igualdad débil, ya que penaliza las soluciones que la violan pero no las invalida. A diferencia de los otros objetivos, esta función de minimización puede alcanzar valores negativos si existe una gran variedad de alimentos con grupo predilecto en la planificación.
 \[
 \text{Minimizar } f_{\text{preferencia}} = \sum_{i=1}^{N}
 \begin{cases} 
@@ -286,7 +286,7 @@ P & \text{si } g(a_i) = G_- \\
 
 \subsection{Restricción de alergia}
 
-Similar al objetivo de preferencia, es una restricción de igualdad donde se penaliza de gran manera si el usuario es alérgico al grupo del alimento del menú. Al finalizar la semana, se suman todas las penalizaciones de alergias, haciendo que sea inviable para el algoritmo volver a seleccionar un alimento que produzca alergia.
+Similar al objetivo de preferencia, es una restricción de igualdad donde se penaliza severamente si el usuario es alérgico al grupo del alimento del menú. Al finalizar la semana, se suman todas las penalizaciones de alergias, haciendo que sea inviable para el algoritmo volver a seleccionar un alimento que produzca alergia.
 \[
 \text{Minimizar } f_{\text{alergia}} = \sum_{i=1}^{N} 
 \begin{cases} 
@@ -311,12 +311,12 @@ P_{\text{alergia}}^2 & \text{si } g(a_i) = G_{\text{alergia}} \\
 
 El código completo se encuentra en el repositorio de Github del autor~\cite{quesada_nutritionplanning}.
 
-La biblioteca usada para la creación del algoritmo evolutivo ha sido \textit{Pymoo}. \textit{Pymoo} es un framework de \textit{Python} diseñado para la optimización multiobjetivo. Entre sus ventajas se encuentran la amplia gama de algoritmos para abordar los problemas, como \textit{NSGA-II}, \textit{SPEA2} o \textit{MOEA/D}. Permite modificar fácilmente los operadores de selección, cruce y matación, lo que ayuda a la personalización del algoritmo según el problema. Además, \textit{Pymoo} presenta un conjunto de herramientas de visualización para la interpetación de resultados, permitiendo entender el comportamiento de los algoritmos.~\cite{pymoo}
+La biblioteca usada para la creación del algoritmo evolutivo ha sido \textit{Pymoo}. \textit{Pymoo} es un framework de \textit{Python} diseñado para la optimización multiobjetivo. Entre sus ventajas se encuentran la amplia gama de algoritmos para abordar los problemas, como \textit{NSGA-II}, \textit{SPEA2} o \textit{MOEA/D}. Permite modificar fácilmente los operadores de selección, cruce y mutación, lo que ayuda a la personalización del algoritmo según el problema. Además, \textit{Pymoo} presenta un conjunto de herramientas de visualización para la interpretación de resultados, permitiendo entender el comportamiento de los algoritmos.~\cite{pymoo}
 
 Se ha creado una clase personalizada que hereda de \textit{''ElementwiseProblem''}, ya que esta última proporciona una estructura eficiente para evaluar cada solución individualmente, como se muestra en el listado \ref{lst:planning}.
 \newpage
 \begin{lstlisting}[basicstyle=\ttfamily, caption=Clase para la evaluación.,label={lst:planning}]
-    CLASE PlanningComida extiende ElementwiseProblem
+    CLASE PlanningComida hereda ElementwiseProblem
     
         MÉTODO __init__(self, num_variables, limites_variables,
                             num_objetivos, num_restricciones)
@@ -345,7 +345,7 @@ El cálculo de los valores a minimizar del objetivo y restricción de macronutri
 
 Los resultados de las evaluaciones se almacenan en los diccionarios \textit{''out[F]''} y \textit{''out[G]''}. \textit{''out[F]''} contiene los valores de las funciones objetivos, que intentamos optimizar. \textit{''out[G]''}, muy usado en métodos separatistas para el manejo de restricciones, contiene los valores de las restricciones que deben ser satisfechas para que las soluciones se consideren factibles. Si se usase, por ejemplo, métodos de penalización para las restricciones, no sería necesario incluir \textit{''out[G]''}, ya que las restricciones se tratan como funciones objetivo. 
 
-Tras la creación de la clase, hay que crear una función que recoja los resultados de esta clase para incluirlos en el algoritmo evolutivo. El funcionamiento del algoritmo es, en esencia, el mismo que se ha explicado en la sección \ref{ch:marco-teorico}, aunque se puede modificar o añadir algún operador según el tipo de algoritmo usado, razón de la experimentación con distintos algoritmos del apartado \ref{ch:algoritmos-multiobjetivo}. Por lo tanto, lo primero a seleccionar es el algortimo con el que se va a trabajar, ya sea NSGA-II, MOEA/D, etc.
+Tras la creación de la clase, hay que crear una función que recoja los resultados de esta clase para incluirlos en el algoritmo evolutivo. El funcionamiento del algoritmo es, en esencia, el mismo que se ha explicado en la sección \ref{ch:marco-teorico}, aunque se puede modificar o añadir algún operador según el tipo de algoritmo usado, razón de la experimentación con distintos algoritmos del apartado \ref{ch:algoritmos-multiobjetivo}. Por lo tanto, lo primero a seleccionar es el algoritmo con el que se va a trabajar, ya sea NSGA-II, MOEA/D, etc.
 
 Se selecciona el número de individuos por generación y el número de generaciones que el algoritmo evaluará. Como no se ha puesto ninguna condición de parada específica el algoritmo terminará tras haber evaluado todas las generaciones predefinidas.
 
@@ -366,7 +366,7 @@ En la selección se eligen individuos de la población basado en la aptitud. En 
 
 Tras elegir los individuos, se cruzan para la generación de una nueva población.  Se puede variar entre el cruce de un punto y el de dos puntos, asignándoles a cada uno de ellos una probabilidad de cruce \(P_c\)  . Aparte de los mecanismos elitistas que usen los algoritmos multi-objetivo, no se ha realizado ningún método extra de selección ambiental, por lo que se realiza un reemplazo generacional completo.
 
-Para la mutación ocurre como con la inicialización. En vez de elegir un método de los que ofrece \textit{Pymoo}, se ha decido crear un método personalizado. El nuevo método recorre cada individuo creado en el cruce y decide si el gen es reservado para una bebida, para un snack, etc. Con una probabilidad \(P_m\) a determinar, muta una bebida por otra bebida o un alimento de una categoría determinada por otro de la misma categoría, como se muestra en la figura \ref{fig:mutacion-custom}. Esto logra, junto con la inicialización, que todas las soluciones a lo largo de las generaciones cumplan con las peculiaridades de este problema.
+Para la mutación ocurre como con la inicialización. En vez de elegir un método de los que ofrece \textit{Pymoo}, se ha decidido crear un método personalizado. El nuevo método recorre cada individuo creado en el cruce y decide si el gen es reservado para una bebida, para un snack, etc. Con una probabilidad \(P_m\) a determinar, muta una bebida por otra bebida o un alimento de una categoría determinada por otro de la misma categoría, como se muestra en la figura \ref{fig:mutacion-custom}. Esto logra, junto con la inicialización, que todas las soluciones a lo largo de las generaciones cumplan con las peculiaridades de este problema.
 
 \begin{figure}[H]
     \centering
@@ -377,7 +377,7 @@ Para la mutación ocurre como con la inicialización. En vez de elegir un métod
 
 Por último, esta nueva población resultante vuelve a ser evaluada en busca de ser óptima para el problema.
 
-El algortimo evolutivo se ejecuta utilizando la función \textit{''minimize''} de \textit{Pymoo}, que toma el problema y la configuración del algoritmo. Como se muestra en la tabla \ref{tab:optimizacion}, el algoritmo va avanzando en busca de mejores soluciones.
+El algoritmo evolutivo se ejecuta utilizando la función \textit{''minimize''} de \textit{Pymoo}, que toma el problema y la configuración del algoritmo. Como se muestra en la tabla \ref{tab:optimizacion}, el algoritmo va avanzando en busca de mejores soluciones.
 
 En la tabla se aprecia, en orden: \textit{''n\_gen''} muestra el número de generación, \textit{''n\_eval''} es el contador de evaluaciones de individuos, \textit{''n\_nds''} es el número de soluciones no dominadas encontradas, \textit{''cv\_min''} es el valor mínimo de violación de una población, \textit{''n\_avg''} es el valor promedio de violación de una población, \textit{''eps''} es una métrica que mide la convergencia del algoritmo hacia soluciones óptimas e \textit{''indicator''} se usa para clasificar la calidad del frente de Pareto en cada generación.
 
@@ -404,7 +404,7 @@ En la tabla se aprecia, en orden: \textit{''n\_gen''} muestra el número de gene
     \label{tab:optimizacion}
 \end{table}
 
-El algortimo, con este manejo de restricciones, está configurado para que, hasta que no alcance una solución viable (\textit{''cv\_min''}=0), no empieza a evaluar la convergencia y la calidad del frente de Pareto.
+El algoritmo, con este manejo de restricciones, está configurado para que, hasta que no alcance una solución viable (\textit{''cv\_min''}=0), no empieza a evaluar la convergencia y la calidad del frente de Pareto.
 
 En el caso de que, como se ha explicado antes, no fuera necesario \textit{''out[G]''} por el manejo de las restricciones, simplemente desaparecen \textit{''cv\_min''} y \textit{''cv\_avg''}, y \textit{''n\_nds''}, \textit{''eps''} e \textit{''indicator''} se calculan desde la primera generación.
 
@@ -422,16 +422,16 @@ Todas las métricas que obtiene el algoritmo son guardadas en una variable \text
 \subsubsection{Penalización estática}
 \label{ch:penalizacion-estatica}
 
-En este método se penalizan las soluciones que violan las restricciones. En las funciones en las que se definen las restricciones de calorías y macronutrientes, se calcula una penalización proporcional a la diferencia entre el objetivo y los nutrientes consumidos, multiplicada por una constante de penalización, mostradas en el listado \ref{lst:factores}. Poniendo de ejemplo la restricción de calorías, si el objetivo calórico es 2500 kilocalorías y la diferencia con las kilocalorías ingeridas está fuera del 10\%, se multiplica esa diferencia por un factor de penalización. Por lo tanto, cuanto mayor es la diferencia, mayor es la penalización, lo que ayuda a guiar al algoritmo en busca de soluciones que se penalicen menos y, en última instancia, que se acerquen lo máximo posible al objetivo.
+En este método se penalizan las soluciones que violan las restricciones. En las funciones en las que se definen las restricciones de calorías y macronutrientes, se calcula una penalización proporcional a la diferencia entre el objetivo y los nutrientes consumidos, multiplicada por una constante de penalización, como se muestra en el listado \ref{lst:factores}. Poniendo de ejemplo la restricción de calorías, si el objetivo calórico es 2500 kilocalorías y la diferencia con las kilocalorías ingeridas está fuera del 10\%, se multiplica esa diferencia por un factor de penalización. Por lo tanto, cuanto mayor sea la diferencia, mayor será la penalización, lo que guía al algoritmo hacia soluciones con menor penalización y más cercanas al objetivo.
 
-En el caso de la restricción de alergia, se penaliza con un factor de penalización si el grupo alérgico aparece en el menú. Si no aparece, se devuelve 0. Tras realizar diversos tests, se ha llegado a la conclusión de que el algoritmo encuentra mejores resultados si el factor de penalización se eleva al cuadrado, lo que hará inviable buscar soluciones que incumplan esta restricción.
+En el caso de la restricción de alergia, se aplica un factor de penalización si el grupo alérgico aparece en el menú. Si no aparece, se devuelve 0. Tras realizar diversos tests, se ha llegado a la conclusión de que el algoritmo encuentra mejores resultados si el factor de penalización se eleva al cuadrado, lo que hace inviable que el algoritmo seleccione soluciones que incumplan esta restricción.
 \newpage
 En el objetivo de preferencias, que se puede considerar una restricción débil, se penaliza con un factor de penalización (de menor valor que el de la alergia) en el caso de que aparezca en el menú un grupo de alimentos que disguste al usuario. En cambio, si el alimento es del gusto del individuo, se devuelve ese mismo factor con un signo negativo delante, lo que ayuda a que baje el valor a minimizar.
 
-Los valores retornados de las funciones de restricción se suman entre sí. El valor resultante se suma a cada uno de los valores objetivo del problema. El algoritmo pasa de calcular 3 objetivos y 3 restricciones a calcular solo los 3 objetivos a los que se le ha sumado la penalización de las restricciones.
+Los valores retornados de las funciones de restricción se suman entre sí, y el resultado se añade a cada uno de los valores objetivo del problema. El algoritmo pasa de calcular 3 objetivos y 3 restricciones a calcular solo los 3 objetivos a los que se le ha sumado la penalización de las restricciones.
 
 \begin{lstlisting}[basicstyle=\ttfamily, caption=Factores de penalización.,label={lst:factores}]
-    PENALIZACION_CALORIAS = 50
+    PENALIZACION_calorías = 50
     PENALIZACION_MACRONUTRIENTES = 30
     PENALIZACION_PREFERENCIA = 10
     PENALIZACION_ALERGIA = 100
@@ -440,13 +440,13 @@ Los valores retornados de las funciones de restricción se suman entre sí. El v
 \subsubsection{Método separatista}
 \label{ch:metodo-separatista}
 
-En el método separatista los objetivos y las restricciones se tratan por separado. A diferencia de los métodos de penalización, en las funciones de restricción no se hace uso de los factores. Se devuelve únicamente, en el caso de las restricciones de las calorías y los macronutrientes, la diferencia entre el valor objetivo y el valor obtenido de la solución candidata.
+En el método separatista, los objetivos y las restricciones se tratan por separado. A diferencia de los métodos de penalización, en las funciones de restricción no se hace uso de los factores. Para las restricciones de calorías y macronutrientes, se devuelve únicamente la diferencia entre el valor objetivo y el valor obtenido de la solución candidata.
 
-La función de la restricción de la alergia (y la de las preferencias) se trata igual que en los métodos con penalización, por lo que aquí sí que se usa el factor de penalización correspondiente.
+La función de la restricción de alergia (y la de preferencias) se maneja igual que en los métodos con penalización, por lo que aquí sí que se usa el factor de penalización correspondiente.
 
-En \textit{''out[F]''} se introducen los valores de las funciones de los objetivos (3 en total), y en \textit{''out[G]''} se introducen los valores de las funciones de las restricciones (3). El algoritmo busca primero soluciones que no violen las restricciones y, cuando las encuentra, busca soluciones que optimicen el problema. En la tabla \ref{tab:optimizacion} se puede ver este funcionamiento.
+En \textit{''out[F]''} se almacenan los valores de las funciones objetivos (3 en total) y en \textit{''out[G]''} se guardan los valores de las funciones de restriccion (también 3). El algoritmo busca primero soluciones que no violen las restricciones y, cuando las encuentra, busca soluciones que optimicen el problema. En la tabla \ref{tab:optimizacion} se puede ver este funcionamiento.
 
-\subsubsection{Restricciones como objetivo}
+\subsubsection{Restricciones como objetivos}
 \label{ch:restricciones-objetivo}
 
 Si bien en los anteriores casos se desarrollaron versiones personalizadas de los métodos, en este tercer caso se va a hacer uso de la herramienta de \textit{Pymoo} \textit{''ConstraintsAsObjective''}~\cite{pymoo_constraints_as_obj}.
@@ -455,9 +455,9 @@ Este método se caracteriza por incorporar las restricciones como objetivos. La 
 \section{Interfaz gráfica}
 \label{ch:interfaz-grafica}
 
-Si bien el objetivo principal de este PFG es la construcción del algoritmo evolutivo y la experimentación del mismo (apartado \ref{ch:objetivos}), se ha creado una interfaz simple que sirve de guía para la ejecución del algoritmo. Se ha hecho uso de la biblioteca \textit{''tkinter''} para ello~\cite{python_tkinter}.
+Si bien el objetivo principal de este PFG es la construcción del algoritmo evolutivo y la experimentación del mismo (apartado \ref{ch:objetivos}), se ha creado una interfaz sencilla que sirve como guía para la ejecución del algoritmo. Para ello, se ha utilizado la biblioteca \textit{''tkinter''}~\cite{python_tkinter}.
 
-La ventana principal, que es la que se muestra en la figura \ref{fig:ventana-main}, es el punto de entrada para la ejecución del algoritmo. Se ha nombrado \textit{''Planificación nutricional mediante algoritmos evolutivos''}. Dispone de un título, que comparte con el nombre de la ventana, y dos botones. El botón de la izquierda, \textit{''Planificar el menú''}, lleva a la ventana que se encuentra en la figura \ref{fig:ventana-usuario}, que es donde se le pregunta al usuario para poder calcular sus kilocalorías necesarias y sus preferencias alimenticias. El segundo botón, \textit{''Visualizar la base de datos''}, redirige a la ventana \textit{''Base de datos''}, mostrada en la figura \ref{fig:ventana-basedatos}. Aquí se indica cada alimento con sus grupo y sus valores nutricionales.
+La ventana principal, que es la que se muestra en la figura \ref{fig:ventana-main}, es el punto de entrada para la ejecución del algoritmo. Se ha nombrado \textit{''Planificación nutricional mediante algoritmos evolutivos''}. Dispone de un título, que comparte con el nombre de la ventana, y dos botones. El botón de la izquierda, \textit{''Planificar el menú''}, lleva a la ventana que se encuentra en la figura \ref{fig:ventana-usuario}, donde se consulta al usuario para calcular sus kilocalorías necesarias y sus preferencias alimenticias. El segundo botón, \textit{''Visualizar la base de datos''}, redirige a la ventana \textit{''Base de datos''}, mostrada en la figura \ref{fig:ventana-basedatos}. Aquí se indica cada alimento con su grupo y sus valores nutricionales.
 
 \begin{figure}[H]
     \centering
@@ -479,7 +479,7 @@ Se ha incluido un botón \textit{''Volver''} que redirige a la ventana principal
 
 La ventana \textit{''Preguntas al usuario''}, figura \ref{fig:ventana-usuario}, es usada para calcular las kilocalorías que el usuario necesita y sus grupos alimenticios de preferencia.
 
-Se pregunta al usuario por medio de un \textit{''label''} y este responde en un \textit{''entry''}, que almacena la respuesta. Así ocurre con las preguntas sobre el peso, la edad y la altura. Para el sexo y el nivel de actividad se ha hecho uso de un \textit{''combobox''}, que permite introducir varias opciones posibles dentro de una lista. Para la alergia y las preferencias alimenticias se ha utilizado \textit{''listbox''}, que permite mostrar, bien tabulados, todos los grupos de alimentos. Se puede hacer selección múltiple. Estos grupos quedan guardados para luego usarlos durante la ejecución del algoritmo.
+Se pregunta al usuario por medio de un \textit{''label''} y este responde en un \textit{''entry''}, que almacena la respuesta. Así ocurre con las preguntas sobre el peso, la edad y la altura. Para el sexo y el nivel de actividad se ha hecho uso de un \textit{''combobox''}, que permite introducir varias opciones posibles dentro de una lista. Para la alergia y las preferencias alimenticias se ha utilizado \textit{''listbox''}, que permite mostrar, correctamente tabulados, todos los grupos de alimentos. Se puede hacer selección múltiple. Estos grupos quedan guardados para luego usarlos durante la ejecución del algoritmo.
 
 El botón \textit{''Calcular calorías''} activa el cálculo de las kilocalorías objetivo del usuario y las muestra. El botón \textit{''Mostrar menú''} activa la ejecución del algoritmo para que encuentre una solución óptima. El último botón, \textit{''Volver''}, regresa a la ventana principal.
 
@@ -494,7 +494,7 @@ Tras pulsar el botón \textit{''Mostrar menú''}, el algoritmo se ejecuta con lo
 
 Se ha creado la ventana \textit{''Menú Generado''}, mostrada en la figura \ref{fig:ventana-menu}, donde se ha hecho uso de un \textit{''grid''}, muy útil para la creación de tablas estáticas. Se han introducido 5 filas (comidas diarias) por 7 columnas (días de la semana). Se muestran todos los alimentos que componen la solución elegida, además del grupo al que pertenecen. Se han añadido una fila y una columna como cabeceras, correspondientes a las comidas del día y a los días de la semana, respectivamente. Además, se ha incorporado una fila al final para ayudar a entender si la solución escogida cumple con los objetivos de las kilocalorías y los macronutrientes.
 
-Se han añadido dos botones, \textit{'Atrás''} y \textit{'Cerrar''}. El primero vuelve a la ventana \textit{''Preguntas al usuario''} para la posibilidad de generar otro menú distinto. El segundo botón termina con la ejecución del programa.
+Se han añadido dos botones, \textit{''Atrás''} y \textit{''Cerrar''}. El primero vuelve a la ventana \textit{''Preguntas al usuario''} para la posibilidad de generar otro menú distinto. El segundo botón termina con la ejecución del programa.
 
 \begin{figure}[H]
     \centering
