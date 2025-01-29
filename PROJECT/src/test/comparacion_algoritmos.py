@@ -4,9 +4,10 @@ import json
 import numpy as np
 from scipy import stats
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../external/stac")))
 
-from PROJECT.external.stac.stac.nonparametric_tests import friedman_aligned_ranks_test, shaffer_multitest
+# Importar las funciones necesarias de STAC
+from stac.nonparametric_tests import friedman_aligned_ranks_test, shaffer_multitest
 
 def cargar_hipervolumenes(ruta_archivo):
     """Carga los hipervolumenes desde un archivo JSON y los almacena en un diccionario."""
