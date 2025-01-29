@@ -7,8 +7,8 @@ import numpy as np
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from PYTHON.utilidades import database, constantes
-from PYTHON.algoritmos.spea2 import ag_spea2_separatista
+from src.utilidades import database, constantes
+from src.algoritmos.spea2 import ag_spea2_separatista
 
 
 def cargar_sujetos():

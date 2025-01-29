@@ -5,7 +5,7 @@ import numpy as np
 from pymoo.operators.sampling.rnd import IntegerRandomSampling
 from pymoo.core.mutation import Mutation
 
-from PYTHON.utilidades.constantes import *
+from src.utilidades.constantes import *
 
 
 class CustomIntegerRandomSampling(IntegerRandomSampling):

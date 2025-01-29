@@ -7,10 +7,10 @@ from pymoo.optimize import minimize
 from pymoo.operators.crossover.pntx import SinglePointCrossover, TwoPointCrossover
 from pymoo.config import Config
 
-from PYTHON.utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
-from PYTHON.utilidades.database import conexion_comida_basedatos
-from PYTHON.utilidades.constantes import *
-from PYTHON.algoritmos.operadores_custom import CustomIntegerRandomSampling, CustomMutation
+from src.utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
+from src.utilidades.database import conexion_comida_basedatos
+from src.utilidades.constantes import *
+from src.utilidades.operadores_custom import CustomIntegerRandomSampling, CustomMutation
 
 Config.warnings['not_compiled'] = False
 

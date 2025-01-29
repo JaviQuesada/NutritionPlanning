@@ -5,9 +5,10 @@ import random
 import tkinter as tk
 from tkinter import ttk
 
-from PYTHON.GUI.ventana_menu import VentanaMenu
-from PYTHON.utilidades import database, funciones_auxiliares, constantes
-from PYTHON.algoritmos.nsga2 import ag_nsga2_penalizacion_estatica
+from src.GUI.ventana_menu import VentanaMenu
+from src.utilidades import database, funciones_auxiliares, constantes
+from src.algoritmos.nsga2 import ag_nsga2_penalizacion_estatica
+
 
 # Conectar a la base de datos
 comida_basedatos = database.conexion_comida_basedatos()

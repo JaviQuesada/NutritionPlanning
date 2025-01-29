@@ -1,8 +1,8 @@
 # ventana_principal.py
 
 import tkinter as tk
-from PYTHON.GUI.ventana_preguntasusuario import VentanaCalorias
-from PYTHON.GUI.ventana_basedatos import BaseDatosApp
+from src.GUI.ventana_preguntasusuario import VentanaCalorias
+from src.GUI.ventana_basedatos import BaseDatosApp
 
 class MainApp:
     """Ventana principal de la aplicacion"""

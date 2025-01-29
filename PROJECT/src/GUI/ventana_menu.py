@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-from PYTHON.utilidades import constantes
+from src.utilidades import constantes
 
 
 class VentanaMenu:

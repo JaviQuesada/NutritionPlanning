@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-from PYTHON.utilidades import database, constantes
-from PYTHON.experimentacion.ejecutar_guardar_resultados import cargar_sujetos
+from src.utilidades import database, constantes
+from src.test.ejecutar_guardar_resultados import cargar_sujetos
 
-from PYTHON.algoritmos.spea2 import ag_spea2_estatica, ag_spea2_separatista
+from src.algoritmos.spea2 import ag_spea2_estatica, ag_spea2_separatista
 
 
 def ejecutar_algoritmo(metodo, conexion_bd, sujeto, seed):
