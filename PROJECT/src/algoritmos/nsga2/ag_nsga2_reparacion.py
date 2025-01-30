@@ -8,13 +8,13 @@ from pymoo.operators.crossover.pntx import SinglePointCrossover
 from pymoo.config import Config
 
 from utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
-from utilidades.database import conexion_comida_basedatos
+from utilidades.database import comida_basedatos
 from utilidades.constantes import *
-from PROJECT.src.utilidades.operadores_custom import CustomIntegerRandomSampling, CustomMutation
+from src.utilidades.operadores_custom import CustomIntegerRandomSampling, CustomMutation
 
 Config.warnings['not_compiled'] = False
 
-comida_basedatos = conexion_comida_basedatos()
+comida_bd = comida_basedatos()
 
 
 def objetivo_calorias(calorias_diarias, objetivo_calorico):
@@ -67,7 +67,7 @@ def reparar_solucion(solucion, problema, objetivo_calorico, grupos_alergia, num_
         # Calcula calorias y macronutrientes diarios
         for i in range(inicio_dia, inicio_dia + NUM_ALIMENTOS_DIARIO):
 
-            alimento = problema.comida_basedatos[int(solucion_reparada[i])]
+            alimento = problema.comida_bd[int(solucion_reparada[i])]
 
             calorias_diarias += alimento["calorias"]
             proteinas_diarias += alimento["proteinas"]
@@ -89,11 +89,11 @@ def reparar_solucion(solucion, problema, objetivo_calorico, grupos_alergia, num_
 
             # Selecciona un indice aleatorio de un alimento en la solucion para reemplazarlo
             idx = np.random.randint(inicio_dia, inicio_dia + NUM_ALIMENTOS_DIARIO)
-            alimento_actual = problema.comida_basedatos[int(solucion_reparada[idx])]
+            alimento_actual = problema.comida_bd[int(solucion_reparada[idx])]
 
             # Selecciona un nuevo alimento para reemplazo
             nuevo_alimento_idx = seleccionar_nuevo_alimento(problema, idx, inicio_dia)
-            nuevo_alimento = problema.comida_basedatos[nuevo_alimento_idx]
+            nuevo_alimento = problema.comida_bd[nuevo_alimento_idx]
 
             if nuevo_alimento["grupo"] in grupos_alergia:
                 intentos += 1
@@ -153,10 +153,10 @@ def seleccionar_nuevo_alimento(problema, idx, inicio_dia):
 class PlanningComida(ElementwiseProblem):
     """Clase que define el problema de planificacion de comida en base a objetivos y restricciones."""
     
-    def __init__(self, comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta):
+    def __init__(self, comida_bd, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta):
 
-        super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=0, xl=0, xu=len(comida_basedatos)-1)  
-        self.comida_basedatos = comida_basedatos
+        super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=0, xl=0, xu=len(comida_bd)-1)  
+        self.comida_bd = comida_bd
         self.objetivo_calorias = objetivo_calorias
         self.edad = edad
         self.grupos_alergia = grupos_alergia
@@ -195,7 +195,7 @@ class PlanningComida(ElementwiseProblem):
                 # Itera sobre cada alimento en la comida actual
                 for indice_alimento in range(num_alimentos):
                     idx = (dia * NUM_ALIMENTOS_DIARIO) + suma_num_alimentos + indice_alimento
-                    alimento = self.comida_basedatos[int(x_reparada[idx])]
+                    alimento = self.comida_bd[int(x_reparada[idx])]
 
                     # Suma las calorias y macronutrientes del alimento actual
                     calorias_diarias += alimento["calorias"]
@@ -227,12 +227,12 @@ class PlanningComida(ElementwiseProblem):
 
     def filtrar_comida(self, tipo):
         """Filtra la base de datos de comida segun el tipo de comida."""
-        return filtrar_comida(self.comida_basedatos, tipo, self.edad)
+        return filtrar_comida(self.comida_bd, tipo, self.edad)
 
 
-def ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta, seed):
+def ejecutar_algoritmo_genetico(comida_bd, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta, seed):
 
-    problema = PlanningComida(comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta)
+    problema = PlanningComida(comida_bd, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta)
 
     algoritmo = NSGA2(
         pop_size=100,  # Tamaño de la poblacion

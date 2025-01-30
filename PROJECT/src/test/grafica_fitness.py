@@ -8,17 +8,15 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from src.utilidades import database, constantes
-from src.test.ejecutar_guardar_resultados import cargar_sujetos
-
 from src.algoritmos.spea2 import ag_spea2_estatica, ag_spea2_separatista
 
 
-def ejecutar_algoritmo(metodo, conexion_bd, sujeto, seed):
+def ejecutar_algoritmo(metodo, comida_basedatos, sujeto, seed):
     """Ejecuta el algoritmo segun el metodo elegido."""
 
     if metodo == "penalizacion_estatica":
         return ag_spea2_estatica.ejecutar_algoritmo_genetico(
-            comida_basedatos=conexion_bd,
+            comida_basedatos=comida_basedatos,
             objetivo_calorico=sujeto['calorias'],
             edad=sujeto['edad'],
             grupos_alergia=sujeto['alergias'],
@@ -28,7 +26,7 @@ def ejecutar_algoritmo(metodo, conexion_bd, sujeto, seed):
         )
     elif metodo == "separatista":
         return ag_spea2_separatista.ejecutar_algoritmo_genetico(
-            comida_basedatos=conexion_bd,
+            comida_basedatos=comida_basedatos,
             objetivo_calorico=sujeto['calorias'],
             edad=sujeto['edad'],
             grupos_alergia=sujeto['alergias'],
@@ -87,8 +85,8 @@ def calcular_media_por_generacion(fitness_por_generacion):
 def generar_graficas(metodo="penalizacion_estatica"):
     """Genera graficas de evolucion de fitness."""
 
-    conexion_bd = database.conexion_comida_basedatos()
-    sujetos = cargar_sujetos()
+    comida_basedatos = database.comida_basedatos()
+    sujetos = database.sujetos_basedatos()
 
     lista_generaciones_sujeto = []
 
@@ -96,7 +94,7 @@ def generar_graficas(metodo="penalizacion_estatica"):
         soluciones_acumuladas = {}
 
         for seed in constantes.SEEDS:
-            resultado = ejecutar_algoritmo(metodo, conexion_bd, sujeto, seed)
+            resultado = ejecutar_algoritmo(metodo, comida_basedatos, sujeto, seed)
             sol_por_gen = calcular_fitness_por_generacion(resultado, metodo)
 
             for gen_idx, soluciones_objetivo in sol_por_gen.items():

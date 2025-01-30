@@ -8,14 +8,14 @@ from pymoo.core.problem import ElementwiseProblem
 from pymoo.operators.crossover.pntx import TwoPointCrossover
 from pymoo.config import Config
 
-from PYTHON.utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
-from PYTHON.utilidades.database import conexion_comida_basedatos
-from PYTHON.utilidades.constantes import *
-from PYTHON.algoritmos.operadores_custom import CustomIntegerRandomSampling, CustomMutation
+from src.utilidades.funciones_auxiliares import calculo_macronutrientes, filtrar_comida
+from src.utilidades.database import comida_basedatos
+from src.utilidades.constantes import *
+from src.utilidades.operadores_custom import CustomIntegerRandomSampling, CustomMutation
 
 Config.warnings['not_compiled'] = False
 
-comida_basedatos = conexion_comida_basedatos()
+comida_bd = comida_basedatos()
 
 
 def objetivo_calorias(calorias_diarias, objetivo_calorico):
@@ -96,10 +96,10 @@ def restriccion_alergia(alimento, grupos_alergia):
 class PlanningComida(ElementwiseProblem):
     """Clase que define el problema de planificacion de comida en base a objetivos y restricciones."""
     
-    def __init__(self, comida_basedatos, objetivo_calorias, edad, grupos_alergia, grupos_gusta, grupos_no_gusta):
+    def __init__(self, comida_bd, objetivo_calorias, edad, grupos_alergia, grupos_gusta, grupos_no_gusta):
 
-        super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=0, xl=0, xu=len(comida_basedatos)-1)  
-        self.comida_basedatos = comida_basedatos
+        super().__init__(n_var=NUM_GENES, n_obj=3, n_constr=0, xl=0, xu=len(comida_bd)-1)  
+        self.comida_bd = comida_bd
         self.objetivo_calorias = objetivo_calorias
         self.edad = edad
         self.grupos_alergia = grupos_alergia
@@ -144,7 +144,7 @@ class PlanningComida(ElementwiseProblem):
                 # Itera sobre cada alimento en la comida actual
                 for indice_alimento in range(num_alimentos):
 
-                    alimento = self.comida_basedatos[int(x[(dia * NUM_ALIMENTOS_DIARIO) + suma_num_alimentos + indice_alimento])]
+                    alimento = self.comida_bd[int(x[(dia * NUM_ALIMENTOS_DIARIO) + suma_num_alimentos + indice_alimento])]
 
                     # Suma las calorias y macronutrientes del alimento actual
                     calorias_diarias += alimento["calorias"]
@@ -187,12 +187,12 @@ class PlanningComida(ElementwiseProblem):
 
     def filtrar_comida(self, tipo):
         """Filtra la base de datos de comida segun el tipo de comida."""
-        return filtrar_comida(self.comida_basedatos, tipo, self.edad)    
+        return filtrar_comida(self.comida_bd, tipo, self.edad)    
             
 
-def ejecutar_algoritmo_genetico(comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta, seed):
+def ejecutar_algoritmo_genetico(comida_bd, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta, seed):
 
-    problema = PlanningComida(comida_basedatos, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta)
+    problema = PlanningComida(comida_bd, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta)
 
     # Definir direcciones de referencia para MOEA/D
     ref_dirs = get_reference_directions("incremental", 3, n_partitions=12)

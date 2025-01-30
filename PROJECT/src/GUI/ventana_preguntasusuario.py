@@ -11,7 +11,7 @@ from src.algoritmos.nsga2 import ag_nsga2_penalizacion_estatica
 
 
 # Conectar a la base de datos
-comida_basedatos = database.conexion_comida_basedatos()
+comida_bd = database.comida_basedatos()
 
 # Establecer como semilla la hora del sistema
 seed = int(time.time())
@@ -171,13 +171,13 @@ class VentanaCalorias:
         grupos_gusta = self.expandir_selecciones(self.lista_gusta)
         grupos_no_gusta = self.expandir_selecciones(self.lista_no_gusta)
         
-        resultado = ag_nsga2_penalizacion_estatica.ejecutar_algoritmo_genetico(comida_basedatos, calorias_ajustadas, self.edad.get(), grupos_alergia, grupos_gusta, grupos_no_gusta, seed)
+        resultado = ag_nsga2_penalizacion_estatica.ejecutar_algoritmo_genetico(comida_bd, calorias_ajustadas, self.edad.get(), grupos_alergia, grupos_gusta, grupos_no_gusta, seed)
 
         cv = resultado.F[:, 0]
         least_infeas = cv.argmin()
         x = resultado.X[least_infeas]
 
-        menu, datos_dia = funciones_auxiliares.traducir_solucion(x, comida_basedatos)
+        menu, datos_dia = funciones_auxiliares.traducir_solucion(x, comida_bd)
         
         self.root.withdraw()
         

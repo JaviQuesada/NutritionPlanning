@@ -8,22 +8,10 @@ import numpy as np
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from src.utilidades import database, constantes
-from src.algoritmos.spea2 import ag_spea2_separatista
+from src.algoritmos.nsga3 import ag_nsga3_penalizacion_estatica
 
 
-def cargar_sujetos():
-    """Devuelve los datos de los sujetos de prueba."""
-
-    return [
-        {'calorias': 2877.19, 'edad': 17, 'alergias': ['S', 'SE', 'SEA', 'SEC', 'SN', 'SNA', 'SNC'], 'gustos': ['AC', 'AD', 'MCA'], 'disgustos': ['J', 'JA', 'JC', 'JK', 'JM', 'JR', 'BR']},
-        {'calorias': 2567.85, 'edad': 30, 'alergias': ['A', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AI', 'AK', 'AM', 'AN', 'AO', 'AP', 'AS', 'AT'], 'gustos': ['BAE', 'FC', 'FE'], 'disgustos': ['C', 'CA', 'CD', 'CDE', 'CDH']},
-        {'calorias': 3102.84, 'edad': 40, 'alergias': ['PAC', 'PCA', 'SNC'], 'gustos': ['MAC', 'DAP', 'SEA'], 'disgustos': ['BH', 'BJS', 'MIG']},
-        {'calorias': 1710.50, 'edad': 55, 'alergias': ['F', 'FA', 'FC', 'FE'], 'gustos': ['AF', 'BNH'], 'disgustos': ['MB', 'QA', 'QC']},
-        {'calorias': 1401.30, 'edad': 72, 'alergias': ['BA', 'BAB', 'BAE', 'BAH', 'BAK', 'BAR', 'BH'], 'gustos': ['AM', 'JC'], 'disgustos': ['MG', 'MR', 'PAC']}
-    ]
-
-
-def calcular_datos_dia(solucion, conexion_bd, dia):
+def calcular_datos_dia(solucion, comida_bd, dia):
     """Calcula y devuelve las calorias y macronutrientes de una solucion especifica para un dia determinado."""
 
     calorias_dia, proteinas_dia, carbohidratos_dia, grasas_dia = 0, 0, 0, 0
@@ -32,7 +20,7 @@ def calcular_datos_dia(solucion, conexion_bd, dia):
     for comida in constantes.COMIDAS:
         for _ in range(comida["num_alimentos"]):
             idx = int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + suma_alimentos])
-            alimento = conexion_bd[idx]
+            alimento = comida_bd[idx]
             calorias_dia += alimento["calorias"]
             proteinas_dia += alimento["proteinas"]
             carbohidratos_dia += alimento["carbohidratos"]
@@ -42,33 +30,33 @@ def calcular_datos_dia(solucion, conexion_bd, dia):
     return calorias_dia, proteinas_dia, carbohidratos_dia, grasas_dia
 
 
-def verificar_restricciones(solucion, conexion_bd, calorias_objetivo, alergias):
+def verificar_restricciones(solucion, comida_bd, calorias_objetivo, alergias):
     """Verifica si una solucion cumple con las restricciones de calorias, macronutrientes y alergias."""
 
     cumple_calorias = cumple_macronutrientes = cumple_alergias = True
     for dia in range(constantes.NUM_DIAS):
 
-        calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, conexion_bd, dia)
+        calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, comida_bd, dia)
 
-        if ag_spea2_separatista.restriccion_calorias(calorias, calorias_objetivo) > 0:
+        if ag_nsga3_penalizacion_estatica.restriccion_calorias(calorias, calorias_objetivo) > 0:
             cumple_calorias = False
-        if ag_spea2_separatista.restriccion_macronutrientes(proteinas, carbohidratos, grasas) > 0:
+        if ag_nsga3_penalizacion_estatica.restriccion_macronutrientes(proteinas, carbohidratos, grasas) > 0:
             cumple_macronutrientes = False
-        if any(ag_spea2_separatista.restriccion_alergia(conexion_bd[int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + i])], alergias) > 0 
+        if any(ag_nsga3_penalizacion_estatica.restriccion_alergia(comida_bd[int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + i])], alergias) > 0 
                for i in range(constantes.NUM_ALIMENTOS_DIARIO)):
             cumple_alergias = False
 
     return {'cumple_restriccion_calorias': cumple_calorias, 'cumple_restriccion_macronutrientes': cumple_macronutrientes, 'cumple_restriccion_alergia': cumple_alergias}
 
 
-def procesar_solucion(solucion, conexion_bd, calorias_objetivo, gustos, disgustos, alergias):
+def procesar_solucion(solucion, comida_bd, calorias_objetivo, gustos, disgustos, alergias):
     """Calcula el fitness y verifica restricciones para una solucion. Devuelve diccionario para JSON"""
 
-    fitness_calorias = calcular_fitness_acumulado(solucion, conexion_bd, calorias_objetivo, ag_spea2_separatista.objetivo_calorias)
-    fitness_macronutrientes = calcular_fitness_acumulado(solucion, conexion_bd, None, ag_spea2_separatista.objetivo_macronutrientes)
-    fitness_preferencia = calcular_fitness_preferencia(solucion, conexion_bd, gustos, disgustos)
+    fitness_calorias = calcular_fitness_acumulado(solucion, comida_bd, calorias_objetivo, ag_nsga3_penalizacion_estatica.objetivo_calorias)
+    fitness_macronutrientes = calcular_fitness_acumulado(solucion, comida_bd, None, ag_nsga3_penalizacion_estatica.objetivo_macronutrientes)
+    fitness_preferencia = calcular_fitness_preferencia(solucion, comida_bd, gustos, disgustos)
     
-    restricciones_cumplidas = verificar_restricciones(solucion, conexion_bd, calorias_objetivo, alergias)
+    restricciones_cumplidas = verificar_restricciones(solucion, comida_bd, calorias_objetivo, alergias)
     
     return {
         'solucion': '[' + ', '.join(map(str, solucion)) + ']',
@@ -82,8 +70,8 @@ def ejecutar_y_guardar_resultados():
     Calcula resultados y soluciones factibles.
     Guarda resultados en JSON."""
 
-    conexion_bd = database.conexion_comida_basedatos()
-    sujetos = cargar_sujetos()
+    comida_bd = database.comida_basedatos()
+    sujetos = database.sujetos_basedatos()
 
     resultados_finales = []
     tiempos_totales = []
@@ -92,19 +80,15 @@ def ejecutar_y_guardar_resultados():
 
     # Itera cada sujeto
     for indice_sujeto, sujeto in enumerate(sujetos, start=1):
-        calorias_objetivo = sujeto['calorias']
-        gustos = sujeto['gustos']
-        disgustos = sujeto['disgustos']
-        alergias = sujeto['alergias']
 
         # Diccionario para almacenar resultados de cada sujeto
         resultados_sujeto = {
             'sujeto_id': indice_sujeto,  
-            'calorias': calorias_objetivo,
+            'calorias': sujeto['calorias'],
             'edad': sujeto['edad'],
-            'alergias': '[' + ', '.join(alergias) + ']',  
-            'gustos': '[' + ', '.join(gustos) + ']',      
-            'disgustos': '[' + ', '.join(disgustos) + ']', 
+            'alergias': '[' + ', '.join(sujeto['alergias']) + ']',  
+            'gustos': '[' + ', '.join(sujeto['gustos']) + ']',      
+            'disgustos': '[' + ', '.join(sujeto['disgustos']) + ']', 
             'soluciones_por_seed': [],
             'tiempo_medio_ejecucion': 0,
             'total_soluciones': 0,
@@ -119,8 +103,8 @@ def ejecutar_y_guardar_resultados():
         for seed in constantes.SEEDS:
 
             # Ejecuta algoritmo
-            resultado = ag_spea2_separatista.ejecutar_algoritmo_genetico(
-                conexion_bd, calorias_objetivo, sujeto['edad'], alergias, gustos, disgustos, seed
+            resultado = ag_nsga3_penalizacion_estatica.ejecutar_algoritmo_genetico(
+                comida_bd, sujeto['calorias'], sujeto['edad'], sujeto['alergias'], sujeto['gustos'], sujeto['disgustos'], seed
             )
             tiempo = resultado.exec_time
             tiempos_ejecucion.append(tiempo)
@@ -141,7 +125,7 @@ def ejecutar_y_guardar_resultados():
                 # Itera cada solucion
                 for solucion in resultado.X.tolist():
                     solucion_info = procesar_solucion(
-                        solucion, conexion_bd, calorias_objetivo, gustos, disgustos, alergias
+                        solucion, comida_bd, sujeto['calorias'], sujeto['gustos'], sujeto['disgustos'], sujeto['alergias']
                     )
                     soluciones_por_seed['soluciones'].append(solucion_info)
 
@@ -171,7 +155,7 @@ def ejecutar_y_guardar_resultados():
 
     # Resultados que se guardan en JSON
     resultados_a_guardar = {
-        'descripcion': "Cruce : TwoPointCrossover , 0.9 --- Mutacion : 1/77 --- Algoritmo : MOEAD --- n_neighbors : 30 --- prob_neighbor_mating : 0.9 --- incremental(18)",
+        'descripcion': "Cruce : TwoPointCrossover , 0.9 --- Mutacion : 1/77 --- Algoritmo : NSGA-III --- Incremental(18)",
         'resultados': resultados_finales,
         'tiempo_medio_total': f"{tiempo_medio_total:.2f}",
         'total_soluciones': total_de_soluciones,
@@ -179,7 +163,7 @@ def ejecutar_y_guardar_resultados():
     }
 
     # Guardar los resultados en un archivo JSON
-    ruta_resultados = 'PYTHON/resultados/resultados_variacion_algoritmo/ag_spea2/direcciones_referencia/incremental/direcciones_referencia_alta.json'
+    ruta_resultados = 'PROJECT/src/test/resultados/tablas/ag_nsga3/penalizacion_estatica/direcciones_referencia_incremental_alto.json'
     os.makedirs(os.path.dirname(ruta_resultados), exist_ok=True)
     with open(ruta_resultados, 'w') as archivo_json:
         json.dump(resultados_a_guardar, archivo_json, indent=4)
@@ -187,26 +171,26 @@ def ejecutar_y_guardar_resultados():
     print(f"Archivo JSON de resultados guardado con éxito en {ruta_resultados}")
 
 
-def calcular_fitness_acumulado(solucion, conexion_bd, calorias_objetivo, funcion_objetivo):
+def calcular_fitness_acumulado(solucion, comida_bd, calorias_objetivo, funcion_objetivo):
     """Calcula la desviación total de calorías o macronutrientes de una solucion"""
 
     total_desviacion = 0
     for dia in range(constantes.NUM_DIAS):
-        calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, conexion_bd, dia)
+        calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, comida_bd, dia)
 
-        if funcion_objetivo == ag_spea2_separatista.objetivo_calorias:
+        if funcion_objetivo == ag_nsga3_penalizacion_estatica.objetivo_calorias:
             total_desviacion += funcion_objetivo(calorias, calorias_objetivo)
-        elif funcion_objetivo == ag_spea2_separatista.objetivo_macronutrientes:
+        elif funcion_objetivo == ag_nsga3_penalizacion_estatica.objetivo_macronutrientes:
             total_desviacion += funcion_objetivo(proteinas, carbohidratos, grasas)
 
     return total_desviacion
 
 
-def calcular_fitness_preferencia(solucion, conexion_bd, gustos, disgustos):
+def calcular_fitness_preferencia(solucion, comida_bd, gustos, disgustos):
     """Calcula y devuelve la penalizacion total por preferencia"""
 
     return sum(
-        ag_spea2_separatista.objetivo_preferencia_grupo(conexion_bd[int(alimento)], gustos, disgustos) 
+        ag_nsga3_penalizacion_estatica.objetivo_preferencia_grupo(comida_bd[int(alimento)], gustos, disgustos) 
         for alimento in solucion
     )
 

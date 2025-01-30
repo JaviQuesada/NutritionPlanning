@@ -1,9 +1,9 @@
 # funciones_auxiliares.py
 
-from src.utilidades.database import conexion_comida_basedatos
+from src.utilidades.database import comida_basedatos
 from src.utilidades.constantes import GruposComida, DIAS_SEMANA, COMIDAS
 
-comida_basedatos = conexion_comida_basedatos()
+comida_bd = comida_basedatos()
 
 def calculo_macronutrientes(proteinas, carbohidratos, grasas):
     """Calcula el porcentaje de calorias provenientes de cada macronutriente."""
@@ -21,13 +21,13 @@ def calculo_macronutrientes(proteinas, carbohidratos, grasas):
     return porcentaje_proteinas, porcentaje_carbohidratos, porcentaje_grasas
 
 
-def filtrar_comida(comida_basedatos, tipo, edad):
+def filtrar_comida(comida_bd, tipo, edad):
     """Filtra los alimentos segun el tipo de comida y la edad del usuario."""
 
     match tipo:
         case "almuerzo_cena":
             return [
-                i for i, item in enumerate(comida_basedatos) if not item["grupo"].startswith(
+                i for i, item in enumerate(comida_bd) if not item["grupo"].startswith(
                     (
                         GruposComida.Frutas.JUGOS_DE_FRUTAS[0],  # "FC"
                         GruposComida.Frutas.ZUMOS[0],  # "FE"
@@ -49,7 +49,7 @@ def filtrar_comida(comida_basedatos, tipo, edad):
         
         case "bebidas":
             bebidas = [
-                i for i, item in enumerate(comida_basedatos) if item["grupo"].startswith(
+                i for i, item in enumerate(comida_bd) if item["grupo"].startswith(
                     (
                         GruposComida.Bebidas.BEBIDAS[0],  # "P"
                         GruposComida.Frutas.JUGOS_DE_FRUTAS[0],  # "FC"
@@ -61,7 +61,7 @@ def filtrar_comida(comida_basedatos, tipo, edad):
             ]
             if edad >= 18:
                 bebidas_alcoholicas = [
-                    i for i, item in enumerate(comida_basedatos) if item["grupo"].startswith(
+                    i for i, item in enumerate(comida_bd) if item["grupo"].startswith(
                         GruposComida.Alcohol.ALCOHOL[0]  # "Q"
                     )
                 ]
@@ -70,7 +70,7 @@ def filtrar_comida(comida_basedatos, tipo, edad):
         
         case "desayuno":
             return [
-                i for i, item in enumerate(comida_basedatos) if item["grupo"].startswith(
+                i for i, item in enumerate(comida_bd) if item["grupo"].startswith(
                 (
                     GruposComida.Cereales.CEREALES[0],  # "A"
                     GruposComida.Huevos.HUEVOS[0],  # "C"
@@ -86,7 +86,7 @@ def filtrar_comida(comida_basedatos, tipo, edad):
         
         case "bebida_desayuno":
             return [
-                i for i, item in enumerate(comida_basedatos) if item["grupo"].startswith(
+                i for i, item in enumerate(comida_bd) if item["grupo"].startswith(
                     (
                         GruposComida.Lacteos.LecheVaca.LECHE_VACA[0],  # "BA"
                         GruposComida.Lacteos.BEBIDAS_LACTEAS[0],  # "BH"
@@ -99,7 +99,7 @@ def filtrar_comida(comida_basedatos, tipo, edad):
         
         case "snacks":
             return [
-                i for i, item in enumerate(comida_basedatos) if item["grupo"].startswith(
+                i for i, item in enumerate(comida_bd) if item["grupo"].startswith(
                     (
                         GruposComida.Frutas.FRUTAS[0],  # "F"
                         GruposComida.Azucares.AZUCARES[0]  # "S"
@@ -108,7 +108,7 @@ def filtrar_comida(comida_basedatos, tipo, edad):
             ]
 
 
-def traducir_solucion(solucion, comida_basedatos):
+def traducir_solucion(solucion, comida_bd):
     """Convierte la solucion de numeros en una lista de alimentos con sus nutrientes"""
 
     menu = {}
@@ -128,7 +128,7 @@ def traducir_solucion(solucion, comida_basedatos):
                 # Traduce el indice a un alimento concreto
                 if indice < len(solucion):
                     idx = int(solucion[indice])  
-                    alimento = comida_basedatos[idx]
+                    alimento = comida_bd[idx]
                     nombre_completo = f"- {alimento['nombre']} ({alimento['grupo']})"
                     alimentos.append(nombre_completo)
 

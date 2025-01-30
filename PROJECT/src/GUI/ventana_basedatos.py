@@ -16,7 +16,7 @@ class BaseDatosApp:
         self.root.minsize(400, 300)
 
         # Conexion a la base de datos
-        datos = database.conexion_comida_basedatos()
+        datos = database.comida_basedatos()
 
         datos_ordenados = sorted(datos, key=lambda item: item["grupo"])
 
