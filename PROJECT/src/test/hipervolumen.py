@@ -21,19 +21,14 @@ def obtener_archivos_json(base_path):
         for file in files:
             if file.endswith(".json"):
                 archivos_json.append(os.path.join(root, file))
-
-    for archivo in archivos_json:
-        print(archivo)
-        # print("\n")
     
-
     return archivos_json
 
 # Lista de archivos JSON actualizada dinámicamente
 ARCHIVOS_JSON = obtener_archivos_json(BASE_PATH)
 
 # Ruta de salida
-RUTA_SALIDA = 'PYTHON/resultados/resultados_variacion_algoritmo/ag_moead/direcciones_referencia/incremental/hipervolumenes/hipervolumenes_moead_direcciones_referencia_incremental_baja.json'
+RUTA_SALIDA = 'PROJECT/src/test/resultados/tablas/ag_nsga3/penalizacion_estatica/das_dennis/hipervolumenes/hipervolumenes_nsga3_das_dennis_bajo.json'
 
 
 def leer_json(ruta_archivo):
@@ -165,7 +160,7 @@ def main():
         punto_referencia = calcular_punto_referencia(ARCHIVOS_JSON)
         if punto_referencia is not None:
             hipervolumenes = calcular_hipervolumen_por_seed(
-                'PYTHON/resultados/resultados_variacion_algoritmo/ag_moead/direcciones_referencia/incremental/direcciones_referencia_baja.json',
+                'PROJECT/src/test/resultados/tablas/ag_nsga3/penalizacion_estatica/das_dennis/direcciones_referencia_das_dennis_bajo.json',
                 punto_referencia
             )
             guardar_en_json(hipervolumenes, RUTA_SALIDA)

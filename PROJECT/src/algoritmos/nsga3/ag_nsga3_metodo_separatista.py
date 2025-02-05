@@ -194,7 +194,7 @@ def ejecutar_algoritmo_genetico(comida_bd, objetivo_calorico, edad, grupos_alerg
 
     problema = PlanningComida(comida_bd, objetivo_calorico, edad, grupos_alergia, grupos_gusta, grupos_no_gusta)
 
-    ref_dirs = get_reference_directions("incremental", 3, n_partitions=5)
+    ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=18)
 
     pop_size = max(100, len(ref_dirs))
 

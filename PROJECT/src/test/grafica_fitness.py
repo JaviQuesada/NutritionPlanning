@@ -8,15 +8,16 @@ import matplotlib.pyplot as plt
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from src.utilidades import database, constantes
-from src.algoritmos.spea2 import ag_spea2_estatica, ag_spea2_separatista
+from src.algoritmos.spea2 import ag_spea2_estatica
+from src.algoritmos.nsga3 import ag_nsga3_metodo_separatista
 
 
-def ejecutar_algoritmo(metodo, comida_basedatos, sujeto, seed):
+def ejecutar_algoritmo(metodo, comida_bd, sujeto, seed):
     """Ejecuta el algoritmo segun el metodo elegido."""
 
     if metodo == "penalizacion_estatica":
         return ag_spea2_estatica.ejecutar_algoritmo_genetico(
-            comida_basedatos=comida_basedatos,
+            comida_bd=comida_bd,
             objetivo_calorico=sujeto['calorias'],
             edad=sujeto['edad'],
             grupos_alergia=sujeto['alergias'],
@@ -25,8 +26,8 @@ def ejecutar_algoritmo(metodo, comida_basedatos, sujeto, seed):
             seed=seed
         )
     elif metodo == "separatista":
-        return ag_spea2_separatista.ejecutar_algoritmo_genetico(
-            comida_basedatos=comida_basedatos,
+        return ag_nsga3_metodo_separatista.ejecutar_algoritmo_genetico(
+            comida_bd=comida_bd,
             objetivo_calorico=sujeto['calorias'],
             edad=sujeto['edad'],
             grupos_alergia=sujeto['alergias'],
@@ -85,7 +86,7 @@ def calcular_media_por_generacion(fitness_por_generacion):
 def generar_graficas(metodo="penalizacion_estatica"):
     """Genera graficas de evolucion de fitness."""
 
-    comida_basedatos = database.comida_basedatos()
+    comida_bd = database.comida_basedatos()
     sujetos = database.sujetos_basedatos()
 
     lista_generaciones_sujeto = []
@@ -94,7 +95,7 @@ def generar_graficas(metodo="penalizacion_estatica"):
         soluciones_acumuladas = {}
 
         for seed in constantes.SEEDS:
-            resultado = ejecutar_algoritmo(metodo, comida_basedatos, sujeto, seed)
+            resultado = ejecutar_algoritmo(metodo, comida_bd, sujeto, seed)
             sol_por_gen = calcular_fitness_por_generacion(resultado, metodo)
 
             for gen_idx, soluciones_objetivo in sol_por_gen.items():
@@ -128,7 +129,7 @@ def generar_graficas(metodo="penalizacion_estatica"):
         plt.legend()
         plt.grid(True)
 
-        nombre_archivo = f"fitness_{metodo}_{obj_nombre.lower()}.png"
+        nombre_archivo = f"fitness_nsga3_{metodo}_das_dennis_{obj_nombre.lower()}.png"
         plt.savefig(nombre_archivo)
         plt.show()
 
