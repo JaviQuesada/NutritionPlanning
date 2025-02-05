@@ -214,10 +214,36 @@ Este algoritmo sigue el funcionamiento general de un algoritmo genético, pero p
   \label{fig:nsga2}
 \end{figure}
 
+\subsubsection{Non-dominated Sorting Genetic Algorithm III (NSGA-III)}
+\label{ch:nsga3}
+
+Se trata de una extensión del \textit{NSGA-II} para problemas con más de 2 objetivos, donde este último pierde eficiencia. Este algoritmo mantiene la estrategia de ordenamiento no dominado de \textit{NSGA-II}, pero introduce un nuevo método de selección basado en direcciones de referencia, que mejora la distribución de las soluciones en el frente de Pareto.
+
+En vez de usar \textit{crowding distance}, este algoritmo utiliza direcciones de referencia, que son vectores distribuidos en el espacio objetivo y que sirven como guías para repartir las soluciones, como se muestra en la figura \ref{fig:nsga3}. Cada solución se asigna a la dirección más cercana. Primero se buscan las direcciones de referencia que aún no tienen ninguna solución y se selecciona la solución más cercana a cada una de ellas, lo que ayuda a que todas las zonas del frente tenga al menos una solución. Después, se seleccionan las soluciones más cercanas a cada dirección de referencia que ya tiene asignaciones. En caso de empate, la solución se escoge al azar.
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}{0.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/nsga3_1.png}
+      \caption{Asignación de soluciones a direcciones de referencia.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.45\textwidth}
+      \centering
+      \includegraphics[width=\linewidth]{figures/nsga3_2.png}
+      \caption{Selección de soluciones para la siguiente generación.}
+  \end{subfigure}
+  \caption{Direcciones de referencia en NSGA-III. Fuente \cite{pymoo_nsga3}}
+  \label{fig:nsga3}
+\end{figure}
+
+Para generar estas direcciones de referencia existen distintos métodos, incluyendo \textit{"das-dennis"} e \textit{"incremental"}. El método \textit{das-dennis} distribuye uniformemente las direcciones en el espacio objetivo, dividiéndolo en particiones equitativas. Por otro lado, el método \textit{incremental} ajusta las direcciones de referencia de manera progresiva, permitiendo una mayor concentración en las regiones más prometedoras del frente de Pareto.
+
 \subsubsection{Strength Pareto Evolutionary Algorithm 2 (SPEA2)}
 \label{ch:spea2}
 
-El \textit{SPEA2} también está optimizado para problemas multi-objetivo y, al igual que el NSGA-II, tiene modificaciones respecto al funcionamiento básico del algoritmo genético.
+El \textit{SPEA2} también está optimizado para problemas multi-objetivo y, al igual que \textit{NSGA-II} o \textit{NSGA-III}, tiene modificaciones respecto al funcionamiento básico del algoritmo genético.
 
 En la evaluación, a cada solución se le asigna una fuerza que refleja el número de soluciones que domina, como se expone en la figura \ref{fig:spea2}. Tras esto, se usa una medida de densidad para evaluar cuán poblada está la área alrededor de cada solución. El fitness se calcula sumando la fuerza y esta medida de densidad, lo que ayuda a la diversidad de la población. En la selección se escogen aquellas soluciones que mayor fitness presentan.
 
@@ -246,13 +272,11 @@ Similar al \textit{NSGA-II}, este algoritmo escoge los mejores individuos de la 
 \end{lstlisting}
 \end{small}
 
-Para generar estas direcciones existen distintos métodos, incluyendo \textit{''das-dennis''} e \textit{''incremental''}. El método \textit{''das-dennis''} es usado para distribuir uniformemente las direcciones, dividiendo el espacio en particiones equitativas. Mientras tanto, el método \textit{''incremental''} ajusta las direcciones de referencia gradualmente, permitiendo una adaptación más precisa a las áreas más prometedoras del espacio de búsqueda.
-
 Para cada subproblema, se selecciona un número determinado de subproblemas más cercanos. Estos subproblemas forman el vecindario del primero, como se ilustra en la figura \ref{fig:moead}. Existe una probabilidad \( P_{cv} \) de que una solución se cruce con otra de su mismo vecindario. Compartir información entre vecinos ayuda a generar soluciones que cumplan cada uno de los subproblemas, por lo que son útiles para mejorar la calidad y la diversidad.~\cite{moead_pymoo}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.73\textwidth]{figures/moead.png}
+  \includegraphics[width=0.7\textwidth]{figures/moead.png}
   \caption{Vecindarios en MOEA/D. Fuente \cite{moead_imagen}}
   \label{fig:moead}
 \end{figure}

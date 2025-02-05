@@ -9,6 +9,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}   
     \specialrule{1.3pt}{0pt}{0pt}
@@ -55,6 +56,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -115,6 +117,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -158,6 +161,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -214,6 +218,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -260,6 +265,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -318,11 +324,292 @@
 \section{Algoritmos multi-objetivo}
 \label{ch:algoritmos-multiobjetivo-anexo}
 
+\subsection{NSGA3}
+\label{ch:ag-nsga3-anexo}
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecuci\'on (s)} & \textbf{Media de Soluciones No Dominadas} & \textbf{N\'umero de Ejecuciones con Soluciones} & \textbf{Success Rate} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}} & 1 & 6.84 & 6.86 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 6.94 & 7.10 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 6.63 & 6.97 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 6.57 & 8.10 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.77 & 7.87 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}} & 1 & 6.22 & 14.03 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 6.34 & 13.86 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 6.29 & 13.13 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 6.34 & 16.71 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.55 & 19.16 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}} & 1 & 9.86 & 23.48 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 9.89 & 23.23 & 30 & 96.77\% \\
+    \cline{2-6}
+    & 3 & 9.84 & 23.13 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 9.85 & 22.61 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 10.27 & 24.39 & 31 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en NSGA-III (separatista): direcciones de referencia en Uniform.}
+    \label{table:resultados-nsga3-separatista-direcciones-uniform-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecuci\'on (s)} & \textbf{Media de Soluciones No Dominadas} & \textbf{Media de Soluciones Factibles} & \textbf{Success Rate} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}} & 1 & 6.10 & 4.81 & 4.16 & 86.58\% \\
+    \cline{2-6}
+    & 2 & 6.37 & 3.26 & 2.55 & 78.22\% \\
+    \cline{2-6}
+    & 3 & 6.32 & 4.97 & 4.48 & 90.26\% \\
+    \cline{2-6}
+    & 4 & 6.25 & 6.23 & 6.23 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.21 & 7.84 & 7.84 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}} & 1 & 6.15 & 6.13 & 5.00 & 81.58\% \\
+    \cline{2-6}
+    & 2 & 6.27 & 5.42 & 4.10 & 75.60\% \\
+    \cline{2-6}
+    & 3 & 6.20 & 9.32 & 9.00 & 96.54\% \\
+    \cline{2-6}
+    & 4 & 6.18 & 13.52 & 13.52 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.27 & 17.74 & 17.74 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}} & 1 & 9.87 & 16.55 & 16.55 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 10.04 & 13.90 & 13.68 & 98.38\% \\
+    \cline{2-6}
+    & 3 & 9.87 & 15.71 & 15.68 & 99.79\% \\
+    \cline{2-6}
+    & 4 & 9.87 & 19.16 & 19.16 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 10.05 & 22.26 & 22.26 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en NSGA-III (estática): direcciones de referencia en Uniform.}
+    \label{table:resultados-nsga3-estatica-direcciones-uniform-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecuci\'on (s)} & \textbf{Media de Soluciones No Dominadas} & \textbf{N\'umero de Ejecuciones con Soluciones} & \textbf{Success Rate} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}} & 1 & 7.74 & 9.86 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 8.45 & 9.55 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 7.45 & 9.77 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 8.36 & 11.32 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 7.17 & 12.58 & 31 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}} & 1 & 12.15 & 27.74 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 12.40 & 24.32 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 12.34 & 23.13 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 11.78 & 24.19 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 13.62 & 25.58 & 31 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}} & 1 & 24.29 & 39.97 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 24.62 & 32.87 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 24.42 & 33.35 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 25.04 & 33.61 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 26.83 & 32.35 & 31 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en NSGA-III (separatista): direcciones de referencia en Incremental.}
+    \label{table:resultados-nsga3-separatista-direcciones-incremental-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecuci\'on (s)} & \textbf{Media de Soluciones No Dominadas} & \textbf{Media de Soluciones Factibles} & \textbf{Success Rate} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}} & 1 & 7.35 & 5.26 & 4.42 & 84.05\% \\
+    \cline{2-6}
+    & 2 & 7.52 & 4.16 & 3.29 & 79.07\% \\
+    \cline{2-6}
+    & 3 & 7.42 & 7.55 & 7.35 & 97.44\% \\
+    \cline{2-6}
+    & 4 & 7.42 & 9.32 & 9.32 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 7.52 & 11.77 & 11.77 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}} & 1 & 13.37 & 18.55 & 18.42 & 99.30\% \\
+    \cline{2-6}
+    & 2 & 13.37 & 16.16 & 16.13 & 99.80\% \\
+    \cline{2-6}
+    & 3 & 12.30 & 19.90 & 19.90 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 12.22 & 20.52 & 20.52 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 12.41 & 23.74 & 23.74 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}} & 1 & 26.67 & 28.58 & 28.58 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 27.75 & 25.61 & 25.61 & 100.00\% \\
+    \cline{2-6}
+    & 3 & 28.00 & 29.13 & 29.13 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 27.55 & 30.16 & 30.16 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 28.03 & 29.68 & 29.68 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en NSGA-III (estática): direcciones de referencia en Incremental.}
+    \label{table:resultados-nsga3-estatica-direcciones-incremental-anexo}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecuci\'on (s)} & \textbf{Media de Soluciones No Dominadas} & \textbf{N\'umero de Ejecuciones con Soluciones} & \textbf{Success Rate} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}} & 1 & 6.19 & 6.86 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 6.30 & 7.10 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 6.25 & 6.97 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 6.15 & 8.10 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.31 & 7.87 & 31 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}} & 1 & 6.29 & 14.03 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 2 & 6.38 & 13.86 & 29 & 93.55\% \\
+    \cline{2-6}
+    & 3 & 6.34 & 13.13 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 6.37 & 16.71 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 6.58 & 19.16 & 31 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}} & 1 & 10.24 & 23.48 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 10.35 & 23.23 & 30 & 96.77\% \\
+    \cline{2-6}
+    & 3 & 10.33 & 23.13 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 4 & 10.30 & 22.61 & 31 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 10.66 & 24.39 & 31 & 100.00\% \\
+    \cline{2-6}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en NSGA-III (separatista): direcciones de referencia en Das-dennis.}
+    \label{table:resultados-nsga3-separatista-direcciones-das-dennis-anexo}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \scriptsize
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    \specialrule{1.3pt}{0pt}{0pt}
+    \textbf{Direcciones de Referencia} & \textbf{Sujeto} & \textbf{Tiempo Medio de Ejecución (s)} & \textbf{Media de Soluciones No Dominadas} & \textbf{Media de Soluciones Factibles} & \textbf{Success Rate} \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Bajo (5)}} & 1 & 7.22 & 4.81 & 4.16 & 86.58\% \\
+    \cline{2-6}
+    & 2 & 7.15 & 3.26 & 2.55 & 78.22\% \\
+    \cline{2-6}
+    & 3 & 6.61 & 4.97 & 4.48 & 90.26\% \\
+    \cline{2-6}
+    & 4 & 7.07 & 6.23 & 6.23 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 7.32 & 7.84 & 7.84 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Medio (12)}} & 1 & 6.80 & 6.13 & 5.00 & 81.58\% \\
+    \cline{2-6}
+    & 2 & 6.79 & 5.42 & 4.10 & 75.60\% \\
+    \cline{2-6}
+    & 3 & 6.94 & 9.32 & 9.00 & 96.54\% \\
+    \cline{2-6}
+    & 4 & 6.84 & 13.52 & 13.52 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 7.05 & 17.74 & 17.74 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \multirow{5}{*}{\textbf{Alto (18)}} & 1 & 10.61 & 16.55 & 16.55 & 100.00\% \\
+    \cline{2-6}
+    & 2 & 11.23 & 13.90 & 13.68 & 98.38\% \\
+    \cline{2-6}
+    & 3 & 11.45 & 15.71 & 15.68 & 99.79\% \\
+    \cline{2-6}
+    & 4 & 11.14 & 19.16 & 19.16 & 100.00\% \\
+    \cline{2-6}
+    & 5 & 11.17 & 22.26 & 22.26 & 100.00\% \\
+    \specialrule{1.3pt}{0pt}{0pt}
+    \end{tabularx}
+    \end{adjustbox}
+    \caption{Resultados en NSGA-III (estática): direcciones de referencia en Das-dennis.}
+    \label{table:resultados-nsga3-estatica-direcciones-das-dennis-anexo}
+\end{table}
+
 \subsection{SPEA2}
 \label{ch:ag-spea2-anexo}
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -361,6 +648,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -407,6 +695,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -453,6 +742,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}
@@ -487,6 +777,7 @@
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     \specialrule{1.3pt}{0pt}{0pt}

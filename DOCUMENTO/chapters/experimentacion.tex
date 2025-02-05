@@ -1,8 +1,20 @@
-\chapter{Experimentación}
-\label{ch:experimentacion}
+\chapter{Tests}
+\label{ch:tests}
 
 Se han creado 5 sujetos de prueba con diferentes características para la experimentación. Dado que los algoritmos son estocásticos, se seleccionaron 31 semillas distintas para garantizar la reproducibilidad de las ejecuciones. Por lo tanto, se han realizado 155 tests por cada configuración. En el anexo \ref{ch:entorno-sujetos} se encuentran detallados todos los sujetos de prueba, los \textit{seeds} y el entorno usado para la ejecución de las pruebas.
 
+Para trabajar con los sujetos, y poder añadir más en el futuro sin tocar el código fuente, se ha creado una tabla \textit{''sujetos''} en la base de datos, cuyos campos son: \textit{''id''}, \textit{''peso''}, \textit{''altura''}, \textit{''edad''}, \textit{''sexo''} y \textit{''actividad''}. Estos dos últimos son de tipo \textit{''enum''} para que solo puedan tener valores predefinidos, explicados en el apartado \ref{ch:calculo-calorías}. Para visualizar las calorías correspondientes a cada sujeto se ha establecido una vista \textit{''sujeto\_calorias''}, que realiza los cálculos necesarios a partir de los datos de la tabla \textit{''sujetos''}, lo que permite visualizar fácilmente el objetivo calórico de cada individuo de prueba.
+
+Se ha diseñado un modelo de relaciones \textit{N:N}, donde los sujetos tienen una relación con los grupos de alimentos. Debido a que cada sujeto puede gustarle o ser alérgico a varios grupos de alimentos, se han creado tres tablas intermedias: \textit{''sujeto\_gustos''}, \textit{''sujeto\_disgustos''} y \textit{''sujeto\_alergias''}. Las 3 tablas tienen un campo que representa al sujeto y otro al grupo de comida.
+
+En la figura \ref{fig:sujetos-prueba} se muestra el resultado de la consulta que recupera toda la información asociada a los sujetos de prueba creados.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/sujetos_prueba.png}
+    \caption{Sujetos de prueba.}
+    \label{fig:sujetos-prueba}
+\end{figure}
+\newpage
 El primer paso fue realizar un análisis de sensibilidad. Se probaron diferentes valores para cada hiperparámetro (tipos de operadores, probabilidad, tamaño de la población, ...) y se han comparado para poder encontrar la mejor configuración posible.
 
 Para comparar conjuntos de resultados se han usado dos métodos. El primero, \textit{success rate}, mide la viabilidad de cada configuración, evaluando el número de soluciones factibles que propone. La mejor configuración es la que mayor tasa de éxito tiene.
@@ -10,7 +22,7 @@ Para comparar conjuntos de resultados se han usado dos métodos. El primero, \te
 El otro método para poder hacer comparaciones entre las configuraciones de un problema multiobjetivo es calculando el \textit{hipervolumen}, que evalúa la calidad de un conjunto de soluciones. Mide el volumen de la región del espacio que está dominada por las soluciones del conjunto y una referencia externa. Cuanto mayor sea, mejor será la calidad de las soluciones y la diversidad.~\cite{pymoo2024hypervolume}. Solo se han calculado los hipervolumenes de las soluciones factibles, eliminando las que no cumplen las restricciones.
 
 Para comparar hipervolumenes se hace uso de un test de significatividad estadística. Se trata de una prueba estadística que propone una hipótesis nula (\(H_0\) ), es decir, que ambos conjuntos provienen de la misma distribución, ya que no existe una diferencia significativa entre las muestras. El test devuelve un \textit{''p\_value''} que señala qué tan probable es \(H_0\). Si el valor \textit{p} es inferior a un umbral ($\alpha$), que suele ser 0.05, se puede rechazar \(H_0\). Esto quiere decir que hay una probabilidad menor del 5\% de que dos muestras vengan de la misma distribución.
-\newpage
+
 Rechazar \(H_0\) proporciona evidencia en contra de la hipótesis y que, efectivamente, existe una diferencia significativa entre los conjuntos. Sin embargo, no rechazar \(H_0\) deja en un estado de incertidumbre y solo indica que no se tiene suficiente evidencia para descartarla.
 
 Según el número de conjuntos a comparar se pueden usar diversos tests no paramétricos. En este caso, este trabajo se ha centrado en dos.
@@ -34,6 +46,7 @@ Las tablas del método separatista presentan modificaciones, ya que todas las so
 
 \begin{table}[H]
     \centering
+    \scriptsize
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}c|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}   
     \specialrule{1.3pt}{0pt}{0pt}
@@ -87,6 +100,16 @@ La comparación de algoritmos se realiza entre el método separatista y la penal
 En la tabla \ref{table:comparacion-manejos-restricciones-grafico} se muestra de manera gráfica las conclusiones que se obtienen tras la comparación de los métodos. Como se ha explicado,  la calidad de las soluciones obtenidas con la penalización estática y el método separatista es prácticamente igual. En cuanto a la estabilidad, la penalización estática presenta un \textit{success rate} más cercano al 100\% en los sujetos 1, 2 y 3 respecto al método separatista. En cambio, en los tiempos de ejecución destaca el método separatista, que es, de media, 1 segundo más rápido que el otro procedimiento.
 
 Por lo tanto, no es posible determinar cuál es el mejor método de manejo de restricciones con las pruebas realizadas con el algoritmo multiobjetivo NSGA-II. Ambos métodos van a ser usados en las pruebas de comparación de algoritmos para comprender la configuración de parámetros óptima para el proyecto.
+\begin{center}
+    {\color{red} \Large /// TODO: Apéndice de fitness (incluyendo NSGA3)///}
+\end{center}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/graficas/nsga2_estatica/fitness_nsga2_penalizacion_estatica_calorías.png}
+    \caption{Fitness NSGA-II. Objetivo calorías.}
+    \label{fig:sujetos}
+\end{figure}
 
 \renewcommand{\arraystretch}{1.5}
 

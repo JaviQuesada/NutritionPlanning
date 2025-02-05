@@ -46,7 +46,7 @@ Dentro del gestor, lo primero que se debe hacer es crear la base de datos. Se ha
 
 \newpage
 
-Después de configurar la base de datos, se debe crear una tabla con los campos donde se almacenarán los valores. Mostrando en el listado \ref{lst:tabla} el código ejecutado, esta será la única tabla necesaria a lo largo del proyecto.
+Después de configurar la base de datos, se debe crear una tabla con los campos donde se almacenarán los valores. Mostrando en el listado \ref{lst:tabla} el código ejecutado, esta será la principal tabla a lo largo del proyecto.
 
 \begin{lstlisting}[style=sqlstyle, caption=Creación de la tabla y sus campos., label={lst:tabla}]
     CREATE DATABASE food_database;
@@ -94,26 +94,18 @@ Tras los cambios realizados queda un total de 2616 registros. En la figura \ref{
 
 \section{Conceptos nutricionales}
 
-Se ha hecho uso de distintas fuentes para los valores nutricionales utilizados para el cálculo de los objetivos, restricciones y límites que se representan en el problema.
-
-En el algoritmo se busca crear un menú equilibrado y personalizado para el usuario, con el propósito de mantener el peso y la masa corporal del individuo.
+Se han empleado diversas fuentes para determinar los valores nutricionales utilizados en el cálculo de objetivos y restricciones y límites representados en el problema. En el algoritmo se busca crear un menú equilibrado y personalizado para el usuario, con el propósito de mantener el peso y la masa corporal del individuo.
 
 \subsection{Cálculo de calorías}
 \label{ch:calculo-calorías}
 
 El primer objetivo es el calórico, explicado en el apartado \ref{ch:objetivo-restriccion-calorías}. Para ello es necesario saber cuántas kilocalorías diarias necesita el usuario. La Tasa Metabólica Basal (TMB) es la cantidad de energía que el cuerpo necesita para mantener las funciones vitales en reposo. Existen diversas fórmulas de calcularla, pero en este proyecto se hace uso de una las más extendidas actualmente, la fórmula de Harris-Benedict revisada por Mifflin et al.~\cite{mifflin1990}. Esta fórmula toma en cuenta el peso, la altura, la edad y el sexo para estimar las kilocalorías.
-
 \begin{itemize}
     \item Para hombres:
-    \[
-    \text{TMB} = (10 \times \text{peso en kg}) + (6.25 \times \text{altura en cm}) - (5 \times \text{edad en años}) + 5
-    \]
+    \[\text{TMB} = (10 \times \text{peso en kg}) + (6.25 \times \text{altura en cm}) - (5 \times \text{edad en años}) + 5\]
     \item Para mujeres:
-    \[
-    \text{TMB} = (10 \times \text{peso en kg}) + (6.25 \times \text{altura en cm}) - (5 \times \text{edad en años}) - 161
-    \]
+    \[\text{TMB} = (10 \times \text{peso en kg}) + (6.25 \times \text{altura en cm}) - (5 \times \text{edad en años}) - 161\]
 \end{itemize}
-
 Como se explica en la definición de la TMB, esta energía es calculada en reposo. Por lo tanto, para alcanzar una aproximación real será necesario multiplicar el resultado por un factor que depende del nivel de actividad física.~\cite{krause2016}
 
 \begin{itemize}
@@ -174,7 +166,7 @@ Con las kilocalorías de cada macronutriente ya calculadas, solo falta dividir e
 Siguiendo el caso de los hidratos de carbono, \textit{11 g} de carbohidratos de un alimento de \textit{98 kcal} representa un porcentaje del \textit{44.9 \%} respecto al total de calorías.
 
 
-\section{Cromosoma planteado}
+\section{Estructura del cromosoma}
 \label{ch:solucion-planteada}
 
 Se ha buscado plantear un menú siguiendo los hábitos alimenticios y nutricionales de los consumidores españoles.
