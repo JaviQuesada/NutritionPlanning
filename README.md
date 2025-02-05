@@ -9,8 +9,10 @@ PFG de Planificación nutricional mediante algoritmos evolutivos. Este proyecto 
 
 ### **📂[`PROJECT/data`](PROJECT/data)**
 - 📄[`food_database_dump.sql`](PROJECT/data/food_database_dump.sql): Contiene la base de datos exportada.
+
 ### **📂[`PROJECT/external`](PROJECT/external)**
-- 📂[`stac/`](PROJECT/external/stac/): Este repositorio usa un submódulo llamado `stac`, que es una implementación personalizada basada en [`citiususc/stac`](https://github.com/citiususc/stac.git) con correcciones específicas. Actualmente, `stac` está fijado en el commit [`df5159c`](https://github.com/citiususc/stac/commit/df5159c).
+- 📂[`stac/`](PROJECT/external/): Este repositorio usa un submódulo llamado `stac`, que es una implementación personalizada basada en [`citiususc/stac`](https://github.com/citiususc/stac.git) con correcciones específicas. Actualmente, `stac` está fijado en el commit [`df5159c`](https://github.com/citiususc/stac/commit/df5159c).
+
 ### **📂[`PROJECT/src`](PROJECT/src)**
 - 📄[`__main__.py`](PROJECT/src/__main__.py): Archivo principal que inicia el proyecto.
 - 📂[`algoritmos/`](PROJECT/src/algoritmos/): Contiene implementaciones de algoritmos genéticos multiobjetivo junto con variaciones y operadores personalizados para resolver el problema nutricional.
@@ -25,9 +27,9 @@ PFG de Planificación nutricional mediante algoritmos evolutivos. Este proyecto 
 - 📂[`moead/`](PROJECT/src/algoritmos/moead/): Contiene implementación del algoritmo *Multi-Objective Evolutionary Algorithm based on Decomposition* (MOEA/D).
 
 #### **📂[`GUI/`](PROJECT/src/GUI/)**
-- 📄[`ventana_principal.py`](PROJECT/src/GUI/ventana_principal.py): Entrada a la interfaz al ejecutar el archivo [`__main__.py`](PROJECT/src/__main__.py). Presenta botones que dirigen a la ventana [`ventana_basedatos.py`](PROJECT/src/GUI/ventana_basedatos.py) o a [`ventana_preguntasusario.py`](PROJECT/GUI/src/ventana_preguntasusario.py).
+- 📄[`ventana_principal.py`](PROJECT/src/GUI/ventana_principal.py): Entrada a la interfaz al ejecutar el archivo [`__main__.py`](PROJECT/src/__main__.py). Presenta botones que dirigen a la ventana [`ventana_basedatos.py`](PROJECT/src/GUI/ventana_basedatos.py) o a [`ventana_preguntasusario.py`](PROJECT/src/GUI/ventana_preguntasusuario.py).
 - 📄[`ventana_basedatos.py`](PROJECT/src/GUI/ventana_basedatos.py): Muestra en formato tabla los alimentos que se encuentran en la base de datos y sus correspondientes valores nutricionales.
-- 📄[`ventana_preguntasusario.py`](PROJECT/src/GUI/ventana_preguntasusuario.py): Permite al usuario ingresar datos personales y preferencias alimenticias para personalizar la planificación nutricional. También presenta el botón que ejecuta el algoritmo evolutivo.
+- 📄[`ventana_preguntasusuario.py`](PROJECT/src/GUI/ventana_preguntasusuario.py): Permite al usuario ingresar datos personales y preferencias alimenticias para personalizar la planificación nutricional. También presenta el botón que ejecuta el algoritmo evolutivo.
 - 📄[`ventana_menu.py`](PROJECT/src/GUI/ventana_menu.py): Muestra el menú semanal resultado de la ejecución del algortimo evolutivo.
 
 #### **📂[`utilidades/`](PROJECT/src/utilidades/)**
@@ -38,7 +40,11 @@ PFG de Planificación nutricional mediante algoritmos evolutivos. Este proyecto 
 
 #### **📂[`test/`](PROJECT/src/test/)**
 - 📄[`ejecutar_guardar_resultados.py`](PROJECT/src/test/ejecutar_guardar_resultados.py): Se ejecuta el algoritmo 31 veces por cada sujeto y se guardan los resultados en [`resultados/tablas/`](PROJECT/src/test/resultados/tablas/) en formato JSON según el tipo de algoritmo y los hiperparámetros elegidos.
-- 📄[`hipervolumen.py`](PROJECT/src/test/hipervolumen.py): Se calcula el hipervolumen a partir de los resultados guardados en [`resultados/tablas/`](PROJECT/test/resultados/tablas/) y se guardan en el directorio `resultados/tablas/xxx/hipervolumen/`, donde `xxx` representa el nombre de la carpeta correspondiente al algoritmo evaluado.
+- 📄[`hipervolumen.py`](PROJECT/src/test/hipervolumen.py): Se calcula el hipervolumen a partir de los resultados guardados en [`resultados/tablas/`](PROJECT/src/test/resultados/tablas/) y se guardan en el directorio `resultados/tablas/xxx/hipervolumen/`, donde `xxx` representa el nombre de la carpeta correspondiente al algoritmo evaluado.
 - 📄[`comparacion_algoritmos.py`](PROJECT/src/test/comparacion_algoritmos.py): Se codifican los test 1vs1 (Wilcoxon) y NvsN (Friedman-Schaffer) para la comparación de hipervolumenes.
-- 📄[`grafica_fitness.py`](PROJECT/src/test/grafica_fitness.py): Se crean gráficas de la evolución del fitness de cada objetivo tras la ejecución del algoritmo.
+- 📄[`grafica_fitness.py`](PROJECT/src/test/grafica_fitness.py): Se crean gráficas de la evolución del fitness de cada objetivo tras la ejecución del algoritmo. Los resultados se guardan en el directorio [`resultados/graficas`](PROJECT/src/test/resultados/graficas/)
 - 📂[`resultados/`](PROJECT/src/test/resultados/): Directorio en el que se encuentran los resultados de ejecutar los diferentes tipos de algoritmo.
+
+##### **📂[`resultados/`](PROJECT/src/test/resultados/)**
+- 📂[`tablas`](PROJECT/src/test/resultados/tablas/): Almacena los resultados de ejecutar los scripts [`ejecutar_guardar_resultados.py`](PROJECT/src/test/ejecutar_guardar_resultados.py) y [`hipervolumen.py`](PROJECT/src/test/hipervolumen.py)
+- 📂[`graficas/`](PROJECT/src/test/resultados/graficas/): Almacena los resultados de ejecutar [`grafica_fitness.py`](PROJECT/src/test/grafica_fitness.py).
