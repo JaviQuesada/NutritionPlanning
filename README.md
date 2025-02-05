@@ -18,16 +18,16 @@ PFG de Planificación nutricional mediante algoritmos evolutivos. Este proyecto 
 - 📂[`utilidades/`](PROJECT/src/utilidades/): Reúne funciones auxiliares, constantes globales y herramientas para la conexión a la base de datos.
 - 📂[`test/`](PROJECT/src/test/): Contiene scripts para la realización de pruebas y análisis de experimentos.
 
-#### **📂[`algoritmos/`](PROJECT/algoritmos/)**
+#### **📂[`algoritmos/`](PROJECT/src/algoritmos/)**
 - 📂[`nsga2/`](PROJECT/src/algoritmos/nsga2/): Contiene diferentes implementaciones del algoritmo *Non-dominated Sorting Genetic Algorithm II* (NSGA-II) basándose en el manejo de restricciones.
 - 📂[`nsga3/`](PROJECT/src/algoritmos/nsga3/): Contiene diferentes implementaciones del algoritmo *Non-dominated Sorting Genetic Algorithm III* (NSGA-III) basándose en el manejo de restricciones.
 - 📂[`spea2/`](PROJECT/src/algoritmos/spea2/): Contiene diferentes implementaciones del algoritmo *Strength Pareto Evolutionary Algorithm 2* (SPEA2) basándose en el manejo de restricciones.
 - 📂[`moead/`](PROJECT/src/algoritmos/moead/): Contiene implementación del algoritmo *Multi-Objective Evolutionary Algorithm based on Decomposition* (MOEA/D).
 
 #### **📂[`GUI/`](PROJECT/src/GUI/)**
-- 📄[`ventana_principal.py`](PROJECT/src/GUI/ventana_principal.py): Entrada a la interfaz al ejecutar el archivo [`__main__.py`](PROJECT/src/__main__.py). Presenta botones que dirigen a la ventana [`ventana_basedatos.py`](PROJECT/src/GUI/ventana_basedatos.py) o a [`ventana_preguntasusario.py`](PROJECT/GUI/ventana_preguntasusario.py).
+- 📄[`ventana_principal.py`](PROJECT/src/GUI/ventana_principal.py): Entrada a la interfaz al ejecutar el archivo [`__main__.py`](PROJECT/src/__main__.py). Presenta botones que dirigen a la ventana [`ventana_basedatos.py`](PROJECT/src/GUI/ventana_basedatos.py) o a [`ventana_preguntasusario.py`](PROJECT/GUI/src/ventana_preguntasusario.py).
 - 📄[`ventana_basedatos.py`](PROJECT/src/GUI/ventana_basedatos.py): Muestra en formato tabla los alimentos que se encuentran en la base de datos y sus correspondientes valores nutricionales.
-- 📄[`ventana_preguntasusario.py`](PROJECT/src/GUI/ventana_preguntasusario.py): Permite al usuario ingresar datos personales y preferencias alimenticias para personalizar la planificación nutricional. También presenta el botón que ejecuta el algoritmo evolutivo.
+- 📄[`ventana_preguntasusario.py`](PROJECT/src/GUI/ventana_preguntasusuario.py): Permite al usuario ingresar datos personales y preferencias alimenticias para personalizar la planificación nutricional. También presenta el botón que ejecuta el algoritmo evolutivo.
 - 📄[`ventana_menu.py`](PROJECT/src/GUI/ventana_menu.py): Muestra el menú semanal resultado de la ejecución del algortimo evolutivo.
 
 #### **📂[`utilidades/`](PROJECT/src/utilidades/)**
