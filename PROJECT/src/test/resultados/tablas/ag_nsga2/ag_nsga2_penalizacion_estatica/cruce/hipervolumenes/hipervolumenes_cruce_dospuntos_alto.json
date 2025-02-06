@@ -2,119 +2,119 @@
     "sujeto 1": [
         {
             "seed": 6,
-            "hipervolumen": 60718997.658843465
+            "hipervolumen": 64490203.70345813
         },
         {
             "seed": 26,
-            "hipervolumen": 80471042.62107892
+            "hipervolumen": 84318071.13066173
         },
         {
             "seed": 59,
-            "hipervolumen": 69443645.34800252
+            "hipervolumen": 73463676.72505876
         },
         {
             "seed": 60,
-            "hipervolumen": 138709697.74232212
+            "hipervolumen": 143745143.25389606
         },
         {
             "seed": 79,
-            "hipervolumen": 100020697.48413412
+            "hipervolumen": 105230747.75243233
         },
         {
             "seed": 93,
-            "hipervolumen": 69980330.16623993
+            "hipervolumen": 74050210.20444387
         },
         {
             "seed": 489,
-            "hipervolumen": 125814618.65437095
+            "hipervolumen": 131251878.5624921
         },
         {
             "seed": 608,
-            "hipervolumen": 131348635.22849701
+            "hipervolumen": 136724342.05154246
         },
         {
             "seed": 634,
-            "hipervolumen": 82419721.29825202
+            "hipervolumen": 86792455.94172505
         },
         {
             "seed": 684,
-            "hipervolumen": 101157179.00462532
+            "hipervolumen": 105493392.97498858
         },
         {
             "seed": 784,
-            "hipervolumen": 91385072.81237373
+            "hipervolumen": 95808157.27488586
         },
         {
             "seed": 930,
-            "hipervolumen": 92978326.48159122
+            "hipervolumen": 97321930.70020595
         },
         {
             "seed": 3364,
-            "hipervolumen": 94875695.91055521
+            "hipervolumen": 99241126.41940627
         },
         {
             "seed": 3608,
-            "hipervolumen": 100326887.31962454
+            "hipervolumen": 105269980.35711178
         },
         {
             "seed": 4845,
-            "hipervolumen": 89992549.67276993
+            "hipervolumen": 94137906.84271352
         },
         {
             "seed": 5375,
-            "hipervolumen": 47693705.73196919
+            "hipervolumen": 51249873.74177413
         },
         {
             "seed": 8542,
-            "hipervolumen": 132378744.93377429
+            "hipervolumen": 137886583.45547262
         },
         {
             "seed": 9397,
-            "hipervolumen": 124251181.01771426
+            "hipervolumen": 129439686.47604126
         },
         {
             "seed": 11320,
-            "hipervolumen": 119280932.57931136
+            "hipervolumen": 124664731.74030182
         },
         {
             "seed": 14648,
-            "hipervolumen": 76771301.398072
+            "hipervolumen": 80656239.52916963
         },
         {
             "seed": 39843,
-            "hipervolumen": 54251481.871934615
+            "hipervolumen": 57433135.84897201
         },
         {
             "seed": 73886,
-            "hipervolumen": 142698659.85058266
+            "hipervolumen": 148473094.16017085
         },
         {
             "seed": 83186,
-            "hipervolumen": 125295474.54333262
+            "hipervolumen": 130842794.69963942
         },
         {
             "seed": 97870,
-            "hipervolumen": 117847392.19229925
+            "hipervolumen": 122641867.45754027
         },
         {
             "seed": 152822,
-            "hipervolumen": 129616374.58375917
+            "hipervolumen": 134854964.7834562
         },
         {
             "seed": 211193,
-            "hipervolumen": 155605111.8771345
+            "hipervolumen": 161951151.17804015
         },
         {
             "seed": 226880,
-            "hipervolumen": 102223553.29118915
+            "hipervolumen": 107809464.65545921
         },
         {
             "seed": 315529,
-            "hipervolumen": 57523290.86565641
+            "hipervolumen": 61354187.71488297
         },
         {
             "seed": 428397,
-            "hipervolumen": 140283859.06240505
+            "hipervolumen": 146145293.62039337
         },
         {
             "seed": 489166,
@@ -122,21 +122,21 @@
         },
         {
             "seed": 526568,
-            "hipervolumen": 145852421.2820239
+            "hipervolumen": 151661780.23354107
         }
     ],
     "sujeto 2": [
         {
             "seed": 6,
-            "hipervolumen": 130941404.73741522
+            "hipervolumen": 136120281.57893074
         },
         {
             "seed": 26,
-            "hipervolumen": 152391607.7332043
+            "hipervolumen": 158821890.18184853
         },
         {
             "seed": 59,
-            "hipervolumen": 101342737.11626108
+            "hipervolumen": 106045463.87443589
         },
         {
             "seed": 60,
@@ -144,15 +144,15 @@
         },
         {
             "seed": 79,
-            "hipervolumen": 138361022.46700484
+            "hipervolumen": 144464088.35452938
         },
         {
             "seed": 93,
-            "hipervolumen": 130773681.98661417
+            "hipervolumen": 136158402.91492447
         },
         {
             "seed": 489,
-            "hipervolumen": 196484439.65133673
+            "hipervolumen": 202764064.84065238
         },
         {
             "seed": 608,
@@ -160,7 +160,7 @@
         },
         {
             "seed": 634,
-            "hipervolumen": 138312105.58562362
+            "hipervolumen": 143858675.61606252
         },
         {
             "seed": 684,
@@ -168,39 +168,39 @@
         },
         {
             "seed": 784,
-            "hipervolumen": 224717245.4464834
+            "hipervolumen": 232124430.49143454
         },
         {
             "seed": 930,
-            "hipervolumen": 168330031.51145947
+            "hipervolumen": 174099632.62036607
         },
         {
             "seed": 3364,
-            "hipervolumen": 177999131.5557145
+            "hipervolumen": 184040887.17516625
         },
         {
             "seed": 3608,
-            "hipervolumen": 168181363.74238914
+            "hipervolumen": 174380768.81356212
         },
         {
             "seed": 4845,
-            "hipervolumen": 190895338.75099653
+            "hipervolumen": 197115794.50393337
         },
         {
             "seed": 5375,
-            "hipervolumen": 233169748.1175332
+            "hipervolumen": 240193581.93816698
         },
         {
             "seed": 8542,
-            "hipervolumen": 170891814.1725759
+            "hipervolumen": 177957158.27747086
         },
         {
             "seed": 9397,
-            "hipervolumen": 218965722.83892918
+            "hipervolumen": 227021434.31410432
         },
         {
             "seed": 11320,
-            "hipervolumen": 97623971.41577068
+            "hipervolumen": 102268024.62319499
         },
         {
             "seed": 14648,
@@ -208,7 +208,7 @@
         },
         {
             "seed": 39843,
-            "hipervolumen": 81606441.74342386
+            "hipervolumen": 86138798.83660555
         },
         {
             "seed": 73886,
@@ -216,7 +216,7 @@
         },
         {
             "seed": 83186,
-            "hipervolumen": 187182374.39266998
+            "hipervolumen": 193694169.54260993
         },
         {
             "seed": 97870,
@@ -228,405 +228,405 @@
         },
         {
             "seed": 211193,
-            "hipervolumen": 125992236.8186375
+            "hipervolumen": 130789871.34104788
         },
         {
             "seed": 226880,
-            "hipervolumen": 139369024.27202302
+            "hipervolumen": 144915313.4080038
         },
         {
             "seed": 315529,
-            "hipervolumen": 187790848.06822276
+            "hipervolumen": 194630079.45690867
         },
         {
             "seed": 428397,
-            "hipervolumen": 150519430.28655773
+            "hipervolumen": 155785320.26422742
         },
         {
             "seed": 489166,
-            "hipervolumen": 192304675.131903
+            "hipervolumen": 199598056.03610978
         },
         {
             "seed": 526568,
-            "hipervolumen": 95609159.0412663
+            "hipervolumen": 100843941.78834474
         }
     ],
     "sujeto 3": [
         {
             "seed": 6,
-            "hipervolumen": 142852592.58171582
+            "hipervolumen": 149584051.8843714
         },
         {
             "seed": 26,
-            "hipervolumen": 188412376.8356832
+            "hipervolumen": 195131930.19680157
         },
         {
             "seed": 59,
-            "hipervolumen": 130014277.70163241
+            "hipervolumen": 136480310.1942734
         },
         {
             "seed": 60,
-            "hipervolumen": 128959414.39196256
+            "hipervolumen": 135130452.05189916
         },
         {
             "seed": 79,
-            "hipervolumen": 81422842.29153514
+            "hipervolumen": 85672484.53132129
         },
         {
             "seed": 93,
-            "hipervolumen": 136871397.80033895
+            "hipervolumen": 142981670.8714264
         },
         {
             "seed": 489,
-            "hipervolumen": 191078370.92136946
+            "hipervolumen": 197591653.43529108
         },
         {
             "seed": 608,
-            "hipervolumen": 104847719.54243845
+            "hipervolumen": 110178789.62924549
         },
         {
             "seed": 634,
-            "hipervolumen": 121797949.28029947
+            "hipervolumen": 127936334.0578663
         },
         {
             "seed": 684,
-            "hipervolumen": 147696128.6739471
+            "hipervolumen": 154469176.75900233
         },
         {
             "seed": 784,
-            "hipervolumen": 131560957.42799091
+            "hipervolumen": 137479404.48097157
         },
         {
             "seed": 930,
-            "hipervolumen": 138980342.66672993
+            "hipervolumen": 145377173.77805874
         },
         {
             "seed": 3364,
-            "hipervolumen": 123241276.02113967
+            "hipervolumen": 128987213.45614374
         },
         {
             "seed": 3608,
-            "hipervolumen": 179789639.43727943
+            "hipervolumen": 186025924.28125522
         },
         {
             "seed": 4845,
-            "hipervolumen": 128813657.23267181
+            "hipervolumen": 134218127.7653914
         },
         {
             "seed": 5375,
-            "hipervolumen": 138306684.33723205
+            "hipervolumen": 144037199.81706452
         },
         {
             "seed": 8542,
-            "hipervolumen": 188233524.93419558
+            "hipervolumen": 195620016.05384794
         },
         {
             "seed": 9397,
-            "hipervolumen": 133619718.66624163
+            "hipervolumen": 140098930.64484522
         },
         {
             "seed": 11320,
-            "hipervolumen": 153547549.99082282
+            "hipervolumen": 160492477.365519
         },
         {
             "seed": 14648,
-            "hipervolumen": 208760193.60690427
+            "hipervolumen": 215374313.4235499
         },
         {
             "seed": 39843,
-            "hipervolumen": 203802165.8803215
+            "hipervolumen": 210380888.89459336
         },
         {
             "seed": 73886,
-            "hipervolumen": 155227305.93843937
+            "hipervolumen": 161563056.1251372
         },
         {
             "seed": 83186,
-            "hipervolumen": 198484551.21004638
+            "hipervolumen": 205737212.37654296
         },
         {
             "seed": 97870,
-            "hipervolumen": 115880494.58202085
+            "hipervolumen": 121788051.48280822
         },
         {
             "seed": 152822,
-            "hipervolumen": 137431128.29209054
+            "hipervolumen": 143082815.23831686
         },
         {
             "seed": 211193,
-            "hipervolumen": 197713325.5573416
+            "hipervolumen": 205262753.0369209
         },
         {
             "seed": 226880,
-            "hipervolumen": 157205471.94949207
+            "hipervolumen": 163758683.0687657
         },
         {
             "seed": 315529,
-            "hipervolumen": 171115713.40459907
+            "hipervolumen": 177375964.78469813
         },
         {
             "seed": 428397,
-            "hipervolumen": 147990609.4790091
+            "hipervolumen": 154379713.79596302
         },
         {
             "seed": 489166,
-            "hipervolumen": 158281710.5281418
+            "hipervolumen": 164749196.99376523
         },
         {
             "seed": 526568,
-            "hipervolumen": 208948992.2870854
+            "hipervolumen": 216556712.2499595
         }
     ],
     "sujeto 4": [
         {
             "seed": 6,
-            "hipervolumen": 117649792.39499745
+            "hipervolumen": 122161544.6055449
         },
         {
             "seed": 26,
-            "hipervolumen": 162786239.8951202
+            "hipervolumen": 168314279.97133088
         },
         {
             "seed": 59,
-            "hipervolumen": 201667200.1921798
+            "hipervolumen": 207185125.13886273
         },
         {
             "seed": 60,
-            "hipervolumen": 197604209.13068086
+            "hipervolumen": 203405586.75468016
         },
         {
             "seed": 79,
-            "hipervolumen": 197030747.19423252
+            "hipervolumen": 202871735.33038098
         },
         {
             "seed": 93,
-            "hipervolumen": 184909908.52570987
+            "hipervolumen": 190277427.52426872
         },
         {
             "seed": 489,
-            "hipervolumen": 181539515.0919605
+            "hipervolumen": 186937788.95819807
         },
         {
             "seed": 608,
-            "hipervolumen": 201214798.1056404
+            "hipervolumen": 206767959.34357816
         },
         {
             "seed": 634,
-            "hipervolumen": 154961483.32264015
+            "hipervolumen": 159906508.3516246
         },
         {
             "seed": 684,
-            "hipervolumen": 151999398.35771137
+            "hipervolumen": 157140170.7968834
         },
         {
             "seed": 784,
-            "hipervolumen": 224403733.29000634
+            "hipervolumen": 230510297.03114828
         },
         {
             "seed": 930,
-            "hipervolumen": 122628705.70964004
+            "hipervolumen": 126560859.8852121
         },
         {
             "seed": 3364,
-            "hipervolumen": 167319612.85446954
+            "hipervolumen": 172232613.57199886
         },
         {
             "seed": 3608,
-            "hipervolumen": 165704180.21613866
+            "hipervolumen": 171111270.47777748
         },
         {
             "seed": 4845,
-            "hipervolumen": 170837981.88374677
+            "hipervolumen": 176293547.67491728
         },
         {
             "seed": 5375,
-            "hipervolumen": 181565188.03979737
+            "hipervolumen": 186950427.7002092
         },
         {
             "seed": 8542,
-            "hipervolumen": 177426911.06347352
+            "hipervolumen": 182823515.37975138
         },
         {
             "seed": 9397,
-            "hipervolumen": 175895619.810737
+            "hipervolumen": 181611381.74118876
         },
         {
             "seed": 11320,
-            "hipervolumen": 152563123.3592484
+            "hipervolumen": 157399324.77863145
         },
         {
             "seed": 14648,
-            "hipervolumen": 176484662.71625483
+            "hipervolumen": 182156811.3153031
         },
         {
             "seed": 39843,
-            "hipervolumen": 157006255.56363878
+            "hipervolumen": 162118997.13769794
         },
         {
             "seed": 73886,
-            "hipervolumen": 146434341.78009993
+            "hipervolumen": 151280062.56328827
         },
         {
             "seed": 83186,
-            "hipervolumen": 156517273.25272328
+            "hipervolumen": 161470108.84648412
         },
         {
             "seed": 97870,
-            "hipervolumen": 124016748.2070281
+            "hipervolumen": 128575003.5349268
         },
         {
             "seed": 152822,
-            "hipervolumen": 195515256.20194924
+            "hipervolumen": 200959925.98285645
         },
         {
             "seed": 211193,
-            "hipervolumen": 196494370.50699633
+            "hipervolumen": 201979343.80973774
         },
         {
             "seed": 226880,
-            "hipervolumen": 125878108.69554748
+            "hipervolumen": 129820895.2682313
         },
         {
             "seed": 315529,
-            "hipervolumen": 188401141.61579967
+            "hipervolumen": 194144114.2815595
         },
         {
             "seed": 428397,
-            "hipervolumen": 145421109.60734496
+            "hipervolumen": 150020693.61933383
         },
         {
             "seed": 489166,
-            "hipervolumen": 155316501.50652128
+            "hipervolumen": 159901264.60132402
         },
         {
             "seed": 526568,
-            "hipervolumen": 191709643.7713696
+            "hipervolumen": 197224620.35140443
         }
     ],
     "sujeto 5": [
         {
             "seed": 6,
-            "hipervolumen": 255978919.72784394
+            "hipervolumen": 262494228.54819036
         },
         {
             "seed": 26,
-            "hipervolumen": 234873965.06033394
+            "hipervolumen": 240996269.4356573
         },
         {
             "seed": 59,
-            "hipervolumen": 221885705.14870805
+            "hipervolumen": 227679408.7009627
         },
         {
             "seed": 60,
-            "hipervolumen": 231536002.8733222
+            "hipervolumen": 237637628.26142544
         },
         {
             "seed": 79,
-            "hipervolumen": 231393164.01767838
+            "hipervolumen": 237539463.04786122
         },
         {
             "seed": 93,
-            "hipervolumen": 242949185.62132597
+            "hipervolumen": 249367168.46612677
         },
         {
             "seed": 489,
-            "hipervolumen": 238043986.80543065
+            "hipervolumen": 244231503.21637303
         },
         {
             "seed": 608,
-            "hipervolumen": 265560375.86872235
+            "hipervolumen": 272333514.16805613
         },
         {
             "seed": 634,
-            "hipervolumen": 213578346.96634346
+            "hipervolumen": 219102668.9255036
         },
         {
             "seed": 684,
-            "hipervolumen": 252578972.6818694
+            "hipervolumen": 259080567.76026604
         },
         {
             "seed": 784,
-            "hipervolumen": 208717852.63010594
+            "hipervolumen": 214237265.52657753
         },
         {
             "seed": 930,
-            "hipervolumen": 204389715.24605358
+            "hipervolumen": 209671924.92812762
         },
         {
             "seed": 3364,
-            "hipervolumen": 230526372.14330286
+            "hipervolumen": 236677351.77144286
         },
         {
             "seed": 3608,
-            "hipervolumen": 231393213.7678672
+            "hipervolumen": 237292690.63265657
         },
         {
             "seed": 4845,
-            "hipervolumen": 261276847.82009634
+            "hipervolumen": 268026196.4970219
         },
         {
             "seed": 5375,
-            "hipervolumen": 239299455.0422241
+            "hipervolumen": 245481423.86084422
         },
         {
             "seed": 8542,
-            "hipervolumen": 243900863.50325578
+            "hipervolumen": 250081057.32665557
         },
         {
             "seed": 9397,
-            "hipervolumen": 264162962.07284498
+            "hipervolumen": 270935262.6681639
         },
         {
             "seed": 11320,
-            "hipervolumen": 273949107.59791195
+            "hipervolumen": 281015229.6545074
         },
         {
             "seed": 14648,
-            "hipervolumen": 228143886.59319913
+            "hipervolumen": 233990213.1885696
         },
         {
             "seed": 39843,
-            "hipervolumen": 216224720.7634554
+            "hipervolumen": 221827253.81564003
         },
         {
             "seed": 73886,
-            "hipervolumen": 189640820.9216384
+            "hipervolumen": 194642729.56807446
         },
         {
             "seed": 83186,
-            "hipervolumen": 229262024.65995654
+            "hipervolumen": 235145801.8970547
         },
         {
             "seed": 97870,
-            "hipervolumen": 228818110.75638515
+            "hipervolumen": 234695408.96802562
         },
         {
             "seed": 152822,
-            "hipervolumen": 249156494.5662151
+            "hipervolumen": 255928765.87118384
         },
         {
             "seed": 211193,
-            "hipervolumen": 211126546.77042067
+            "hipervolumen": 216489492.3737039
         },
         {
             "seed": 226880,
-            "hipervolumen": 254051893.8087807
+            "hipervolumen": 260560454.13244784
         },
         {
             "seed": 315529,
-            "hipervolumen": 254994890.81598705
+            "hipervolumen": 261508822.98987544
         },
         {
             "seed": 428397,
-            "hipervolumen": 248455456.42412284
+            "hipervolumen": 254904797.51781583
         },
         {
             "seed": 489166,
-            "hipervolumen": 263124811.25545424
+            "hipervolumen": 269857282.8326117
         },
         {
             "seed": 526568,
-            "hipervolumen": 238595329.74184695
+            "hipervolumen": 244801340.0798868
         }
     ]
 }
