@@ -18,7 +18,7 @@
         },
         {
             "seed": 79,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 93,
@@ -38,7 +38,7 @@
         },
         {
             "seed": 684,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 784,
@@ -164,7 +164,7 @@
         },
         {
             "seed": 684,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 784,
@@ -196,7 +196,7 @@
         },
         {
             "seed": 9397,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 11320,

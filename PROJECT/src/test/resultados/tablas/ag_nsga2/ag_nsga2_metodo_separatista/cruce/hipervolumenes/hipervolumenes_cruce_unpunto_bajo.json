@@ -2,7 +2,7 @@
     "sujeto 1": [
         {
             "seed": 6,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 26,
@@ -102,11 +102,11 @@
         },
         {
             "seed": 211193,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 226880,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 315529,
@@ -118,11 +118,11 @@
         },
         {
             "seed": 489166,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 526568,
-            "hipervolumen": null
+            "hipervolumen": 0
         }
     ],
     "sujeto 2": [
@@ -136,11 +136,11 @@
         },
         {
             "seed": 59,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 60,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 79,
@@ -148,7 +148,7 @@
         },
         {
             "seed": 93,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 489,
@@ -164,11 +164,11 @@
         },
         {
             "seed": 684,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 784,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 930,
@@ -200,7 +200,7 @@
         },
         {
             "seed": 11320,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 14648,
@@ -212,7 +212,7 @@
         },
         {
             "seed": 73886,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 83186,
@@ -232,7 +232,7 @@
         },
         {
             "seed": 226880,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 315529,
@@ -248,7 +248,7 @@
         },
         {
             "seed": 526568,
-            "hipervolumen": null
+            "hipervolumen": 0
         }
     ],
     "sujeto 3": [
@@ -282,7 +282,7 @@
         },
         {
             "seed": 608,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 634,

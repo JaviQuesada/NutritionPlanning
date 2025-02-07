@@ -6,11 +6,11 @@
         },
         {
             "seed": 26,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 59,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 60,
@@ -18,11 +18,11 @@
         },
         {
             "seed": 79,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 93,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 489,
@@ -54,7 +54,7 @@
         },
         {
             "seed": 3608,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 4845,
@@ -66,7 +66,7 @@
         },
         {
             "seed": 8542,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 9397,
@@ -74,7 +74,7 @@
         },
         {
             "seed": 11320,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 14648,
@@ -86,7 +86,7 @@
         },
         {
             "seed": 73886,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 83186,
@@ -106,7 +106,7 @@
         },
         {
             "seed": 226880,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 315529,
@@ -114,7 +114,7 @@
         },
         {
             "seed": 428397,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 489166,
@@ -148,7 +148,7 @@
         },
         {
             "seed": 93,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 489,
@@ -156,19 +156,19 @@
         },
         {
             "seed": 608,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 634,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 684,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 784,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 930,
@@ -196,7 +196,7 @@
         },
         {
             "seed": 9397,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 11320,
@@ -224,7 +224,7 @@
         },
         {
             "seed": 152822,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 211193,
@@ -240,7 +240,7 @@
         },
         {
             "seed": 428397,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 489166,
@@ -270,7 +270,7 @@
         },
         {
             "seed": 79,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 93,
@@ -286,7 +286,7 @@
         },
         {
             "seed": 634,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 684,
@@ -314,7 +314,7 @@
         },
         {
             "seed": 5375,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 8542,
@@ -338,7 +338,7 @@
         },
         {
             "seed": 73886,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 83186,

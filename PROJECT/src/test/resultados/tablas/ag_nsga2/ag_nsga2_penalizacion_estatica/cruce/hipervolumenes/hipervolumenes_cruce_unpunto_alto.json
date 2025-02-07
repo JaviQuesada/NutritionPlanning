@@ -2,7 +2,7 @@
     "sujeto 1": [
         {
             "seed": 6,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 26,
@@ -14,7 +14,7 @@
         },
         {
             "seed": 60,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 79,
@@ -66,7 +66,7 @@
         },
         {
             "seed": 8542,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 9397,
@@ -128,7 +128,7 @@
     "sujeto 2": [
         {
             "seed": 6,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 26,
@@ -144,7 +144,7 @@
         },
         {
             "seed": 79,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 93,
@@ -188,7 +188,7 @@
         },
         {
             "seed": 5375,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 8542,
@@ -290,7 +290,7 @@
         },
         {
             "seed": 684,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 784,

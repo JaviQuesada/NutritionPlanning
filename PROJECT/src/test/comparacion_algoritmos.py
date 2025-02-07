@@ -17,49 +17,26 @@ def cargar_hipervolumenes(ruta_archivo):
 
     hipervolumenes = {}
 
-    # Itera cada sujeto
     for sujeto in datos:
         seeds = datos[sujeto]
         for entry in seeds:
-            # Valida si hipervolumen es un numero
+            # Si no es un número, asignar 0 en su lugar
             if isinstance(entry['hipervolumen'], (int, float)):
                 hipervolumenes[(sujeto, entry['seed'])] = float(entry['hipervolumen'])
             else:
-                hipervolumenes[(sujeto, entry['seed'])] = None
+                hipervolumenes[(sujeto, entry['seed'])] = 0  
 
     return hipervolumenes
 
-def filtrar_hipervolumenes(*hipervolumenes_list):
-    """Filtra los hipervolumenes eliminando los valores None y sus correspondientes en otras listas."""
-
-    filtrado = []
-
-    # Recorre listas en paralelo y filtra los que no contienen None
-    for valores in zip(*hipervolumenes_list):
-        if None not in valores:
-            filtrado.append(valores)
-
-    resultado = []
-
-    for i in range(len(hipervolumenes_list)):
-        resultado.append([])
-
-    for valores in filtrado:
-        for i, valor in enumerate(valores):
-            resultado[i].append(valor)
-
-    return resultado
-
 def is_better(rank_1, rank_2):
-    """Determina si el primer metodo es mejor que el segundo basado en los rankings."""
-
+    """Determina si el primer método es mejor que el segundo basado en los rankings."""
     return rank_1 < rank_2
 
 def prueba_wilcoxon(hipervolumenes_1, hipervolumenes_2, nombre_1, nombre_2):
     """Realiza la prueba de Wilcoxon entre dos conjuntos de hipervolumenes."""
 
-    if len(hipervolumenes_1) == 0 or len(hipervolumenes_2) == 0:
-        print("No hay suficientes datos para la comparacion.")
+    if len(hipervolumenes_1) < 2 or len(hipervolumenes_2) < 2:
+        print(f"No hay suficientes datos para la prueba de Wilcoxon entre {nombre_1} y {nombre_2}. Se necesitan al menos 2 valores en cada grupo.")
         return
     
     _, p_value = stats.wilcoxon(hipervolumenes_1, hipervolumenes_2)
@@ -67,27 +44,29 @@ def prueba_wilcoxon(hipervolumenes_1, hipervolumenes_2, nombre_1, nombre_2):
     mediana_1 = np.median(hipervolumenes_1)
     mediana_2 = np.median(hipervolumenes_2)
 
-    print("Resultado de la prueba de Wilcoxon entre " + nombre_1 + " y " + nombre_2 + ":")
-    print("p-value:", p_value)
-    print("Mediana de " + nombre_1 + ":", mediana_1)
-    print("Mediana de " + nombre_2 + ":", mediana_2)
+    print(f"Resultado de la prueba de Wilcoxon entre {nombre_1} y {nombre_2}:")
+    print(f"p-value: {p_value:.4f}")
+    print(f"Mediana de {nombre_1}: {mediana_1:.4f}")
+    print(f"Mediana de {nombre_2}: {mediana_2:.4f}")
 
     if p_value >= 0.05:
-        print("No hay suficiente evidencia.")
+        print("No hay suficiente evidencia para concluir diferencias significativas.")
     else:
         if mediana_1 > mediana_2:
-            print(nombre_1 + " es mejor que " + nombre_2)
+            print(f"{nombre_1} es mejor que {nombre_2}.")
         else:
-            print(nombre_2 + " es mejor que " + nombre_1)
+            print(f"{nombre_2} es mejor que {nombre_1}.")
 
+def friedman_y_shaffer(hipervolumenes, nombres_archivos):
+    """Realiza el test de rangos alineados de Friedman y la corrección post-hoc de Shaffer."""
 
-def friedman_y_shaffer(hipervolumenes_filtrados, nombres_archivos):
-    """Realiza el test de rangos alineados de Friedman y la correccion post-hoc de Shaffer."""
+    if len(hipervolumenes) < 2:
+        print("No hay suficientes datos para la prueba de Friedman. Se necesitan al menos 2 métodos.")
+        return
 
-    _, pv, ranks, pvts = friedman_aligned_ranks_test(*hipervolumenes_filtrados)
-    print(f"p-value: {pv}")
+    _, pv, ranks, _ = friedman_aligned_ranks_test(*hipervolumenes)
+    print(f"p-value: {pv:.4f}")
 
-    
     ranks_dict = {nombre: rank for nombre, rank in zip(nombres_archivos, ranks)}
 
     ranking_ordenado = sorted(ranks_dict.items(), key=lambda item: item[1])
@@ -112,16 +91,21 @@ def friedman_y_shaffer(hipervolumenes_filtrados, nombres_archivos):
 
 def main():
     """Realiza comparaciones 1vs1 o NvsN."""
-    tipo_comparacion = input("Que tipo de comparacion deseas realizar?\n1: Comparacion 1vs1 usando Wilcoxon\n2: Comparacion NvsN usando Friedman con Shaffer\nIntroduce 1 o 2: ")
+    tipo_comparacion = input("¿Qué tipo de comparación deseas realizar?\n1: Comparación 1vs1 usando Wilcoxon\n2: Comparación NvsN usando Friedman con Shaffer\nIntroduce 1 o 2: ")
 
     if tipo_comparacion == "1":
         archivo_1 = input("Introduce la ruta del archivo 1 (JSON): ")
         archivo_2 = input("Introduce la ruta del archivo 2 (JSON): ")
         hipervolumenes_1 = cargar_hipervolumenes(archivo_1)
         hipervolumenes_2 = cargar_hipervolumenes(archivo_2)
-        hipervolumenes_1_filtrado, hipervolumenes_2_filtrado = filtrar_hipervolumenes(
-            list(hipervolumenes_1.values()), list(hipervolumenes_2.values()))
-        prueba_wilcoxon(hipervolumenes_1_filtrado, hipervolumenes_2_filtrado, archivo_1, archivo_2)
+
+        hipervolumenes_1_lista = list(hipervolumenes_1.values())
+        hipervolumenes_2_lista = list(hipervolumenes_2.values())
+
+        if len(hipervolumenes_1_lista) > 1 and len(hipervolumenes_2_lista) > 1:
+            prueba_wilcoxon(hipervolumenes_1_lista, hipervolumenes_2_lista, archivo_1, archivo_2)
+        else:
+            print("No hay suficientes datos para ejecutar la prueba de Wilcoxon.")
 
     elif tipo_comparacion == "2":
         archivos = []
@@ -130,16 +114,20 @@ def main():
             if archivo.lower() == 'n':
                 break
             archivos.append(archivo)
+
         hipervolumenes = []
         for archivo in archivos:
             datos = cargar_hipervolumenes(archivo)
             valores = list(datos.values())
             hipervolumenes.append(valores)
-        hipervolumenes_filtrados = filtrar_hipervolumenes(*hipervolumenes)
-        friedman_y_shaffer(hipervolumenes_filtrados, archivos)
+
+        if len(hipervolumenes) > 1:
+            friedman_y_shaffer(hipervolumenes, archivos)
+        else:
+            print("No hay suficientes datos para ejecutar la prueba de Friedman.")
 
     else:
-        print("Opcion no valida.")
+        print("Opción no válida.")
 
 if __name__ == "__main__":
     main()

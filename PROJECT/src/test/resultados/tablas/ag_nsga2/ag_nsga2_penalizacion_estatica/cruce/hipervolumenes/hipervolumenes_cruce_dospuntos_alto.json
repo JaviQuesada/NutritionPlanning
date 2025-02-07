@@ -118,7 +118,7 @@
         },
         {
             "seed": 489166,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 526568,
@@ -140,7 +140,7 @@
         },
         {
             "seed": 60,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 79,
@@ -156,7 +156,7 @@
         },
         {
             "seed": 608,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 634,
@@ -164,7 +164,7 @@
         },
         {
             "seed": 684,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 784,
@@ -204,7 +204,7 @@
         },
         {
             "seed": 14648,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 39843,
@@ -212,7 +212,7 @@
         },
         {
             "seed": 73886,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 83186,
@@ -220,11 +220,11 @@
         },
         {
             "seed": 97870,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 152822,
-            "hipervolumen": null
+            "hipervolumen": 0
         },
         {
             "seed": 211193,
