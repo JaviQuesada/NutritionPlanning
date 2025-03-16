@@ -8,7 +8,7 @@ import numpy as np
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from src.utilidades import database, constantes
-from src.algoritmos.nsga3 import ag_nsga3_metodo_separatista
+from src.algoritmos.nsga2 import ag_nsga2_penalizacion_estatica
 
 
 def calcular_datos_dia(solucion, comida_bd, dia):
@@ -38,11 +38,11 @@ def verificar_restricciones(solucion, comida_bd, calorias_objetivo, alergias):
 
         calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, comida_bd, dia)
 
-        if ag_nsga3_metodo_separatista.restriccion_calorias(calorias, calorias_objetivo) > 0:
+        if ag_nsga2_penalizacion_estatica.restriccion_calorias(calorias, calorias_objetivo) > 0:
             cumple_calorias = False
-        if ag_nsga3_metodo_separatista.restriccion_macronutrientes(proteinas, carbohidratos, grasas) > 0:
+        if ag_nsga2_penalizacion_estatica.restriccion_macronutrientes(proteinas, carbohidratos, grasas) > 0:
             cumple_macronutrientes = False
-        if any(ag_nsga3_metodo_separatista.restriccion_alergia(comida_bd[int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + i])], alergias) > 0 
+        if any(ag_nsga2_penalizacion_estatica.restriccion_alergia(comida_bd[int(solucion[dia * constantes.NUM_ALIMENTOS_DIARIO + i])], alergias) > 0 
                for i in range(constantes.NUM_ALIMENTOS_DIARIO)):
             cumple_alergias = False
 
@@ -52,8 +52,8 @@ def verificar_restricciones(solucion, comida_bd, calorias_objetivo, alergias):
 def procesar_solucion(solucion, comida_bd, calorias_objetivo, gustos, disgustos, alergias):
     """Calcula el fitness y verifica restricciones para una solucion. Devuelve diccionario para JSON"""
 
-    fitness_calorias = calcular_fitness_acumulado(solucion, comida_bd, calorias_objetivo, ag_nsga3_metodo_separatista.objetivo_calorias)
-    fitness_macronutrientes = calcular_fitness_acumulado(solucion, comida_bd, None, ag_nsga3_metodo_separatista.objetivo_macronutrientes)
+    fitness_calorias = calcular_fitness_acumulado(solucion, comida_bd, calorias_objetivo, ag_nsga2_penalizacion_estatica.objetivo_calorias)
+    fitness_macronutrientes = calcular_fitness_acumulado(solucion, comida_bd, None, ag_nsga2_penalizacion_estatica.objetivo_macronutrientes)
     fitness_preferencia = calcular_fitness_preferencia(solucion, comida_bd, gustos, disgustos)
     
     restricciones_cumplidas = verificar_restricciones(solucion, comida_bd, calorias_objetivo, alergias)
@@ -103,7 +103,7 @@ def ejecutar_y_guardar_resultados():
         for seed in constantes.SEEDS:
 
             # Ejecuta algoritmo
-            resultado = ag_nsga3_metodo_separatista.ejecutar_algoritmo_genetico(
+            resultado = ag_nsga2_penalizacion_estatica.ejecutar_algoritmo_genetico(
                 comida_bd, sujeto['calorias'], sujeto['edad'], sujeto['alergias'], sujeto['gustos'], sujeto['disgustos'], seed
             )
             tiempo = resultado.exec_time
@@ -155,7 +155,7 @@ def ejecutar_y_guardar_resultados():
 
     # Resultados que se guardan en JSON
     resultados_a_guardar = {
-        'descripcion': "Cruce : TwoPointCrossover , 0.9 --- Mutacion : 1/77 --- Algoritmo : NSGA-III --- Incremental(18)",
+        'descripcion': "Cruce : SinglePointCrossover , 0.6 --- Mutacion : 1/77 --- Algoritmo : NSGA-II",
         'resultados': resultados_finales,
         'tiempo_medio_total': f"{tiempo_medio_total:.2f}",
         'total_soluciones': total_de_soluciones,
@@ -163,7 +163,7 @@ def ejecutar_y_guardar_resultados():
     }
 
     # Guardar los resultados en un archivo JSON
-    ruta_resultados = 'PROJECT/src/test/resultados/tablas/ag_nsga3/penalizacion_estatica/direcciones_referencia_incremental_alto.json'
+    ruta_resultados = 'PROJECT/src/test/resultados/tablas/ag_nsga2/ag_nsga2_penalizacion_estatica/cruce/cruce_unpunto_bajo.json'
     os.makedirs(os.path.dirname(ruta_resultados), exist_ok=True)
     with open(ruta_resultados, 'w') as archivo_json:
         json.dump(resultados_a_guardar, archivo_json, indent=4)
@@ -178,9 +178,9 @@ def calcular_fitness_acumulado(solucion, comida_bd, calorias_objetivo, funcion_o
     for dia in range(constantes.NUM_DIAS):
         calorias, proteinas, carbohidratos, grasas = calcular_datos_dia(solucion, comida_bd, dia)
 
-        if funcion_objetivo == ag_nsga3_metodo_separatista.objetivo_calorias:
+        if funcion_objetivo == ag_nsga2_penalizacion_estatica.objetivo_calorias:
             total_desviacion += funcion_objetivo(calorias, calorias_objetivo)
-        elif funcion_objetivo == ag_nsga3_metodo_separatista.objetivo_macronutrientes:
+        elif funcion_objetivo == ag_nsga2_penalizacion_estatica.objetivo_macronutrientes:
             total_desviacion += funcion_objetivo(proteinas, carbohidratos, grasas)
 
     return total_desviacion
@@ -190,7 +190,7 @@ def calcular_fitness_preferencia(solucion, comida_bd, gustos, disgustos):
     """Calcula y devuelve la penalizacion total por preferencia"""
 
     return sum(
-        ag_nsga3_metodo_separatista.objetivo_preferencia_grupo(comida_bd[int(alimento)], gustos, disgustos) 
+        ag_nsga2_penalizacion_estatica.objetivo_preferencia_grupo(comida_bd[int(alimento)], gustos, disgustos) 
         for alimento in solucion
     )
 

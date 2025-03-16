@@ -197,7 +197,7 @@ def ejecutar_algoritmo_genetico(comida_bd, objetivo_calorico, edad, grupos_alerg
     algoritmo = NSGA2(
         pop_size=100,  # Tamaño de la poblacion
         sampling=CustomIntegerRandomSampling(problema),  # Inicializacion personalizada
-        crossover=TwoPointCrossover(prob=0.9),  # Cruzamiento
+        crossover=SinglePointCrossover(prob=0.6),  # Cruzamiento
         mutation=CustomMutation(problema, prob_mutation=1/77),  # Mutacion personalizada
         eliminate_duplicates=True,
         seed=seed   # Semilla
